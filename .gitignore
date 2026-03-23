@@ -5,6 +5,7 @@ npm-debug.log*
 
 # Dependency directories
 node_modules/
+frontend/dist
 bower_components/
 
 # Vue files
@@ -59,3 +60,8 @@ coverage.html
 
 # Golang
 *.work
+
+.task
+build
+build/linux/appimage/build
+build/windows/nsis/MicrosoftEdgeWebview2Setup.exe
