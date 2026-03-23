@@ -1,0 +1,61 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directories
+node_modules/
+bower_components/
+
+# Vue files
+*.local
+*.env.local
+*.env.*.local
+.env
+.env.*
+
+# Editor directories and files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swap
+
+# MacOS system files
+.DS_Store
+
+# Temp files
+/tmp/
+/temp/
+/report/
+
+# Test files
+/coverage
+/jest
+coverage.html
+
+# Linting files
+.eslintcache
+
+# Optional npm cache directory
+.npm/
+
+# Yarn Integrity file
+.yarn-integrity
+
+# .pnpm-specific files
+.pnpm-debug.log
+.pnp/
+.pnp.js
+
+# Other caches
+.cache/
+*.old
+
+# TypeScript cache (if using TypeScript)
+*.tsbuildinfo
+
+# Golang
+*.work

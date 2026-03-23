@@ -1,0 +1,64 @@
+version: "3"
+
+vars:
+  PROJECT_NAME: "wfrp-buddy"
+
+  # folders
+  BUILD_FOLDER: build
+
+  # build options
+  # -v  print the names of packages as they are compiled
+  # -s  omit the symbol table and debug information
+  # -w  omit the DWARF symbol table
+  #
+  BUILD_OPTIONS: -v -ldflags="-s -w"
+
+tasks:
+  default:
+    cmds:
+      - task: list-tools
+    silent: false
+
+  dev:
+    dir: "{{ .PROJECT_NAME }}"
+    cmds:
+      - wails3 dev {{.TASK_OPTIONS}}
+    silent: false
+
+  #---------------------------------------------#
+  #                                             #
+  #                                             #
+  #                   Build                     #
+  #                                             #
+  #                                             #
+  #---------------------------------------------#
+
+  build:
+    env:
+      GOOS: linux
+      GOARCH: amd64
+      CGO_ENABLED: 1
+    dir: "{{ .PROJECT_NAME }}"
+    cmds:
+      - wails3 build {{.TASK_OPTIONS}} -o {{.PROJECT_NAME}} -tags '{{.BUILD_OPTIONS}}'
+    internal: false
+
+  windows:build:
+    dir: "{{ .PROJECT_NAME }}"
+    cmds:
+      - task windows:build
+    internal: false
+    silent: false
+
+  test:
+    dir: "{{ .PROJECT_NAME }}"
+    cmd: go test -v ./...
+    silent: false
+
+  list-tools:
+    cmds:
+      - go version
+      - gcc --version
+      - task --version
+      - wails3 version
+    silent: false
