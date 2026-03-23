@@ -1,0 +1,22 @@
+.spacer {
+    flex-grow: 1;
+}
+
+.text-big {
+    font-size: x-large;
+}
+
+html,
+body {
+    overflow: hidden
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/*This is padding underlined variant of input field*/
+.v-input--plain-underlined input.v-field__input,
+.v-input--plain-underlined label {
+    padding-left: 16px;
+}

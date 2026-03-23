@@ -1,0 +1,1 @@
+export type ConfirmFunction = () => Promise<boolean>
