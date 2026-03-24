@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import CharacterHeader from './CharacterHeader.vue'
 import CharacteristicsTable from './CharacteristicsTable.vue'
 import ArmourSilhouette from './ArmourSilhouette.vue'
@@ -8,7 +9,12 @@ import WeaponTable from './WeaponTable.vue'
 import ArmourTable from './ArmourTable.vue'
 import TrappingsTable from './TrappingsTable.vue'
 import PrayersTable from './PrayersTable.vue'
+import SpellTable from './SpellTable.vue'
 import AmbitionsPartyCard from './AmbitionsPartyCard.vue'
+import WealthCard from './WealthCard.vue'
+import CorruptionPsychologyCard from './CorruptionPsychologyCard.vue'
+
+const showPrayers = ref(false)
 </script>
 
 <template>
@@ -38,7 +44,7 @@ import AmbitionsPartyCard from './AmbitionsPartyCard.vue'
                <TalentList />
             </v-col>
 
-            <!-- Weapons & Armour -->
+            <!-- Combat -->
             <v-col cols="12" md="6">
               <WeaponTable />
             </v-col>
@@ -46,12 +52,31 @@ import AmbitionsPartyCard from './AmbitionsPartyCard.vue'
               <ArmourTable />
             </v-col>
 
-            <!-- Trappings & Prayers -->
-            <v-col cols="12" md="6">
-              <TrappingsTable />
+            <!-- Magic & Faith (Toggled) -->
+            <v-col cols="12">
+              <div class="d-flex align-center mb-1 px-2">
+                <v-checkbox 
+                  v-model="showPrayers" 
+                  label="Show Prayers instead of Spells" 
+                  density="compact" 
+                  hide-details 
+                  color="primary"
+                  class="toggle-magic-faith"
+                />
+              </div>
+              <transition name="fade" mode="out-in">
+                <div v-if="showPrayers" key="prayers">
+                  <PrayersTable />
+                </div>
+                <div v-else key="spells">
+                  <SpellTable />
+                </div>
+              </transition>
             </v-col>
-            <v-col cols="12" md="6">
-              <PrayersTable />
+
+            <!-- Gear -->
+            <v-col cols="12">
+              <TrappingsTable />
             </v-col>
           </v-row>
         </v-col>
@@ -63,7 +88,13 @@ import AmbitionsPartyCard from './AmbitionsPartyCard.vue'
               <ArmourSilhouette />
             </v-col>
             <v-col cols="12">
+              <WealthCard />
+            </v-col>
+            <v-col cols="12">
               <AmbitionsPartyCard />
+            </v-col>
+            <v-col cols="12">
+              <CorruptionPsychologyCard />
             </v-col>
           </v-row>
         </v-col>
@@ -74,7 +105,6 @@ import AmbitionsPartyCard from './AmbitionsPartyCard.vue'
 
 <style scoped>
 .scroll-wrapper {
-  /* This is the key scroll container now */
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
@@ -85,21 +115,16 @@ import AmbitionsPartyCard from './AmbitionsPartyCard.vue'
   min-height: 100%;
 }
 
-/* Custom scrollbar to match the theme */
-.scroll-wrapper::-webkit-scrollbar {
-  width: 10px;
+.toggle-magic-faith :deep(label) {
+  font-family: 'Crimson Text', serif;
+  font-style: italic;
+  font-size: 0.9rem;
 }
 
-.scroll-wrapper::-webkit-scrollbar-track {
-  background: var(--v-theme-background);
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.2s ease;
 }
-
-.scroll-wrapper::-webkit-scrollbar-thumb {
-  background: var(--v-theme-primary);
-  border-radius: 5px;
-}
-
-.scroll-wrapper::-webkit-scrollbar-thumb:hover {
-  background: #d4a017;
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
 }
 </style>

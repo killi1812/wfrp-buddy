@@ -4,9 +4,23 @@ const store = useCharacterStore()
 </script>
 
 <template>
-  <v-card class="pa-2 h-100" elevation="2">
+  <v-card class="pa-2 h-100 grim-card relative-pos" elevation="2">
+    <!-- Sin Counter -->
+    <div class="sin-counter-box d-flex align-center">
+      <div class="section-title mr-2" style="font-size: 0.7rem">SIN</div>
+      <v-number-input 
+        v-model="store.char.Sin" 
+        density="compact" 
+        variant="plain" 
+        hide-details 
+        control-variant="stacked" 
+        hide-controls 
+        class="sin-input" 
+      />
+    </div>
+
     <div class="text-h6 mb-2 text-primary px-2 section-title">Prayers & Blessings</div>
-    <v-table density="compact">
+    <v-table density="compact" class="grim-table">
       <thead>
         <tr>
           <th class="text-left">Prayer</th>
@@ -31,22 +45,29 @@ const store = useCharacterStore()
 </template>
 
 <style scoped>
-.section-title {
-  font-family: 'Crimson Text', serif;
+.relative-pos {
+  position: relative;
+}
+
+.sin-counter-box {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border: 1px solid var(--v-theme-error);
+  border-radius: 4px;
+  padding: 2px 8px;
+  background-color: rgba(184, 87, 76, 0.05);
+}
+
+.sin-input :deep(input) {
+  width: 25px;
+  text-align: center;
   font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-th {
-  font-family: 'Crimson Text', serif;
-  font-weight: bold !important;
-  text-transform: uppercase;
-  font-size: 1rem !important;
-  color: var(--v-theme-primary) !important;
-}
-td {
+  font-size: 1.1rem;
+  color: var(--v-theme-error);
   font-family: 'Crimson Text', serif;
 }
+
 .cell-bold {
   font-size: 1.2rem;
   font-weight: bold;

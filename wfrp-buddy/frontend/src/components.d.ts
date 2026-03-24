@@ -18,6 +18,7 @@ declare module 'vue' {
     CharacterSheet: typeof import('./components/character/CharacterSheet.vue')['default']
     CompTwo: typeof import('./components/general/compTwo.vue')['default']
     ConfirmDialog: typeof import('./components/general/ConfirmDialog.vue')['default']
+    CorruptionPsychologyCard: typeof import('./components/character/CorruptionPsychologyCard.vue')['default']
     Line: typeof import('./components/general/Line.vue')['default']
     MenuCard: typeof import('./components/general/MenuCard.vue')['default']
     PersonalInfoCard: typeof import('./components/character/PersonalInfoCard.vue')['default']
@@ -29,11 +30,13 @@ declare module 'vue' {
     Search: typeof import('./components/general/Search.vue')['default']
     SkillSection: typeof import('./components/character/SkillSection.vue')['default']
     SnackbarProvider: typeof import('./components/general/SnackbarProvider.vue')['default']
+    SpellTable: typeof import('./components/character/SpellTable.vue')['default']
     StatusCard: typeof import('./components/character/StatusCard.vue')['default']
     TabsLayout: typeof import('./components/general/TabsLayout.vue')['default']
     TalentList: typeof import('./components/character/TalentList.vue')['default']
     Test: typeof import('./components/general/Test.vue')['default']
     TrappingsTable: typeof import('./components/character/TrappingsTable.vue')['default']
+    WealthCard: typeof import('./components/character/WealthCard.vue')['default']
     WeaponTable: typeof import('./components/character/WeaponTable.vue')['default']
   }
 }

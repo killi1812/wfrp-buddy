@@ -8,23 +8,9 @@ export const useCharacterStore = defineStore('character', () => {
     Name: 'Gottfried von Berlichingen',
     Species: 'Dwarf',
     Class: 'Warrior',
-    Career: {
-      Career: 'Slayer',
-      CareerTier: 2,
-      CareerPath: 'Troll Slayer'
-    },
-    Status: {
-      Tier: 'Brass',
-      Level: 3
-    },
-    Description: {
-      Age: 32,
-      Height: '4\'8"',
-      Hair: 'Orange',
-      Eyes: 'Blue',
-      Description: 'A standard slayer',
-      Psychology: 'Grim'
-    },
+    Career: { Career: 'Slayer', CareerTier: 2, CareerPath: 'Troll Slayer' },
+    Status: { Tier: 'Brass', Level: 3 },
+    Description: { Age: 32, Height: '4\'8"', Hair: 'Orange', Eyes: 'Blue', Description: 'A standard slayer', Psychology: 'Grim' },
     Characteristics: {
       WeaponSkill: { Basic: 30, Advances: 5 },
       BalisticSkill: { Basic: 25, Advances: 0 },
@@ -37,24 +23,17 @@ export const useCharacterStore = defineStore('character', () => {
       Willpower: { Basic: 35, Advances: 5 },
       Fellowhip: { Basic: 20, Advances: 0 }
     },
-    Movment: {
-      Movment: 3,
-      Walk: 6,
-      Run: 12
-    },
-    Ambitions: {
-      shortTerm: 'Kill a Troll',
-      LongTerm: 'Die a Slayer\'s Death'
-    },
+    Movment: { Movment: 3, Walk: 6, Run: 12 },
+    Ambitions: { shortTerm: 'Kill a Troll', LongTerm: 'Die a Slayer\'s Death' },
     Points: {
       Fate: { FateMax: 2, FateCurrent: 2, FortuneMax: 2, FortuneCurrent: 2 },
       Resilience: { ResilienceMax: 2, ResilienceMCurrent: 2, ResolveMax: 2, ResolveCurrent: 2, Motive: 'Redemption' },
       Exp: { Current: 150, Spent: 100, Total: 250 }
     },
-    Wounds: {
-      Max: 15,
-      Current: 15
-    },
+    Wounds: { Max: 15, Current: 15 },
+    Welth: { BrassPenny: 10, SilverShilling: 5, GoldCrown: 1 },
+    Corruption: { Treshold: 10, Current: 0, Mutations: [] },
+    Psychology: ['Fear of Elves'],
     Talents: [],
     Skills: [
       { Name: 'Athletics', Characteristic: 'Agility', Basic: 30, Advances: 5 },
@@ -63,39 +42,27 @@ export const useCharacterStore = defineStore('character', () => {
     Armour: { Name: '', Location: '', ArmourPoints: 0, Encumbrance: 0, Qualities: [], IsWorn: false },
     Trappings: [],
     Weapons: [],
+    Spells: [],
     Prayers: []
   })
 
-  // Helpers to handle the structure and typos
   const getCharValue = (key: keyof Characteristics) => {
     const c = char.value.Characteristics[key]
     return c.Basic + c.Advances
   }
 
-  const getBonus = (key: keyof Characteristics) => {
-    return Math.floor(getCharValue(key) / 10)
-  }
+  const getBonus = (key: keyof Characteristics) => Math.floor(getCharValue(key) / 10)
 
   const maxWounds = computed(() => {
     const sb = getBonus('Strength')
-    const tb = getBonus('Toughnes') // Typo matched
+    const tb = getBonus('Toughnes')
     const wpb = getBonus('Willpower')
     return sb + (2 * tb) + wpb
   })
 
   const expCurrent = computed(() => char.value.Points.Exp.Total - char.value.Points.Exp.Spent)
 
-  const getSkillTotal = (skill: Skill) => {
-    // In a real app, we'd lookup the characteristic by Name/Id
-    return skill.Basic + skill.Advances
-  }
+  const getSkillTotal = (skill: Skill) => skill.Basic + skill.Advances
 
-  return {
-    char,
-    maxWounds,
-    expCurrent,
-    getBonus,
-    getCharValue,
-    getSkillTotal,
-  }
+  return { char, maxWounds, expCurrent, getBonus, getCharValue, getSkillTotal }
 })

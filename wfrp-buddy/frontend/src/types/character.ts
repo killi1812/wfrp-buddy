@@ -19,16 +19,16 @@ export interface Characteristics {
 }
 
 export interface Skill {
-  Characteristic: string; // This might be a mistake in Go struct if it's supposed to be an enum/ref
+  Characteristic: string;
   Basic: number;
   Advances: number;
-  Name?: string; // Adding for UI convenience
+  Name?: string;
 }
 
 export interface Talent {
   Name: string;
   Description: string;
-  TimesTaken?: number; // Custom addition for UI
+  TimesTaken?: number;
 }
 
 export interface Quality {
@@ -74,6 +74,22 @@ export interface Prayer {
   Target: string;
   Duration: string;
   Effect: string;
+}
+
+export interface Spell {
+  Id: string;
+  Name: string;
+  CN: number;
+  Range: string;
+  Target: string;
+  Duration: string;
+  Effect: string;
+}
+
+export interface Welth {
+  BrassPenny: number;
+  SilverShilling: number;
+  GoldCrown: number;
 }
 
 export interface Description {
@@ -139,6 +155,12 @@ export interface Wounds {
   Current: number;
 }
 
+export interface Corruption {
+  Treshold: number; // Typo matched
+  Current: number;
+  Mutations: string[];
+}
+
 export interface Caracter {
   CaracterId: string;
   Name: string;
@@ -148,14 +170,18 @@ export interface Caracter {
   Status: Status;
   Description: Description;
   Talents: Talent[];
-  Characteristics: Characteristics; // Fixed typo from 'Characteristic' to match intent
+  Characteristics: Characteristics;
   Movment: Movment;
   Ambitions: Ambitions;
-  Armour: Armour; // Go struct says singular Armour
+  Armour: Armour;
   Trappings: Trapping[];
+  Welth: Welth;
   Wounds: Wounds;
   Weapons: Weapon[];
+  Spells: Spell[];
   Prayers: Prayer[];
   Points: Points;
-  Skills?: Skill[]; // Skills seems missing from main struct in Go, but defined in types
+  Corruption: Corruption;
+  Psychology: string[];
+  Skills?: Skill[];
 }
