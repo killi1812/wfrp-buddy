@@ -5,53 +5,68 @@ const store = useCharacterStore()
 </script>
 
 <template>
-  <v-card class="pa-2 skills-section" elevation="4">
-    <div class="text-overline mb-2 amber-lighten-2 px-2">Skills</div>
-    <v-row dense>
-      <v-col cols="12" md="4">
-        <div class="skill-column-header text-center py-1 mb-1">Basic 1</div>
-        <div class="placeholder-text px-2">Athletics, Charm, Dodge...</div>
-      </v-col>
-      <v-col cols="12" md="4" class="border-left">
-        <div class="skill-column-header text-center py-1 mb-1">Basic 2</div>
-        <div class="placeholder-text px-2">Melee (Basic), Perception...</div>
-      </v-col>
-      <v-col cols="12" md="4" class="border-left">
-        <div class="skill-column-header text-center py-1 mb-1">Advanced</div>
-        <div class="placeholder-text px-2">Language (Classical), Lore...</div>
-      </v-col>
-    </v-row>
+  <v-card class="pa-2 skills-section" elevation="2">
+    <div class="text-overline mb-2 text-primary px-2">Skills</div>
+    <v-table density="compact" class="grim-table">
+      <thead>
+        <tr>
+          <th class="text-left">Name</th>
+          <th class="text-center">Charac.</th>
+          <th class="text-center">Adv.</th>
+          <th class="text-center">Skill</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="s in store.char.skills" :key="s.name">
+          <td class="font-weight-bold">{{ s.name }}</td>
+          <td class="text-center text-caption">{{ s.characteristic }}</td>
+          <td class="text-center pa-1">
+            <v-text-field
+              v-model.number="s.advances"
+              hide-details
+              density="compact"
+              variant="plain"
+              class="centered-input-adv"
+              type="number"
+            />
+          </td>
+          <td class="text-center font-weight-bold text-primary">
+            {{ store.getSkillTotal(s) }}
+          </td>
+        </tr>
+      </tbody>
+    </v-table>
   </v-card>
 </template>
 
 <style scoped>
 .skills-section {
-  background-color: #1e1e1e;
-  border: 1px solid #333;
+  background-color: var(--v-theme-surface);
+  border: 1px solid rgba(0,0,0,0.1);
 }
 
-.skill-column-header {
-  background-color: #252525;
+.grim-table {
+  background: transparent !important;
+}
+
+th {
   font-family: 'Crimson Text', serif;
-  font-weight: bold;
-  border-bottom: 1px solid #444;
+  color: var(--v-theme-primary) !important;
+  font-weight: bold !important;
+  text-transform: uppercase;
+  font-size: 0.75rem;
 }
 
-.border-left {
-  border-left: 1px solid #333;
-}
-
-.placeholder-text {
+td {
   font-family: 'Crimson Text', serif;
-  color: #666;
-  font-size: 0.9rem;
 }
 
-@media (max-width: 960px) {
-  .border-left {
-    border-left: none;
-    border-top: 1px solid #333;
-    padding-top: 8px;
-  }
+.centered-input-adv :deep(input) {
+  text-align: center;
+  font-family: 'Crimson Text', serif;
+  background-color: rgba(0,0,0,0.05);
+  border-radius: 4px;
+  width: 40px;
+  margin: 0 auto;
 }
 </style>

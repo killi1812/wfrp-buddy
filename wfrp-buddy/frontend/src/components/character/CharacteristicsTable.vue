@@ -5,8 +5,8 @@ const store = useCharacterStore()
 </script>
 
 <template>
-  <v-card class="pa-2 characteristics-table" elevation="4">
-    <div class="text-overline mb-2 amber-lighten-2 px-2">Characteristics</div>
+  <v-card class="pa-2 characteristics-table" elevation="2">
+    <div class="text-overline mb-2 text-primary px-2">Characteristics</div>
     <v-table density="compact" class="grim-table">
       <thead>
         <tr>
@@ -46,8 +46,8 @@ const store = useCharacterStore()
           </td>
         </tr>
         <tr class="current-row">
-          <td class="text-overline amber-lighten-2">Current</td>
-          <td v-for="c in store.char.characteristics" :key="c.name" class="text-center text-h6 amber-lighten-2 font-weight-bold py-1">
+          <td class="text-overline text-primary">Current</td>
+          <td v-for="c in store.char.characteristics" :key="c.name" class="text-center text-h6 text-primary font-weight-bold py-1">
             {{ c.current }}
           </td>
         </tr>
@@ -64,18 +64,16 @@ const store = useCharacterStore()
 
 <style scoped>
 .characteristics-table {
-  background-color: #1e1e1e;
-  border: 1px solid #333;
+  background-color: var(--v-theme-surface);
+  border: 1px solid rgba(0,0,0,0.1);
 }
 
 .grim-table {
   background: transparent !important;
-  color: #ddd !important;
 }
 
 .char-col {
   min-width: 45px;
-  color: #aaa !important;
   font-weight: bold;
 }
 
@@ -84,7 +82,7 @@ const store = useCharacterStore()
 }
 
 .current-row {
-  background-color: #252525;
+  background-color: rgba(0,0,0,0.05);
 }
 
 .centered-input :deep(input) {

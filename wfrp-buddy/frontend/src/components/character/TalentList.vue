@@ -5,8 +5,8 @@ const store = useCharacterStore()
 </script>
 
 <template>
-  <v-card class="pa-2 talents-list" elevation="4">
-    <div class="text-overline mb-2 amber-lighten-2 px-2">Talents</div>
+  <v-card class="pa-2 talents-list" elevation="2">
+    <div class="text-overline mb-2 text-primary px-2">Talents</div>
     <v-table density="compact" class="grim-table">
       <thead>
         <tr>
@@ -22,7 +22,7 @@ const store = useCharacterStore()
         <tr v-for="t in store.char.talents" :key="t.name">
           <td class="font-weight-bold">{{ t.name }}</td>
           <td class="text-center">{{ t.timesTaken }}</td>
-          <td class="text-caption text-grey-darken-1">{{ t.description }}</td>
+          <td class="text-caption text-subtext">{{ t.description }}</td>
         </tr>
       </tbody>
     </v-table>
@@ -31,24 +31,23 @@ const store = useCharacterStore()
 
 <style scoped>
 .talents-list {
-  background-color: #1e1e1e;
-  border: 1px solid #333;
+  background-color: var(--v-theme-surface);
+  border: 1px solid rgba(0,0,0,0.1);
 }
 
 .grim-table {
   background: transparent !important;
-  color: #ddd !important;
 }
 
 .placeholder-text {
   font-family: 'Crimson Text', serif;
-  color: #666;
+  color: var(--v-theme-subtext);
   font-style: italic;
 }
 
 th {
   font-family: 'Crimson Text', serif;
-  color: #aaa !important;
+  color: var(--v-theme-primary) !important;
   font-weight: bold !important;
   text-transform: uppercase;
   font-size: 0.75rem;

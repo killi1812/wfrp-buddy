@@ -13,7 +13,7 @@ export const useCharacterStore = defineStore('character', () => {
     resilience: 2,
     movement: 3,
     experience: 150,
-    wounds: 0,
+    wounds: 0, // We'll use maxWounds computed instead
     characteristics: [
       { name: 'WS', initial: 30, advances: 5, current: 35 },
       { name: 'BS', initial: 25, advances: 0, current: 25 },
@@ -26,7 +26,13 @@ export const useCharacterStore = defineStore('character', () => {
       { name: 'WP', initial: 35, advances: 5, current: 40 },
       { name: 'Fel', initial: 20, advances: 0, current: 20 },
     ],
-    skills: [],
+    skills: [
+      { name: 'Athletics', characteristic: 'Ag', advances: 5, isAdvanced: false },
+      { name: 'Charm', characteristic: 'Fel', advances: 0, isAdvanced: false },
+      { name: 'Dodge', characteristic: 'Ag', advances: 10, isAdvanced: false },
+      { name: 'Melee (Basic)', characteristic: 'WS', advances: 15, isAdvanced: false },
+      { name: 'Perception', characteristic: 'I', advances: 5, isAdvanced: false },
+    ],
     talents: [],
     weapons: [
       { name: 'Great Axe', group: 'Two-handed', damage: '+SB+6', range: 'Reach', reload: '', qualities: 'Damaging', encumbrance: 2 }
@@ -42,6 +48,8 @@ export const useCharacterStore = defineStore('character', () => {
     ],
   })
 
+  const currentWounds = ref(0)
+
   const getCharacteristic = (name: string) => {
     return char.value.characteristics.find(c => c.name === name)
   }
@@ -51,12 +59,17 @@ export const useCharacterStore = defineStore('character', () => {
     return c ? Math.floor(c.current / 10) : 0
   }
 
-  const wounds = computed(() => {
+  const maxWounds = computed(() => {
     const sb = getBonus('S')
     const tb = getBonus('T')
     const wpb = getBonus('WP')
     return sb + (2 * tb) + wpb
   })
+
+  // Set initial wounds if not set
+  if (currentWounds.value === 0) {
+    currentWounds.value = maxWounds.value
+  }
 
   const updateCharacteristic = (name: string, type: 'initial' | 'advances', value: number) => {
     const c = char.value.characteristics.find(c => c.name === name)
@@ -66,10 +79,17 @@ export const useCharacterStore = defineStore('character', () => {
     }
   }
 
+  const getSkillTotal = (skill: any) => {
+    const charValue = getCharacteristic(skill.characteristic)?.current || 0
+    return charValue + skill.advances
+  }
+
   return {
     char,
-    wounds,
+    currentWounds,
+    maxWounds,
     getBonus,
     updateCharacteristic,
+    getSkillTotal,
   }
 })
