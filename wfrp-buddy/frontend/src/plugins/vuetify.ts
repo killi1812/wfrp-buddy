@@ -49,11 +49,26 @@ const darkTheme: ThemeDefinition = {
 
 }
 
+const wfrpDark: ThemeDefinition = {
+  dark: true,
+  colors: {
+    background: '#121212',
+    surface: '#1e1e1e',
+    primary: '#ffca28', // amber-lighten-2
+    secondary: '#825127',
+    error: '#B8574C',
+    info: '#D1B37B',
+    success: '#38c76a',
+    warning: '#C7A654',
+  },
+}
+
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
   theme: {
-    defaultTheme: "defaultTheme",
+    defaultTheme: "wfrpDark",
     themes: {
+      wfrpDark,
       defaultTheme,
       darkTheme,
     }

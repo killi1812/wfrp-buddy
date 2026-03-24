@@ -9,7 +9,11 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppFooter: typeof import('./components/general/AppFooter.vue')['default']
     AppHeader: typeof import('./components/general/AppHeader.vue')['default']
+    ArmourSilhouette: typeof import('./components/character/ArmourSilhouette.vue')['default']
     AwaitDialog: typeof import('./components/general/AwaitDialog.vue')['default']
+    CharacterHeader: typeof import('./components/character/CharacterHeader.vue')['default']
+    CharacteristicsTable: typeof import('./components/character/CharacteristicsTable.vue')['default']
+    CharacterSheet: typeof import('./components/character/CharacterSheet.vue')['default']
     CompTwo: typeof import('./components/general/compTwo.vue')['default']
     ConfirmDialog: typeof import('./components/general/ConfirmDialog.vue')['default']
     Line: typeof import('./components/general/Line.vue')['default']
@@ -18,8 +22,10 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Search: typeof import('./components/general/Search.vue')['default']
+    SkillSection: typeof import('./components/character/SkillSection.vue')['default']
     SnackbarProvider: typeof import('./components/general/SnackbarProvider.vue')['default']
     TabsLayout: typeof import('./components/general/TabsLayout.vue')['default']
+    TalentList: typeof import('./components/character/TalentList.vue')['default']
     Test: typeof import('./components/general/Test.vue')['default']
   }
 }

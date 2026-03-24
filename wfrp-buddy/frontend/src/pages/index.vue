@@ -1,7 +1,7 @@
 <template>
-  <MenuCard title="Main menue">
-    <VBtn>Bokic</VBtn>
-  </MenuCard>
+  <CharacterSheet />
 </template>
+
 <script setup lang="ts">
+import CharacterSheet from '@/components/character/CharacterSheet.vue'
 </script>
