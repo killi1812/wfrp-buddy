@@ -2,7 +2,7 @@
   <v-app class="wails-layout">
     <AppHeader />
 
-    <v-main class="scrollable-content">
+    <v-main class="layout-main">
       <router-view />
     </v-main>
 
@@ -17,31 +17,15 @@ import AppFooter from "@/components/general/AppFooter.vue";
 
 <style scoped>
 .wails-layout {
+  /* Let v-app fill the screen */
   height: 100vh;
   overflow: hidden;
 }
 
-.scrollable-content {
-  height: calc(100vh - 60px - 40px); /* AppBar 60px, Footer 40px */
-  overflow-y: auto;
-  background-color: var(--v-theme-background);
-}
-
-/* Custom scrollbar to match the theme */
-.scrollable-content::-webkit-scrollbar {
-  width: 8px;
-}
-
-.scrollable-content::-webkit-scrollbar-track {
-  background: var(--v-theme-background);
-}
-
-.scrollable-content::-webkit-scrollbar-thumb {
-  background: var(--v-theme-primary);
-  border-radius: 4px;
-}
-
-.scrollable-content::-webkit-scrollbar-thumb:hover {
-  background: #d4a017;
+.layout-main {
+  /* v-main with 'app' props on bar/footer handles its own padding */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 </style>

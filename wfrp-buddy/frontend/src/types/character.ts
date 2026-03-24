@@ -62,6 +62,10 @@ export interface Character {
   hair: string;
   eyes: string;
   motivation: string;
+  shortTermAmbition: string;
+  longTermAmbition: string;
+  partyName: string;
+  partyMembers: string;
   fate: number;
   fortune: number;
   resilience: number;

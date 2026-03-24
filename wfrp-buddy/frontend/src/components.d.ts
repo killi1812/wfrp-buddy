@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AmbitionsPartyCard: typeof import('./components/character/AmbitionsPartyCard.vue')['default']
     AppFooter: typeof import('./components/general/AppFooter.vue')['default']
     AppHeader: typeof import('./components/general/AppHeader.vue')['default']
     ArmourSilhouette: typeof import('./components/character/ArmourSilhouette.vue')['default']

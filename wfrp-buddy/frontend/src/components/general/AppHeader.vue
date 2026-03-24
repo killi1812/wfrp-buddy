@@ -1,6 +1,6 @@
 <template>
 
-  <v-app-bar color="primary" :elevation="8" height="60">
+  <v-app-bar color="primary" :elevation="8" height="60" app>
     <v-app-bar-nav-icon class="text-white" @click="drawer = !drawer"></v-app-bar-nav-icon>
     <img id="logo" src="../../assets/logo.png" alt="logo" />
     <v-app-bar-title>POS</v-app-bar-title>
