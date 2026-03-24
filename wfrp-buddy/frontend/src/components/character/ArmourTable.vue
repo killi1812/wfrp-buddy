@@ -5,7 +5,7 @@ const store = useCharacterStore()
 
 <template>
   <v-card class="pa-2 h-100" elevation="2">
-    <div class="text-overline mb-2 primary--text px-2">Armour List</div>
+    <div class="text-h6 mb-2 text-primary px-2 section-title">Armour List</div>
     <v-table density="compact">
       <thead>
         <tr>
@@ -17,10 +17,10 @@ const store = useCharacterStore()
       </thead>
       <tbody>
         <tr v-for="a in store.char.armour" :key="a.name">
-          <td>{{ a.name }}</td>
-          <td class="text-center">{{ a.location }}</td>
-          <td class="text-center">{{ a.ap }}</td>
-          <td class="text-caption">{{ a.qualities }}</td>
+          <td class="cell-bold">{{ a.name }}</td>
+          <td class="text-center cell-text">{{ a.location }}</td>
+          <td class="text-center cell-bold text-primary">{{ a.ap }}</td>
+          <td class="text-caption cell-text">{{ a.qualities }}</td>
         </tr>
       </tbody>
     </v-table>
@@ -28,13 +28,27 @@ const store = useCharacterStore()
 </template>
 
 <style scoped>
+.section-title {
+  font-family: 'Crimson Text', serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
 th {
   font-family: 'Crimson Text', serif;
   font-weight: bold !important;
   text-transform: uppercase;
-  font-size: 0.75rem;
+  font-size: 1rem !important;
+  color: var(--v-theme-primary) !important;
 }
 td {
   font-family: 'Crimson Text', serif;
+}
+.cell-bold {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.cell-text {
+  font-size: 1.1rem;
 }
 </style>

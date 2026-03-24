@@ -5,7 +5,7 @@ const store = useCharacterStore()
 
 <template>
   <v-card class="pa-2 h-100" elevation="2">
-    <div class="text-overline mb-2 primary--text px-2">Prayers & Blessings</div>
+    <div class="text-h6 mb-2 text-primary px-2 section-title">Prayers & Blessings</div>
     <v-table density="compact">
       <thead>
         <tr>
@@ -17,13 +17,13 @@ const store = useCharacterStore()
       </thead>
       <tbody>
         <tr v-if="store.char.prayers.length === 0">
-           <td colspan="4" class="text-center text-grey py-4">No prayers known</td>
+           <td colspan="4" class="text-center text-grey py-4 placeholder-text">No prayers known</td>
         </tr>
         <tr v-for="p in store.char.prayers" :key="p.name">
-          <td>{{ p.name }}</td>
-          <td class="text-center">{{ p.range }}</td>
-          <td class="text-center">{{ p.duration }}</td>
-          <td class="text-caption">{{ p.effect }}</td>
+          <td class="cell-bold">{{ p.name }}</td>
+          <td class="text-center cell-text">{{ p.range }}</td>
+          <td class="text-center cell-text">{{ p.duration }}</td>
+          <td class="text-caption cell-text">{{ p.effect }}</td>
         </tr>
       </tbody>
     </v-table>
@@ -31,13 +31,31 @@ const store = useCharacterStore()
 </template>
 
 <style scoped>
+.section-title {
+  font-family: 'Crimson Text', serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
 th {
   font-family: 'Crimson Text', serif;
   font-weight: bold !important;
   text-transform: uppercase;
-  font-size: 0.75rem;
+  font-size: 1rem !important;
+  color: var(--v-theme-primary) !important;
 }
 td {
   font-family: 'Crimson Text', serif;
+}
+.cell-bold {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.cell-text {
+  font-size: 1.1rem;
+}
+.placeholder-text {
+  font-size: 1.1rem;
+  font-style: italic;
 }
 </style>

@@ -10,7 +10,7 @@ const getAP = (location: string) => {
 
 <template>
   <v-card class="pa-4 silhouette-card" elevation="2">
-    <div class="text-overline mb-2 text-primary">Armour Points</div>
+    <div class="text-h6 mb-4 text-primary section-title">Armour Points</div>
     <div class="silhouette-container">
       <svg viewBox="0 0 100 200" class="silhouette-svg">
         <path d="M50 10 C 60 10, 65 20, 50 35 C 35 20, 40 10, 50 10" fill="#606060" /> <!-- Head -->
@@ -23,27 +23,27 @@ const getAP = (location: string) => {
 
       <!-- AP Boxes -->
       <div class="ap-box head" title="Head">
-        <div class="ap-label">H</div>
+        <div class="ap-label">HEAD</div>
         <div class="ap-value">{{ getAP('Head') }}</div>
       </div>
       <div class="ap-box body" title="Body">
-        <div class="ap-label">B</div>
+        <div class="ap-label">BODY</div>
         <div class="ap-value">{{ getAP('Body') }}</div>
       </div>
       <div class="ap-box l-arm" title="Left Arm">
-        <div class="ap-label">LA</div>
+        <div class="ap-label">L.ARM</div>
         <div class="ap-value">{{ getAP('Left Arm') }}</div>
       </div>
       <div class="ap-box r-arm" title="Right Arm">
-        <div class="ap-label">RA</div>
+        <div class="ap-label">R.ARM</div>
         <div class="ap-value">{{ getAP('Right Arm') }}</div>
       </div>
       <div class="ap-box l-leg" title="Left Leg">
-        <div class="ap-label">LL</div>
+        <div class="ap-label">L.LEG</div>
         <div class="ap-value">{{ getAP('Left Leg') }}</div>
       </div>
       <div class="ap-box r-leg" title="Right Leg">
-        <div class="ap-label">RL</div>
+        <div class="ap-label">R.LEG</div>
         <div class="ap-value">{{ getAP('Right Leg') }}</div>
       </div>
     </div>
@@ -57,10 +57,17 @@ const getAP = (location: string) => {
   height: 100%;
 }
 
+.section-title {
+  font-family: 'Crimson Text', serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
 .silhouette-container {
   position: relative;
   width: 100%;
-  max-width: 200px;
+  max-width: 250px;
   margin: 0 auto;
   aspect-ratio: 1/2;
 }
@@ -73,8 +80,8 @@ const getAP = (location: string) => {
 
 .ap-box {
   position: absolute;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   background-color: var(--v-theme-surface);
   border: 2px solid var(--v-theme-primary);
   border-radius: 4px;
@@ -83,17 +90,19 @@ const getAP = (location: string) => {
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 2;
 }
 
 .ap-label {
-  font-size: 0.6rem;
+  font-size: 0.75rem;
+  font-weight: bold;
   color: var(--v-theme-subtext);
   font-family: 'Crimson Text', serif;
   line-height: 1;
 }
 
 .ap-value {
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   font-weight: bold;
   color: var(--v-theme-primary);
   font-family: 'Crimson Text', serif;
@@ -102,9 +111,9 @@ const getAP = (location: string) => {
 
 /* Positioning boxes based on human anatomy on a 100x200 SVG */
 .head { top: 0; left: 50%; transform: translateX(-50%); }
-.body { top: 50px; left: 50%; transform: translateX(-50%); }
-.l-arm { top: 60px; left: 0; }
-.r-arm { top: 60px; right: 0; }
-.l-leg { bottom: 20px; left: 10px; }
-.r-leg { bottom: 20px; right: 10px; }
+.body { top: 60px; left: 50%; transform: translateX(-50%); }
+.l-arm { top: 70px; left: -10px; }
+.r-arm { top: 70px; right: -10px; }
+.l-leg { bottom: 20px; left: 0px; }
+.r-leg { bottom: 20px; right: 0px; }
 </style>

@@ -6,12 +6,12 @@ const store = useCharacterStore()
 
 <template>
   <v-card class="pa-2 talents-list" elevation="2">
-    <div class="text-overline mb-2 text-primary px-2">Talents</div>
+    <div class="text-h6 mb-2 text-primary px-2 section-title">Talents</div>
     <v-table density="compact" class="grim-table">
       <thead>
         <tr>
-          <th class="text-left">Talent Name</th>
-          <th class="text-center">Times</th>
+          <th class="text-left talent-col">Talent Name</th>
+          <th class="text-center count-col">Times</th>
           <th class="text-left">Description</th>
         </tr>
       </thead>
@@ -20,9 +20,9 @@ const store = useCharacterStore()
            <td colspan="3" class="text-center placeholder-text py-4">No talents added</td>
         </tr>
         <tr v-for="t in store.char.talents" :key="t.name">
-          <td class="font-weight-bold">{{ t.name }}</td>
-          <td class="text-center">{{ t.timesTaken }}</td>
-          <td class="text-caption text-subtext">{{ t.description }}</td>
+          <td class="talent-name">{{ t.name }}</td>
+          <td class="text-center talent-count">{{ t.timesTaken }}</td>
+          <td class="talent-desc">{{ t.description }}</td>
         </tr>
       </tbody>
     </v-table>
@@ -35,14 +35,30 @@ const store = useCharacterStore()
   border: 1px solid rgba(0,0,0,0.1);
 }
 
+.section-title {
+  font-family: 'Crimson Text', serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
 .grim-table {
   background: transparent !important;
+}
+
+.talent-col {
+  width: 30%;
+}
+
+.count-col {
+  width: 10%;
 }
 
 .placeholder-text {
   font-family: 'Crimson Text', serif;
   color: var(--v-theme-subtext);
   font-style: italic;
+  font-size: 1.1rem;
 }
 
 th {
@@ -50,10 +66,24 @@ th {
   color: var(--v-theme-primary) !important;
   font-weight: bold !important;
   text-transform: uppercase;
-  font-size: 0.75rem;
+  font-size: 1rem !important;
 }
 
 td {
   font-family: 'Crimson Text', serif;
+}
+
+.talent-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.talent-count {
+  font-size: 1.1rem;
+}
+
+.talent-desc {
+  font-size: 1rem;
+  color: var(--v-theme-subtext);
 }
 </style>

@@ -6,7 +6,7 @@ const store = useCharacterStore()
 
 <template>
   <v-card class="pa-2 characteristics-table" elevation="2">
-    <div class="text-overline mb-2 text-primary px-2">Characteristics</div>
+    <div class="text-h6 mb-2 text-primary px-2 section-title">Characteristics</div>
     <v-table density="compact" class="grim-table">
       <thead>
         <tr>
@@ -18,7 +18,7 @@ const store = useCharacterStore()
       </thead>
       <tbody>
         <tr>
-          <td class="text-overline">Initial</td>
+          <td class="row-label">Initial</td>
           <td v-for="c in store.char.characteristics" :key="c.name" class="pa-1">
             <v-number-input
               v-model="c.initial"
@@ -33,7 +33,7 @@ const store = useCharacterStore()
           </td>
         </tr>
         <tr>
-          <td class="text-overline">Advances</td>
+          <td class="row-label">Advances</td>
           <td v-for="c in store.char.characteristics" :key="c.name" class="pa-1">
             <v-number-input
               v-model="c.advances"
@@ -48,14 +48,14 @@ const store = useCharacterStore()
           </td>
         </tr>
         <tr class="current-row">
-          <td class="text-overline text-primary">Current</td>
-          <td v-for="c in store.char.characteristics" :key="c.name" class="text-center text-h6 text-primary font-weight-bold py-1">
+          <td class="row-label text-primary font-weight-bold">Current</td>
+          <td v-for="c in store.char.characteristics" :key="c.name" class="text-center text-h5 text-primary font-weight-bold py-1">
             {{ c.current }}
           </td>
         </tr>
         <tr class="bonus-row">
-          <td class="text-overline">Bonus</td>
-          <td v-for="c in store.char.characteristics" :key="c.name" class="text-center text-subtitle-1 py-1">
+          <td class="row-label">Bonus</td>
+          <td v-for="c in store.char.characteristics" :key="c.name" class="text-center text-h6 py-1">
             {{ Math.floor(c.current / 10) }}
           </td>
         </tr>
@@ -70,6 +70,13 @@ const store = useCharacterStore()
   border: 1px solid rgba(0,0,0,0.1);
 }
 
+.section-title {
+  font-family: 'Crimson Text', serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
 .grim-table {
   background: transparent !important;
 }
@@ -77,10 +84,16 @@ const store = useCharacterStore()
 .char-col {
   min-width: 45px;
   font-weight: bold;
+  font-size: 1.1rem !important;
 }
 
 .char-name-col {
   min-width: 80px;
+}
+
+.row-label {
+  font-family: 'Crimson Text', serif;
+  font-size: 1.1rem;
 }
 
 .current-row {
@@ -90,12 +103,7 @@ const store = useCharacterStore()
 .centered-input :deep(input) {
   text-align: center;
   font-family: 'Crimson Text', serif;
-  font-size: 1.1rem;
-}
-
-.text-overline {
-  font-family: 'Crimson Text', serif;
-  letter-spacing: 0.1em;
+  font-size: 1.2rem;
 }
 
 :deep(.v-table__wrapper) {
