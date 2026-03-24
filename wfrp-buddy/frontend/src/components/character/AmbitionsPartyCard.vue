@@ -8,24 +8,22 @@ const store = useCharacterStore()
     <div class="text-h6 mb-2 text-primary section-title">Ambitions</div>
     <v-row dense>
       <v-col cols="12">
-        <v-text-field v-model="store.char.shortTermAmbition" label="Short-Term Ambition" variant="outlined" density="compact" hide-details class="mb-3" />
+        <v-text-field v-model="store.char.Ambitions.shortTerm" label="Short-Term Ambition" variant="outlined" density="compact" hide-details class="mb-3" />
       </v-col>
       <v-col cols="12">
-        <v-textarea v-model="store.char.longTermAmbition" label="Long-Term Ambition" variant="outlined" density="compact" hide-details rows="2" class="mb-3" />
+        <v-textarea v-model="store.char.Ambitions.LongTerm" label="Long-Term Ambition" variant="outlined" density="compact" hide-details rows="2" class="mb-3" />
       </v-col>
     </v-row>
 
     <v-divider class="my-2" />
 
     <div class="text-h6 mb-2 text-primary section-title">Party</div>
-    <v-row dense>
+    <v-row dense v-if="store.char.Party">
       <v-col cols="12">
-        <v-text-field v-model="store.char.partyName" label="Party Name" variant="outlined" density="compact" hide-details class="mb-3" />
-      </v-col>
-      <v-col cols="12">
-        <v-textarea v-model="store.char.partyMembers" label="Party Members" variant="outlined" density="compact" hide-details rows="2" />
+        <v-text-field v-model="store.char.Party.Name" label="Party Name" variant="outlined" density="compact" hide-details class="mb-3" />
       </v-col>
     </v-row>
+    <div v-else class="text-caption text-grey pa-2">No party assigned</div>
   </v-card>
 </template>
 

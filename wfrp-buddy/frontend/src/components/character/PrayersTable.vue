@@ -16,14 +16,14 @@ const store = useCharacterStore()
         </tr>
       </thead>
       <tbody>
-        <tr v-if="store.char.prayers.length === 0">
+        <tr v-if="!store.char.Prayers || store.char.Prayers.length === 0">
            <td colspan="4" class="text-center text-grey py-4 placeholder-text">No prayers known</td>
         </tr>
-        <tr v-for="p in store.char.prayers" :key="p.name">
-          <td class="cell-bold">{{ p.name }}</td>
-          <td class="text-center cell-text">{{ p.range }}</td>
-          <td class="text-center cell-text">{{ p.duration }}</td>
-          <td class="text-caption cell-text">{{ p.effect }}</td>
+        <tr v-for="p in store.char.Prayers" :key="p.Name">
+          <td class="cell-bold">{{ p.Name }}</td>
+          <td class="text-center cell-text">{{ p.Range }}</td>
+          <td class="text-center cell-text">{{ p.Duration }}</td>
+          <td class="text-caption cell-text">{{ p.Effect }}</td>
         </tr>
       </tbody>
     </v-table>

@@ -4,7 +4,10 @@ import { useCharacterStore } from '@/stores/character'
 const store = useCharacterStore()
 
 const getAP = (location: string) => {
-  return store.char.armour.find(a => a.location === location)?.ap || 0
+  if (!store.char.Armour) return 0
+  // In the current Go struct, Armour is a single object. 
+  // We check if that specific piece matches the location.
+  return store.char.Armour.Location === location ? store.char.Armour.ArmourPoints : 0
 }
 </script>
 
@@ -109,7 +112,7 @@ const getAP = (location: string) => {
   line-height: 1;
 }
 
-/* Positioning boxes based on human anatomy on a 100x200 SVG */
+/* Positioning boxes based on human anatomy */
 .head { top: 0; left: 50%; transform: translateX(-50%); }
 .body { top: 60px; left: 50%; transform: translateX(-50%); }
 .l-arm { top: 70px; left: -10px; }

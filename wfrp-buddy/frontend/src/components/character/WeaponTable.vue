@@ -17,12 +17,15 @@ const store = useCharacterStore()
         </tr>
       </thead>
       <tbody>
-        <tr v-for="w in store.char.weapons" :key="w.name">
-          <td class="cell-bold">{{ w.name }}</td>
-          <td class="text-center cell-text">{{ w.group }}</td>
-          <td class="text-center cell-bold">{{ w.damage }}</td>
-          <td class="text-center cell-text">{{ w.range }}</td>
-          <td class="text-caption cell-text">{{ w.qualities }}</td>
+        <tr v-if="!store.char.Weapons || store.char.Weapons.length === 0">
+           <td colspan="5" class="text-center text-grey py-4 placeholder-text">No weapons added</td>
+        </tr>
+        <tr v-for="w in store.char.Weapons" :key="w.Name">
+          <td class="cell-bold">{{ w.Name }}</td>
+          <td class="text-center cell-text">{{ w.Group }}</td>
+          <td class="text-center cell-bold">{{ w.Damage }}</td>
+          <td class="text-center cell-text">{{ w.Range_Reach }}</td>
+          <td class="text-caption cell-text">{{ w.Qualities?.Name }}</td>
         </tr>
       </tbody>
     </v-table>
@@ -52,5 +55,9 @@ td {
 }
 .cell-text {
   font-size: 1.1rem;
+}
+.placeholder-text {
+  font-size: 1.1rem;
+  font-style: italic;
 }
 </style>

@@ -1,113 +1,101 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { Character } from '@/types/character'
+import { Caracter, Characteristics, Skill } from '@/types/character'
 
 export const useCharacterStore = defineStore('character', () => {
-  const char = ref<Character>({
-    name: 'Gottfried von Berlichingen',
-    species: 'Dwarf',
-    class: 'Warrior',
-    career: 'Slayer',
-    path: 'Troll Slayer',
-    status: 'Brass 3',
-    tier: 'Tier 2',
-    age: 32,
-    height: '4\'8"',
-    hair: 'Orange',
-    eyes: 'Blue',
-    motivation: 'Redemption',
-    shortTermAmbition: 'Kill a Troll',
-    longTermAmbition: 'Die a Slayer\'s Death',
-    partyName: 'The Ubersreik Five',
-    partyMembers: 'Victor, Kerillian, Bardin, Sienna, Markus',
-    fate: 2,
-    fortune: 2,
-    resilience: 2,
-    resolve: 2,
-    movement: 3,
-    expSpent: 100,
-    expTotal: 250,
-    wounds: 0,
-    characteristics: [
-      { name: 'WS', initial: 30, advances: 5, current: 35 },
-      { name: 'BS', initial: 25, advances: 0, current: 25 },
-      { name: 'S', initial: 35, advances: 10, current: 45 },
-      { name: 'T', initial: 40, advances: 15, current: 55 },
-      { name: 'I', initial: 30, advances: 0, current: 30 },
-      { name: 'Ag', initial: 30, advances: 0, current: 30 },
-      { name: 'Dex', initial: 25, advances: 0, current: 25 },
-      { name: 'Int', initial: 20, advances: 0, current: 20 },
-      { name: 'WP', initial: 35, advances: 5, current: 40 },
-      { name: 'Fel', initial: 20, advances: 0, current: 20 },
+  const char = ref<Caracter>({
+    CaracterId: '00000000-0000-0000-0000-000000000000',
+    Name: 'Gottfried von Berlichingen',
+    Species: 'Dwarf',
+    Class: 'Warrior',
+    Career: {
+      Career: 'Slayer',
+      CareerTier: 2,
+      CareerPath: 'Troll Slayer'
+    },
+    Status: {
+      Tier: 'Brass',
+      Level: 3
+    },
+    Description: {
+      Age: 32,
+      Height: '4\'8"',
+      Hair: 'Orange',
+      Eyes: 'Blue',
+      Description: 'A standard slayer',
+      Psychology: 'Grim'
+    },
+    Characteristics: {
+      WeaponSkill: { Basic: 30, Advances: 5 },
+      BalisticSkill: { Basic: 25, Advances: 0 },
+      Strength: { Basic: 35, Advances: 10 },
+      Toughnes: { Basic: 40, Advances: 15 },
+      Initative: { Basic: 30, Advances: 0 },
+      Agility: { Basic: 30, Advances: 0 },
+      Dexterity: { Basic: 25, Advances: 0 },
+      Inteligence: { Basic: 20, Advances: 0 },
+      Willpower: { Basic: 35, Advances: 5 },
+      Fellowhip: { Basic: 20, Advances: 0 }
+    },
+    Movment: {
+      Movment: 3,
+      Walk: 6,
+      Run: 12
+    },
+    Ambitions: {
+      shortTerm: 'Kill a Troll',
+      LongTerm: 'Die a Slayer\'s Death'
+    },
+    Points: {
+      Fate: { FateMax: 2, FateCurrent: 2, FortuneMax: 2, FortuneCurrent: 2 },
+      Resilience: { ResilienceMax: 2, ResilienceMCurrent: 2, ResolveMax: 2, ResolveCurrent: 2, Motive: 'Redemption' },
+      Exp: { Current: 150, Spent: 100, Total: 250 }
+    },
+    Wounds: {
+      Max: 15,
+      Current: 15
+    },
+    Talents: [],
+    Skills: [
+      { Name: 'Athletics', Characteristic: 'Agility', Basic: 30, Advances: 5 },
+      { Name: 'Dodge', Characteristic: 'Agility', Basic: 30, Advances: 10 }
     ],
-    skills: [
-      { name: 'Athletics', characteristic: 'Ag', advances: 5, isAdvanced: false },
-      { name: 'Charm', characteristic: 'Fel', advances: 0, isAdvanced: false },
-      { name: 'Dodge', characteristic: 'Ag', advances: 10, isAdvanced: false },
-      { name: 'Melee (Basic)', characteristic: 'WS', advances: 15, isAdvanced: false },
-      { name: 'Perception', characteristic: 'I', advances: 5, isAdvanced: false },
-    ],
-    talents: [],
-    weapons: [
-      { name: 'Great Axe', group: 'Two-handed', damage: '+SB+6', range: 'Reach', reload: '', qualities: 'Damaging', encumbrance: 2 }
-    ],
-    armour: [
-      { name: 'Leather Jerkin', location: 'Body', ap: 1, qualities: '', encumbrance: 1 }
-    ],
-    trappings: [
-      { name: 'Backpack', encumbrance: 0, description: 'Holds items' }
-    ],
-    prayers: [
-      { name: 'Sigmar\'s Might', range: 'Self', duration: 'Instant', effect: '+10 Strength' }
-    ],
+    Armour: { Name: '', Location: '', ArmourPoints: 0, Encumbrance: 0, Qualities: [], IsWorn: false },
+    Trappings: [],
+    Weapons: [],
+    Prayers: []
   })
 
-  const currentWounds = ref(0)
-
-  const getCharacteristic = (name: string) => {
-    return char.value.characteristics.find(c => c.name === name)
+  // Helpers to handle the structure and typos
+  const getCharValue = (key: keyof Characteristics) => {
+    const c = char.value.Characteristics[key]
+    return c.Basic + c.Advances
   }
 
-  const getBonus = (name: string) => {
-    const c = getCharacteristic(name)
-    return c ? Math.floor(c.current / 10) : 0
+  const getBonus = (key: keyof Characteristics) => {
+    return Math.floor(getCharValue(key) / 10)
   }
 
   const maxWounds = computed(() => {
-    const sb = getBonus('S')
-    const tb = getBonus('T')
-    const wpb = getBonus('WP')
+    const sb = getBonus('Strength')
+    const tb = getBonus('Toughnes') // Typo matched
+    const wpb = getBonus('Willpower')
     return sb + (2 * tb) + wpb
   })
 
-  const expCurrent = computed(() => {
-    return char.value.expTotal - char.value.expSpent
-  })
+  const expCurrent = computed(() => char.value.Points.Exp.Total - char.value.Points.Exp.Spent)
 
-  if (currentWounds.value === 0) {
-    currentWounds.value = maxWounds.value
-  }
-
-  const updateCharacteristic = (name: string, type: 'initial' | 'advances', value: number) => {
-    const c = char.value.characteristics.find(c => c.name === name)
-    if (c) {
-      c[type] = value
-      c.current = c.initial + c.advances
-    }
-  }
-
-  const getSkillTotal = (skill: any) => {
-    const charValue = getCharacteristic(skill.characteristic)?.current || 0
-    return charValue + skill.advances
+  const getSkillTotal = (skill: Skill) => {
+    // In a real app, we'd lookup the characteristic by Name/Id
+    return skill.Basic + skill.Advances
   }
 
   return {
     char,
-    currentWounds,
     maxWounds,
     expCurrent,
     getBonus,
-    updateCharacteristic,
+    getCharValue,
     getSkillTotal,
   }
 })

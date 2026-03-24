@@ -23,7 +23,7 @@ const store = useCharacterStore()
         <div class="text-overline text-primary">Wounds</div>
         <div class="d-flex align-center justify-center">
           <v-number-input
-            v-model="store.currentWounds"
+            v-model="store.char.Wounds.Current"
             density="compact"
             variant="plain"
             hide-details
@@ -32,7 +32,7 @@ const store = useCharacterStore()
             hide-controls
           />
           <div class="text-h4 mx-1">/</div>
-          <div class="text-h4 font-weight-bold">{{ store.maxWounds }}</div>
+          <div class="text-h4 font-weight-bold">{{ store.char.Wounds.Max }}</div>
         </div>
       </v-card>
     </v-col>

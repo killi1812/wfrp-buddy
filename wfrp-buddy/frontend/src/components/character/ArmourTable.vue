@@ -16,11 +16,14 @@ const store = useCharacterStore()
         </tr>
       </thead>
       <tbody>
-        <tr v-for="a in store.char.armour" :key="a.name">
-          <td class="cell-bold">{{ a.name }}</td>
-          <td class="text-center cell-text">{{ a.location }}</td>
-          <td class="text-center cell-bold text-primary">{{ a.ap }}</td>
-          <td class="text-caption cell-text">{{ a.qualities }}</td>
+        <tr v-if="!store.char.Armour || !store.char.Armour.Name">
+           <td colspan="4" class="text-center text-grey py-4 placeholder-text">No armour equipped</td>
+        </tr>
+        <tr v-else>
+          <td class="cell-bold">{{ store.char.Armour.Name }}</td>
+          <td class="text-center cell-text">{{ store.char.Armour.Location }}</td>
+          <td class="text-center cell-bold text-primary">{{ store.char.Armour.ArmourPoints }}</td>
+          <td class="text-caption cell-text">{{ store.char.Armour.Qualities?.map(q => q.Name).join(', ') }}</td>
         </tr>
       </tbody>
     </v-table>
@@ -50,5 +53,9 @@ td {
 }
 .cell-text {
   font-size: 1.1rem;
+}
+.placeholder-text {
+  font-size: 1.1rem;
+  font-style: italic;
 }
 </style>

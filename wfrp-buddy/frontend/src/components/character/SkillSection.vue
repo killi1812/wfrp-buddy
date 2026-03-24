@@ -17,12 +17,12 @@ const store = useCharacterStore()
         </tr>
       </thead>
       <tbody>
-        <tr v-for="s in store.char.skills" :key="s.name">
-          <td class="skill-name">{{ s.name }}</td>
-          <td class="text-center text-subtitle-2">{{ s.characteristic }}</td>
+        <tr v-for="s in store.char.Skills" :key="s.Name">
+          <td class="skill-name">{{ s.Name }}</td>
+          <td class="text-center text-subtitle-2">{{ s.Characteristic }}</td>
           <td class="text-center pa-1">
             <v-number-input
-              v-model="s.advances"
+              v-model="s.Advances"
               hide-details
               density="compact"
               variant="plain"

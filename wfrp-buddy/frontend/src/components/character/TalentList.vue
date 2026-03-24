@@ -16,13 +16,13 @@ const store = useCharacterStore()
         </tr>
       </thead>
       <tbody>
-        <tr v-if="store.char.talents.length === 0">
+        <tr v-if="store.char.Talents.length === 0">
            <td colspan="3" class="text-center placeholder-text py-4">No talents added</td>
         </tr>
-        <tr v-for="t in store.char.talents" :key="t.name">
-          <td class="talent-name">{{ t.name }}</td>
-          <td class="text-center talent-count">{{ t.timesTaken }}</td>
-          <td class="talent-desc">{{ t.description }}</td>
+        <tr v-for="t in store.char.Talents" :key="t.Name">
+          <td class="talent-name">{{ t.Name }}</td>
+          <td class="text-center talent-count">{{ t.TimesTaken || 1 }}</td>
+          <td class="talent-desc">{{ t.Description }}</td>
         </tr>
       </tbody>
     </v-table>

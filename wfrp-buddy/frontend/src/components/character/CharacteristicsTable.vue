@@ -1,7 +1,18 @@
 <script setup lang="ts">
 import { useCharacterStore } from '@/stores/character'
+import { Characteristics } from '@/types/character'
 
 const store = useCharacterStore()
+
+const characteristicKeys: (keyof Characteristics)[] = [
+  'WeaponSkill', 'BalisticSkill', 'Strength', 'Toughnes', 'Initative', 
+  'Agility', 'Dexterity', 'Inteligence', 'Willpower', 'Fellowhip'
+]
+
+const labels: Record<string, string> = {
+  WeaponSkill: 'WS', BalisticSkill: 'BS', Strength: 'S', Toughnes: 'T', Initative: 'I',
+  Agility: 'Ag', Dexterity: 'Dex', Inteligence: 'Int', Willpower: 'WP', Fellowhip: 'Fel'
+}
 </script>
 
 <template>
@@ -11,18 +22,17 @@ const store = useCharacterStore()
       <thead>
         <tr>
           <th class="text-left char-name-col"></th>
-          <th v-for="c in store.char.characteristics" :key="c.name" class="text-center char-col">
-            {{ c.name }}
+          <th v-for="key in characteristicKeys" :key="key" class="text-center char-col">
+            {{ labels[key] }}
           </th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td class="row-label">Initial</td>
-          <td v-for="c in store.char.characteristics" :key="c.name" class="pa-1">
+          <td v-for="key in characteristicKeys" :key="key" class="pa-1">
             <v-number-input
-              v-model="c.initial"
-              @update:model-value="store.updateCharacteristic(c.name, 'initial', c.initial)"
+              v-model="store.char.Characteristics[key].Basic"
               hide-details
               density="compact"
               variant="plain"
@@ -34,10 +44,9 @@ const store = useCharacterStore()
         </tr>
         <tr>
           <td class="row-label">Advances</td>
-          <td v-for="c in store.char.characteristics" :key="c.name" class="pa-1">
+          <td v-for="key in characteristicKeys" :key="key" class="pa-1">
             <v-number-input
-              v-model="c.advances"
-              @update:model-value="store.updateCharacteristic(c.name, 'advances', c.advances)"
+              v-model="store.char.Characteristics[key].Advances"
               hide-details
               density="compact"
               variant="plain"
@@ -49,14 +58,14 @@ const store = useCharacterStore()
         </tr>
         <tr class="current-row">
           <td class="row-label text-primary font-weight-bold">Current</td>
-          <td v-for="c in store.char.characteristics" :key="c.name" class="text-center text-h5 text-primary font-weight-bold py-1">
-            {{ c.current }}
+          <td v-for="key in characteristicKeys" :key="key" class="text-center text-h5 text-primary font-weight-bold py-1">
+            {{ store.char.Characteristics[key].Basic + store.char.Characteristics[key].Advances }}
           </td>
         </tr>
         <tr class="bonus-row">
           <td class="row-label">Bonus</td>
-          <td v-for="c in store.char.characteristics" :key="c.name" class="text-center text-h6 py-1">
-            {{ Math.floor(c.current / 10) }}
+          <td v-for="key in characteristicKeys" :key="key" class="text-center text-h6 py-1">
+            {{ Math.floor((store.char.Characteristics[key].Basic + store.char.Characteristics[key].Advances) / 10) }}
           </td>
         </tr>
       </tbody>
