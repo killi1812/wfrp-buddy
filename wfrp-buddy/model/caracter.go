@@ -40,30 +40,6 @@ type Caracter struct {
 }
 
 type (
-	// TODO: implement species enum
-	Species string
-	// TODO: implement class enum
-	Class string
-	// TODO: implement BookVersion enum
-	BookVersion string
-	// TODO: implement StatusTier enum
-	StatusTier string
-	// TODO: implement Location enum
-	Location string
-	// TODO: implement WeaponGroup enum
-	WeaponGroup string
-)
-
-type Talent struct {
-	Id          uuid.UUID
-	Name        string
-	Version     BookVersion
-	MaxLvl      int
-	Test        string `json:"test,omitempty"`
-	Description string
-}
-
-type (
 	Characteristics struct {
 		WeaponSkill   Characteristic
 		BalisticSkill Characteristic
@@ -183,25 +159,6 @@ type (
 		Damage      string
 		Qualities   Quality
 		IsWorn      bool
-	}
-
-	Prayer struct {
-		Id       uuid.UUID
-		Name     string
-		Range    string
-		Target   string
-		Duration string
-		Effect   string
-	}
-
-	Spell struct {
-		Id            uuid.UUID
-		Name          string
-		CastingNumber int
-		Range         string
-		Target        string
-		Duration      string
-		Effect        string
 	}
 
 	Psychology []string
