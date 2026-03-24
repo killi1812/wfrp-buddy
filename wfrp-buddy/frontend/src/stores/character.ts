@@ -5,15 +5,25 @@ import { Character } from '@/types/character'
 export const useCharacterStore = defineStore('character', () => {
   const char = ref<Character>({
     name: 'Gottfried von Berlichingen',
+    species: 'Dwarf',
+    class: 'Warrior',
     career: 'Slayer',
     path: 'Troll Slayer',
     status: 'Brass 3',
+    tier: 'Tier 2',
     age: 32,
+    height: '4\'8"',
+    hair: 'Orange',
+    eyes: 'Blue',
+    motivation: 'Redemption',
     fate: 2,
+    fortune: 2,
     resilience: 2,
+    resolve: 2,
     movement: 3,
-    experience: 150,
-    wounds: 0, // We'll use maxWounds computed instead
+    expSpent: 100,
+    expTotal: 250,
+    wounds: 0,
     characteristics: [
       { name: 'WS', initial: 30, advances: 5, current: 35 },
       { name: 'BS', initial: 25, advances: 0, current: 25 },
@@ -66,7 +76,10 @@ export const useCharacterStore = defineStore('character', () => {
     return sb + (2 * tb) + wpb
   })
 
-  // Set initial wounds if not set
+  const expCurrent = computed(() => {
+    return char.value.expTotal - char.value.expSpent
+  })
+
   if (currentWounds.value === 0) {
     currentWounds.value = maxWounds.value
   }
@@ -88,6 +101,7 @@ export const useCharacterStore = defineStore('character', () => {
     char,
     currentWounds,
     maxWounds,
+    expCurrent,
     getBonus,
     updateCharacteristic,
     getSkillTotal,

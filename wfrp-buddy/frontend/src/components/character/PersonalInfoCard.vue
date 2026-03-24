@@ -11,10 +11,32 @@ const store = useCharacterStore()
         <v-text-field v-model="store.char.name" label="Name" variant="outlined" density="compact" hide-details class="mb-2" />
       </v-col>
       <v-col cols="6">
-        <v-text-field v-model="store.char.career" label="Career" variant="outlined" density="compact" hide-details />
+        <v-text-field v-model="store.char.species" label="Species" variant="outlined" density="compact" hide-details class="mb-2" />
       </v-col>
       <v-col cols="6">
-        <v-text-field v-model="store.char.path" label="Path" variant="outlined" density="compact" hide-details />
+        <v-text-field v-model="store.char.class" label="Class" variant="outlined" density="compact" hide-details class="mb-2" />
+      </v-col>
+      <v-col cols="6">
+        <v-text-field v-model="store.char.career" label="Career" variant="outlined" density="compact" hide-details class="mb-2" />
+      </v-col>
+      <v-col cols="6">
+        <v-text-field v-model="store.char.tier" label="Tier" variant="outlined" density="compact" hide-details class="mb-2" />
+      </v-col>
+      <v-col cols="6">
+        <v-text-field v-model="store.char.path" label="Path" variant="outlined" density="compact" hide-details class="mb-2" />
+      </v-col>
+      <v-col cols="6">
+        <v-text-field v-model="store.char.status" label="Status" variant="outlined" density="compact" hide-details class="mb-2" />
+      </v-col>
+      
+      <v-col cols="4">
+        <v-text-field v-model="store.char.height" label="Height" variant="outlined" density="compact" hide-details />
+      </v-col>
+      <v-col cols="4">
+        <v-text-field v-model="store.char.hair" label="Hair" variant="outlined" density="compact" hide-details />
+      </v-col>
+      <v-col cols="4">
+        <v-text-field v-model="store.char.eyes" label="Eyes" variant="outlined" density="compact" hide-details />
       </v-col>
     </v-row>
   </v-card>

@@ -47,7 +47,7 @@ const store = useCharacterStore()
   font-size: 2.125rem;
   font-weight: 700;
   text-align: right;
-  width: 60px;
+  width: 50px;
   padding: 0;
   font-family: 'Crimson Text', serif;
 }

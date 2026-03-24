@@ -5,22 +5,34 @@ const store = useCharacterStore()
 
 <template>
   <v-card class="pa-4 header-sub-card h-100" elevation="2">
-    <div class="text-overline mb-2 primary--text">Status & Movement</div>
+    <div class="text-overline mb-2 primary--text">Mov & Exp</div>
     <v-row dense>
-      <v-col cols="6">
-        <v-text-field v-model="store.char.status" label="Status" variant="outlined" density="compact" hide-details class="mb-2" />
-      </v-col>
       <v-col cols="6">
         <v-text-field v-model.number="store.char.age" label="Age" type="number" variant="outlined" density="compact" hide-details class="mb-2" />
       </v-col>
-      <v-col cols="4">
+      <v-col cols="6">
         <v-text-field v-model.number="store.char.movement" label="Move" type="number" variant="outlined" density="compact" hide-details />
       </v-col>
-      <v-col cols="4">
+      
+      <v-col cols="6">
         <v-text-field :model-value="store.char.movement * 2" label="Walk" readonly variant="outlined" density="compact" hide-details />
       </v-col>
-      <v-col cols="4">
+      <v-col cols="6">
         <v-text-field :model-value="store.char.movement * 4" label="Run" readonly variant="outlined" density="compact" hide-details />
+      </v-col>
+      
+      <v-col cols="12" class="mt-2">
+        <v-divider />
+      </v-col>
+      
+      <v-col cols="4" class="mt-2">
+        <v-text-field v-model.number="store.char.expTotal" label="Total" type="number" variant="outlined" density="compact" hide-details />
+      </v-col>
+      <v-col cols="4" class="mt-2">
+        <v-text-field v-model.number="store.char.expSpent" label="Spent" type="number" variant="outlined" density="compact" hide-details />
+      </v-col>
+      <v-col cols="4" class="mt-2">
+        <v-text-field :model-value="store.expCurrent" label="Current" readonly variant="outlined" density="compact" hide-details />
       </v-col>
     </v-row>
   </v-card>

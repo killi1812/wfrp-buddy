@@ -51,14 +51,24 @@ export interface Prayer {
 
 export interface Character {
   name: string;
+  species: string;
+  class: string;
   career: string;
   path: string;
   status: string;
+  tier: string;
   age: number;
+  height: string;
+  hair: string;
+  eyes: string;
+  motivation: string;
   fate: number;
+  fortune: number;
   resilience: number;
+  resolve: number;
   movement: number;
-  experience: number;
+  expSpent: number;
+  expTotal: number;
   wounds: number;
   characteristics: Characteristic[];
   skills: Skill[];
