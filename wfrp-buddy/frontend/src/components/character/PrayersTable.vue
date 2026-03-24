@@ -59,13 +59,14 @@ const store = useCharacterStore()
 }
 
 .sin-number-input {
-  width: 60px;
+  width: 80px;
 }
 
 .sin-number-input :deep(input) {
   text-align: center;
   font-weight: bold;
   font-family: 'Crimson Text', serif;
+  font-size: 1.1rem;
 }
 
 .cell-bold {
