@@ -4,7 +4,7 @@ const store = useCharacterStore()
 </script>
 
 <template>
-  <v-card class="pa-4 grim-card h-100 elevation-0">
+  <v-card class="pa-4 grim-card h-100 elevation-2">
     <v-row dense>
       <v-col cols="6">
         <div class="text-center">
@@ -46,8 +46,15 @@ const store = useCharacterStore()
           </div>
         </div>
       </v-col>
-      <v-col cols="12" class="mt-2">
-        <v-text-field v-model="store.char.Points.Resilience.Motive" label="Motivation" variant="underlined" density="compact" hide-details class="motivation-underlined" />
+      <v-col cols="12" class="mt-3">
+        <v-text-field 
+          v-model="store.char.Points.Resilience.Motive" 
+          label="Motivation" 
+          variant="outlined" 
+          density="compact" 
+          hide-details 
+          class="motivation-outlined" 
+        />
       </v-col>
     </v-row>
   </v-card>
@@ -63,7 +70,7 @@ const store = useCharacterStore()
   font-family: 'Crimson Text', serif;
 }
 
-.motivation-underlined :deep(label), .motivation-underlined :deep(input) {
+.motivation-outlined :deep(label), .motivation-outlined :deep(input) {
   font-family: 'Crimson Text', serif;
 }
 </style>

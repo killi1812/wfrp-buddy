@@ -19,7 +19,7 @@ const store = useCharacterStore()
       <PointsCard />
     </v-col>
     <v-col cols="12" md="2">
-      <v-card class="pa-4 grim-card h-100 d-flex flex-column align-center justify-center elevation-0">
+      <v-card class="pa-4 grim-card h-100 d-flex flex-column align-center justify-center elevation-2">
         <div class="section-title mb-1">Wounds</div>
         <div class="d-flex align-center">
           <v-number-input
