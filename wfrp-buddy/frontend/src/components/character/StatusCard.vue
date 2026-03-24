@@ -8,10 +8,10 @@ const store = useCharacterStore()
     <div class="text-overline mb-2 primary--text">Mov & Exp</div>
     <v-row dense>
       <v-col cols="6">
-        <v-text-field v-model.number="store.char.age" label="Age" type="number" variant="outlined" density="compact" hide-details class="mb-2" />
+        <v-number-input v-model="store.char.age" label="Age" variant="outlined" density="compact" hide-details class="mb-2" control-variant="stacked" hide-controls />
       </v-col>
       <v-col cols="6">
-        <v-text-field v-model.number="store.char.movement" label="Move" type="number" variant="outlined" density="compact" hide-details />
+        <v-number-input v-model="store.char.movement" label="Move" variant="outlined" density="compact" hide-details control-variant="stacked" hide-controls />
       </v-col>
       
       <v-col cols="6">
@@ -26,10 +26,10 @@ const store = useCharacterStore()
       </v-col>
       
       <v-col cols="4" class="mt-2">
-        <v-text-field v-model.number="store.char.expTotal" label="Total" type="number" variant="outlined" density="compact" hide-details />
+        <v-number-input v-model="store.char.expTotal" label="Total" variant="outlined" density="compact" hide-details control-variant="stacked" hide-controls />
       </v-col>
       <v-col cols="4" class="mt-2">
-        <v-text-field v-model.number="store.char.expSpent" label="Spent" type="number" variant="outlined" density="compact" hide-details />
+        <v-number-input v-model="store.char.expSpent" label="Spent" variant="outlined" density="compact" hide-details control-variant="stacked" hide-controls />
       </v-col>
       <v-col cols="4" class="mt-2">
         <v-text-field :model-value="store.expCurrent" label="Current" readonly variant="outlined" density="compact" hide-details />

@@ -21,14 +21,15 @@ const store = useCharacterStore()
     <v-col cols="12" md="2">
       <v-card class="pa-4 wounds-card h-100 d-flex flex-column align-center justify-center" elevation="2">
         <div class="text-overline text-primary">Wounds</div>
-        <div class="d-flex align-center">
-          <v-text-field
-            v-model.number="store.currentWounds"
-            type="number"
+        <div class="d-flex align-center justify-center">
+          <v-number-input
+            v-model="store.currentWounds"
             density="compact"
             variant="plain"
             hide-details
             class="wounds-input"
+            control-variant="stacked"
+            hide-controls
           />
           <div class="text-h4 mx-1">/</div>
           <div class="text-h4 font-weight-bold">{{ store.maxWounds }}</div>
@@ -47,7 +48,7 @@ const store = useCharacterStore()
   font-size: 2.125rem;
   font-weight: 700;
   text-align: right;
-  width: 50px;
+  width: 70px;
   padding: 0;
   font-family: 'Crimson Text', serif;
 }

@@ -21,13 +21,14 @@ const store = useCharacterStore()
           <td class="font-weight-bold">{{ s.name }}</td>
           <td class="text-center text-caption">{{ s.characteristic }}</td>
           <td class="text-center pa-1">
-            <v-text-field
-              v-model.number="s.advances"
+            <v-number-input
+              v-model="s.advances"
               hide-details
               density="compact"
               variant="plain"
               class="centered-input-adv"
-              type="number"
+              control-variant="stacked"
+              hide-controls
             />
           </td>
           <td class="text-center font-weight-bold text-primary">

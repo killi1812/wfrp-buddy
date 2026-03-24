@@ -10,6 +10,7 @@ import "vuetify/styles";
 
 // Composables
 import { createVuetify, ThemeDefinition } from "vuetify";
+import * as labsComponents from 'vuetify/labs/components'
 
 const defaultTheme: ThemeDefinition = {
   dark: false,
@@ -24,6 +25,20 @@ const defaultTheme: ThemeDefinition = {
     success: '#38c76a',
     warning: '#C7A654',
     subtext: "#606060"
+  },
+}
+
+const wfrpDark: ThemeDefinition = {
+  dark: true,
+  colors: {
+    background: '#121212',
+    surface: '#1e1e1e',
+    primary: '#ffca28', // amber-lighten-2
+    secondary: '#825127',
+    error: '#B8574C',
+    info: '#D1B37B',
+    success: '#38c76a',
+    warning: '#C7A654',
   },
 }
 
@@ -45,10 +60,14 @@ const darkTheme: ThemeDefinition = {
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
+  components: {
+    ...labsComponents,
+  },
   theme: {
     defaultTheme: "defaultTheme",
     themes: {
       defaultTheme,
+      wfrpDark,
       darkTheme,
     }
   },

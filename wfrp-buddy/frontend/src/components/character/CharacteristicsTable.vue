@@ -20,28 +20,30 @@ const store = useCharacterStore()
         <tr>
           <td class="text-overline">Initial</td>
           <td v-for="c in store.char.characteristics" :key="c.name" class="pa-1">
-            <v-text-field
-              v-model.number="c.initial"
+            <v-number-input
+              v-model="c.initial"
               @update:model-value="store.updateCharacteristic(c.name, 'initial', c.initial)"
               hide-details
               density="compact"
               variant="plain"
               class="centered-input"
-              type="number"
+              control-variant="stacked"
+              hide-controls
             />
           </td>
         </tr>
         <tr>
           <td class="text-overline">Advances</td>
           <td v-for="c in store.char.characteristics" :key="c.name" class="pa-1">
-            <v-text-field
-              v-model.number="c.advances"
+            <v-number-input
+              v-model="c.advances"
               @update:model-value="store.updateCharacteristic(c.name, 'advances', c.advances)"
               hide-details
               density="compact"
               variant="plain"
               class="centered-input"
-              type="number"
+              control-variant="stacked"
+              hide-controls
             />
           </td>
         </tr>
