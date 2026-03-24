@@ -4,7 +4,7 @@ const store = useCharacterStore()
 </script>
 
 <template>
-  <v-card class="pa-4 grim-card h-100 elevation-2">
+  <v-card class="pa-4 header-sub-card h-100 elevation-2">
     <div class="text-h6 mb-2 text-primary section-title">Corruption</div>
     <v-row dense class="mb-2">
       <v-col cols="6">
@@ -38,6 +38,11 @@ const store = useCharacterStore()
 </template>
 
 <style scoped>
+.header-sub-card {
+  border: 1px solid rgba(0,0,0,0.1);
+  background-color: var(--v-theme-surface);
+}
+
 .compact-num-input :deep(input) {
   text-align: center;
   font-family: 'Crimson Text', serif;

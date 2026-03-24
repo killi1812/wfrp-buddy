@@ -19,13 +19,13 @@
 html,
 body {
     height: 100%;
-    overflow: hidden !important;
+    overflow: hidden;
 }
 
 /* Character Sheet Common Classes */
 .grim-card {
-    background-color: var(--v-theme-surface) !important;
-    border: 1px solid rgba(0,0,0,0.1) !important;
+    background-color: var(--v-theme-surface);
+    border: 1px solid rgba(0,0,0,0.1);
 }
 
 .section-title {
@@ -37,13 +37,13 @@ body {
 }
 
 .grim-table {
-    background: transparent !important;
+    background: transparent;
 }
 
 .grim-table th {
-    font-family: 'Crimson Text', serif !important;
-    color: var(--v-theme-primary) !important;
-    font-weight: bold !important;
+    font-family: 'Crimson Text', serif;
+    color: var(--v-theme-primary);
+    font-weight: bold;
     text-transform: uppercase;
 }
 

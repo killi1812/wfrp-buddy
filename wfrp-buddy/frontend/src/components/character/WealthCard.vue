@@ -4,7 +4,7 @@ const store = useCharacterStore()
 </script>
 
 <template>
-  <v-card class="pa-4 grim-card h-100 elevation-2">
+  <v-card class="pa-4 header-sub-card h-100 elevation-2">
     <div class="text-h6 mb-2 text-primary section-title">Wealth</div>
     <v-row dense>
       <v-col cols="4">
@@ -51,6 +51,11 @@ const store = useCharacterStore()
 </template>
 
 <style scoped>
+.header-sub-card {
+  border: 1px solid rgba(0,0,0,0.1);
+  background-color: var(--v-theme-surface);
+}
+
 .wealth-input :deep(input) {
   font-size: 1.2rem;
   font-weight: bold;

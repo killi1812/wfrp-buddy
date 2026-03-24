@@ -19,7 +19,7 @@ const store = useCharacterStore()
       <PointsCard />
     </v-col>
     <v-col cols="12" md="2">
-      <v-card class="pa-4 grim-card h-100 d-flex flex-column align-center justify-center elevation-2">
+      <v-card class="pa-4 header-sub-card h-100 d-flex flex-column align-center justify-center elevation-2">
         <div class="section-title mb-1">Wounds</div>
         <div class="d-flex align-center">
           <v-number-input
@@ -48,6 +48,11 @@ const store = useCharacterStore()
 </template>
 
 <style scoped>
+.header-sub-card {
+  border: 1px solid rgba(0,0,0,0.1);
+  background-color: var(--v-theme-surface);
+}
+
 .header-large-input :deep(input) {
   font-size: 2.2rem;
   font-weight: bold;

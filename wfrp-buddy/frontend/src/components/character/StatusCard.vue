@@ -5,7 +5,7 @@ const store = useCharacterStore()
 
 <template>
   <v-card class="pa-4 header-sub-card h-100" elevation="2">
-    <div class="text-overline mb-2 primary--text">Movement & Exp</div>
+    <div class="text-h6 mb-2 text-primary section-title">Movement & Exp</div>
     <v-row dense>
       <v-col cols="4">
         <v-number-input v-model="store.char.Movment.Movment" label="Move" variant="outlined" density="compact" hide-details control-variant="stacked" hide-controls />
@@ -38,9 +38,5 @@ const store = useCharacterStore()
 .header-sub-card {
   border: 1px solid rgba(0,0,0,0.1);
   background-color: var(--v-theme-surface);
-}
-.text-overline {
-  font-family: 'Crimson Text', serif;
-  font-weight: bold;
 }
 </style>

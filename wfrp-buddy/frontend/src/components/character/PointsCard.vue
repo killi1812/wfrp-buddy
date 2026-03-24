@@ -4,7 +4,7 @@ const store = useCharacterStore()
 </script>
 
 <template>
-  <v-card class="pa-4 grim-card h-100 elevation-2">
+  <v-card class="pa-4 header-sub-card h-100 elevation-2">
     <v-row dense>
       <v-col cols="6">
         <div class="text-center">
@@ -61,6 +61,11 @@ const store = useCharacterStore()
 </template>
 
 <style scoped>
+.header-sub-card {
+  border: 1px solid rgba(0,0,0,0.1);
+  background-color: var(--v-theme-surface);
+}
+
 .points-plain-input :deep(input) {
   font-size: 1.5rem;
   font-weight: bold;
@@ -68,6 +73,7 @@ const store = useCharacterStore()
   width: 45px;
   padding: 0;
   font-family: 'Crimson Text', serif;
+  color: var(--v-theme-primary);
 }
 
 .motivation-outlined :deep(label), .motivation-outlined :deep(input) {

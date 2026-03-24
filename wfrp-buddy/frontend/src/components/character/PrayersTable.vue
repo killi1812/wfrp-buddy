@@ -11,11 +11,11 @@ const store = useCharacterStore()
       <v-number-input 
         v-model="store.char.Sin" 
         density="compact" 
-        variant="plain" 
+        variant="outlined" 
         hide-details 
         control-variant="stacked" 
         hide-controls 
-        class="sin-input" 
+        class="sin-number-input" 
       />
     </div>
 
@@ -53,18 +53,18 @@ const store = useCharacterStore()
   position: absolute;
   top: 8px;
   right: 8px;
-  border: 1px solid var(--v-theme-error);
-  border-radius: 4px;
-  padding: 2px 8px;
-  background-color: rgba(184, 87, 76, 0.05);
+  z-index: 10;
+  display: flex;
+  align-items: center;
 }
 
-.sin-input :deep(input) {
-  width: 25px;
+.sin-number-input {
+  width: 60px;
+}
+
+.sin-number-input :deep(input) {
   text-align: center;
   font-weight: bold;
-  font-size: 1.1rem;
-  color: var(--v-theme-error);
   font-family: 'Crimson Text', serif;
 }
 
