@@ -19,20 +19,28 @@ const store = useCharacterStore()
       <PointsCard />
     </v-col>
     <v-col cols="12" md="2">
-      <v-card class="pa-4 wounds-card h-100 d-flex flex-column align-center justify-center" elevation="2">
-        <div class="text-overline text-primary">Wounds</div>
-        <div class="d-flex align-center justify-center">
+      <v-card class="pa-4 grim-card h-100 d-flex flex-column align-center justify-center elevation-0">
+        <div class="section-title mb-1">Wounds</div>
+        <div class="d-flex align-center">
           <v-number-input
             v-model="store.char.Wounds.Current"
             density="compact"
             variant="plain"
             hide-details
-            class="wounds-input"
+            class="header-large-input"
             control-variant="stacked"
             hide-controls
           />
-          <div class="text-h4 mx-1">/</div>
-          <div class="text-h4 font-weight-bold">{{ store.char.Wounds.Max }}</div>
+          <div class="text-h4 mx-1 primary--text">/</div>
+          <v-number-input
+            v-model="store.char.Wounds.Max"
+            density="compact"
+            variant="plain"
+            hide-details
+            class="header-large-input"
+            control-variant="stacked"
+            hide-controls
+          />
         </div>
       </v-card>
     </v-col>
@@ -40,19 +48,12 @@ const store = useCharacterStore()
 </template>
 
 <style scoped>
-.wounds-card {
-  border: 2px solid var(--v-theme-primary);
-  background-color: var(--v-theme-surface);
-}
-.wounds-input :deep(input) {
-  font-size: 2.125rem;
-  font-weight: 700;
-  text-align: right;
-  width: 70px;
-  padding: 0;
+.header-large-input :deep(input) {
+  font-size: 2.2rem;
+  font-weight: bold;
+  width: 60px;
+  text-align: center;
   font-family: 'Crimson Text', serif;
-}
-.text-overline {
-  font-family: 'Crimson Text', serif;
+  color: var(--v-theme-primary);
 }
 </style>

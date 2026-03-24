@@ -16,14 +16,17 @@ const store = useCharacterStore()
         </tr>
       </thead>
       <tbody>
-        <tr v-if="!store.char.Armour || !store.char.Armour.Name">
-           <td colspan="4" class="text-center text-grey py-4 placeholder-text">No armour equipped</td>
-        </tr>
-        <tr v-else>
+        <!-- Check if Armour object exists and has a Name -->
+        <tr v-if="store.char.Armour && store.char.Armour.Name">
           <td class="cell-bold">{{ store.char.Armour.Name }}</td>
           <td class="text-center cell-text">{{ store.char.Armour.Location }}</td>
           <td class="text-center cell-bold text-primary">{{ store.char.Armour.ArmourPoints }}</td>
-          <td class="text-caption cell-text">{{ store.char.Armour.Qualities?.map(q => q.Name).join(', ') }}</td>
+          <td class="text-caption cell-text">
+            {{ store.char.Armour.Qualities?.map(q => q.Name).join(', ') }}
+          </td>
+        </tr>
+        <tr v-else>
+           <td colspan="4" class="text-center text-grey py-4 placeholder-text">No armour equipped</td>
         </tr>
       </tbody>
     </v-table>

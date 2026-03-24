@@ -21,7 +21,9 @@ const store = useCharacterStore()
         <tr v-for="t in store.char.Trappings" :key="t.Name">
           <td class="cell-bold">{{ t.Name }}</td>
           <td class="text-center cell-text">{{ t.Encumbrance }}</td>
-          <td class="text-caption cell-text">{{ t.Qualities?.map(q => q.Name).join(', ') }}</td>
+          <td class="text-caption cell-text">
+            {{ t.Qualities?.map(q => q.Name).join(', ') }}
+          </td>
         </tr>
       </tbody>
     </v-table>
@@ -46,7 +48,7 @@ td {
   font-family: 'Crimson Text', serif;
 }
 .cell-bold {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: bold;
 }
 .cell-text {
