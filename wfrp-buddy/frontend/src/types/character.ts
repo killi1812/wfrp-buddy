@@ -36,6 +36,19 @@ export interface Armour {
   encumbrance: number;
 }
 
+export interface Trapping {
+  name: string;
+  encumbrance: number;
+  description: string;
+}
+
+export interface Prayer {
+  name: string;
+  range: string;
+  duration: string;
+  effect: string;
+}
+
 export interface Character {
   name: string;
   career: string;
@@ -52,5 +65,6 @@ export interface Character {
   talents: Talent[];
   weapons: Weapon[];
   armour: Armour[];
-  inventory: string[];
+  trappings: Trapping[];
+  prayers: Prayer[];
 }

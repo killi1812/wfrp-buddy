@@ -25,16 +25,13 @@ const defaultTheme: ThemeDefinition = {
     warning: '#C7A654',
     subtext: "#606060"
   },
-  //variables{
-  //}
-
 }
 
 const darkTheme: ThemeDefinition = {
   dark: true,
   colors: {
-    background: '#f9fbfe',
-    surface: '#e0e0e0',
+    background: '#121212',
+    surface: '#1e1e1e',
     primary: '#1976d2',
     secondary: '#f5f5f5',
     accent: '#e3effa',
@@ -44,31 +41,13 @@ const darkTheme: ThemeDefinition = {
     warning: '#fdbe04',
     subtext: "#606060"
   },
-  //variables{
-  //}
-
-}
-
-const wfrpDark: ThemeDefinition = {
-  dark: true,
-  colors: {
-    background: '#121212',
-    surface: '#1e1e1e',
-    primary: '#ffca28', // amber-lighten-2
-    secondary: '#825127',
-    error: '#B8574C',
-    info: '#D1B37B',
-    success: '#38c76a',
-    warning: '#C7A654',
-  },
 }
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
   theme: {
-    defaultTheme: "wfrpDark",
+    defaultTheme: "defaultTheme",
     themes: {
-      wfrpDark,
       defaultTheme,
       darkTheme,
     }

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { Character, Characteristic } from '@/types/character'
+import { Character } from '@/types/character'
 
 export const useCharacterStore = defineStore('character', () => {
   const char = ref<Character>({
@@ -28,9 +28,18 @@ export const useCharacterStore = defineStore('character', () => {
     ],
     skills: [],
     talents: [],
-    weapons: [],
-    armour: [],
-    inventory: [],
+    weapons: [
+      { name: 'Great Axe', group: 'Two-handed', damage: '+SB+6', range: 'Reach', reload: '', qualities: 'Damaging', encumbrance: 2 }
+    ],
+    armour: [
+      { name: 'Leather Jerkin', location: 'Body', ap: 1, qualities: '', encumbrance: 1 }
+    ],
+    trappings: [
+      { name: 'Backpack', encumbrance: 0, description: 'Holds items' }
+    ],
+    prayers: [
+      { name: 'Sigmar\'s Might', range: 'Self', duration: 'Instant', effect: '+10 Strength' }
+    ],
   })
 
   const getCharacteristic = (name: string) => {
