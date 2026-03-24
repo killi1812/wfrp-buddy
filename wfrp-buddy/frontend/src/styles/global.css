@@ -8,11 +8,7 @@
 
 html,
 body {
-    overflow: hidden
-}
-
-body::-webkit-scrollbar {
-    display: none;
+    height: 100%;
 }
 
 /*This is padding underlined variant of input field*/

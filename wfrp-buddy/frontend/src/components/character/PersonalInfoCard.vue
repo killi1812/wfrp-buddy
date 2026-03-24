@@ -29,6 +29,10 @@ const store = useCharacterStore()
         <v-text-field v-model="store.char.status" label="Status" variant="outlined" density="compact" hide-details class="mb-2" />
       </v-col>
       
+      <v-col cols="12">
+        <v-number-input v-model="store.char.age" label="Age" variant="outlined" density="compact" hide-details class="mb-2" control-variant="stacked" hide-controls />
+      </v-col>
+
       <v-col cols="4">
         <v-text-field v-model="store.char.height" label="Height" variant="outlined" density="compact" hide-details />
       </v-col>

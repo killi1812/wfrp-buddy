@@ -5,19 +5,15 @@ const store = useCharacterStore()
 
 <template>
   <v-card class="pa-4 header-sub-card h-100" elevation="2">
-    <div class="text-overline mb-2 primary--text">Mov & Exp</div>
+    <div class="text-overline mb-2 primary--text">Movement & Exp</div>
     <v-row dense>
-      <v-col cols="6">
-        <v-number-input v-model="store.char.age" label="Age" variant="outlined" density="compact" hide-details class="mb-2" control-variant="stacked" hide-controls />
-      </v-col>
-      <v-col cols="6">
+      <v-col cols="4">
         <v-number-input v-model="store.char.movement" label="Move" variant="outlined" density="compact" hide-details control-variant="stacked" hide-controls />
       </v-col>
-      
-      <v-col cols="6">
+      <v-col cols="4">
         <v-text-field :model-value="store.char.movement * 2" label="Walk" readonly variant="outlined" density="compact" hide-details />
       </v-col>
-      <v-col cols="6">
+      <v-col cols="4">
         <v-text-field :model-value="store.char.movement * 4" label="Run" readonly variant="outlined" density="compact" hide-details />
       </v-col>
       
