@@ -13,6 +13,7 @@ type Caracter struct {
 	Career Career
 
 	Status Status
+	Skills Skills
 
 	Description Description
 
@@ -66,7 +67,7 @@ type (
 	}
 
 	Ambitions struct {
-		shortTerm string
+		ShortTerm string
 		LongTerm  string
 	}
 

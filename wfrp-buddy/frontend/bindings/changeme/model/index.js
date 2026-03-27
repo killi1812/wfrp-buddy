@@ -19,6 +19,7 @@ export {
     Prayer,
     Quality,
     RPoint,
+    Skill,
     Spell,
     Status,
     Talent,
@@ -47,6 +48,10 @@ import * as $models from "./models.js";
 
 /**
  * @typedef {$models.Psychology} Psychology
+ */
+
+/**
+ * @typedef {$models.Skills} Skills
  */
 
 /**

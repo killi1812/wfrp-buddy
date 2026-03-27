@@ -21,7 +21,7 @@ const store = useCharacterStore()
         </tr>
         <tr v-for="s in store.char.Spells" :key="s.Id">
           <td class="cell-bold">{{ s.Name }}</td>
-          <td class="text-center cell-text">{{ s.CN }}</td>
+          <td class="text-center cell-text">{{ s.CastingNumber }}</td>
           <td class="text-center cell-text">{{ s.Range }}</td>
           <td class="text-caption cell-text">{{ s.Effect }}</td>
         </tr>

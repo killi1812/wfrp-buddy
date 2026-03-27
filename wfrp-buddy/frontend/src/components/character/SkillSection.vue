@@ -17,8 +17,8 @@ const store = useCharacterStore()
         </tr>
       </thead>
       <tbody>
-        <tr v-for="s in store.char.Skills" :key="s.Name">
-          <td class="skill-name">{{ s.Name }}</td>
+        <tr v-for="s in store.char.Skills" :key="(s as any).Name">
+          <td class="skill-name">{{ (s as any).Name }}</td>
           <td class="text-center text-subtitle-2">{{ s.Characteristic }}</td>
           <td class="text-center pa-1">
             <v-number-input

@@ -21,7 +21,7 @@ const store = useCharacterStore()
         </tr>
         <tr v-for="t in store.char.Talents" :key="t.Name">
           <td class="talent-name">{{ t.Name }}</td>
-          <td class="text-center talent-count">{{ t.TimesTaken || 1 }}</td>
+          <td class="text-center talent-count">{{ t.MaxLvl || 1 }}</td>
           <td class="talent-desc">{{ t.Description }}</td>
         </tr>
       </tbody>

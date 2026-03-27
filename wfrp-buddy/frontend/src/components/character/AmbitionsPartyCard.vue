@@ -8,7 +8,7 @@ const store = useCharacterStore()
     <div class="text-h6 mb-2 text-primary section-title">Ambitions</div>
     <v-row dense>
       <v-col cols="12">
-        <v-text-field v-model="store.char.Ambitions.shortTerm" label="Short-Term Ambition" variant="outlined" density="compact" hide-details class="mb-3" />
+        <v-text-field v-model="store.char.Ambitions.ShortTerm" label="Short-Term Ambition" variant="outlined" density="compact" hide-details class="mb-3" />
       </v-col>
       <v-col cols="12">
         <v-textarea v-model="store.char.Ambitions.LongTerm" label="Long-Term Ambition" variant="outlined" density="compact" hide-details rows="2" class="mb-3" />
