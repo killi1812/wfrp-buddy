@@ -17,10 +17,10 @@ type Caracter struct {
 
 	Description Description
 
-	Talents        []Talent
-	Characteristic Characteristic
-	Movment        Movment
-	Ambitions      Ambitions
+	Talents         []Talent
+	Characteristics Characteristics
+	Movment         Movment
+	Ambitions       Ambitions
 
 	Party *Party
 

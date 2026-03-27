@@ -10,7 +10,7 @@ export const useCharacterStore = defineStore('character', () => {
     Career: new model.Career({ Career: 'Slayer', CareerTier: 2, CareerPath: 'Troll Slayer' }),
     Status: new model.Status({ Tier: 'Brass', Level: 3 }),
     Description: new model.Description({ Age: 32, Height: '4\'8"', Hair: 'Orange', Eyes: 'Blue', Description: 'A standard slayer', Psychology: 'Grim' }),
-    Characteristic: new model.Characteristic({ 
+    Characteristics: new model.Characteristics({
       WeaponSkill: { Basic: 30, Advances: 5 },
       BalisticSkill: { Basic: 25, Advances: 0 },
       Strength: { Basic: 35, Advances: 10 },

@@ -8,6 +8,7 @@ export {
     Caracter,
     Career,
     Characteristic,
+    Characteristics,
     Corruption,
     Description,
     Encumbrance,

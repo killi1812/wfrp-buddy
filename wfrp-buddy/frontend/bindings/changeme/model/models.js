@@ -186,12 +186,12 @@ export class Caracter {
              */
             this["Talents"] = [];
         }
-        if (!("Characteristic" in $$source)) {
+        if (!("Characteristics" in $$source)) {
             /**
              * @member
-             * @type {Characteristic}
+             * @type {Characteristics}
              */
-            this["Characteristic"] = (new Characteristic());
+            this["Characteristics"] = (new Characteristics());
         }
         if (!("Movment" in $$source)) {
             /**
@@ -344,8 +344,8 @@ export class Caracter {
         if ("Talents" in $$parsedSource) {
             $$parsedSource["Talents"] = $$createField8_0($$parsedSource["Talents"]);
         }
-        if ("Characteristic" in $$parsedSource) {
-            $$parsedSource["Characteristic"] = $$createField9_0($$parsedSource["Characteristic"]);
+        if ("Characteristics" in $$parsedSource) {
+            $$parsedSource["Characteristics"] = $$createField9_0($$parsedSource["Characteristics"]);
         }
         if ("Movment" in $$parsedSource) {
             $$parsedSource["Movment"] = $$createField10_0($$parsedSource["Movment"]);
@@ -468,6 +468,137 @@ export class Characteristic {
     static createFrom($$source = {}) {
         let $$parsedSource = typeof $$source === 'string' ? JSON.parse($$source) : $$source;
         return new Characteristic(/** @type {Partial<Characteristic>} */($$parsedSource));
+    }
+}
+
+export class Characteristics {
+    /**
+     * Creates a new Characteristics instance.
+     * @param {Partial<Characteristics>} [$$source = {}] - The source object to create the Characteristics.
+     */
+    constructor($$source = {}) {
+        if (!("WeaponSkill" in $$source)) {
+            /**
+             * @member
+             * @type {Characteristic}
+             */
+            this["WeaponSkill"] = (new Characteristic());
+        }
+        if (!("BalisticSkill" in $$source)) {
+            /**
+             * @member
+             * @type {Characteristic}
+             */
+            this["BalisticSkill"] = (new Characteristic());
+        }
+        if (!("Strength" in $$source)) {
+            /**
+             * @member
+             * @type {Characteristic}
+             */
+            this["Strength"] = (new Characteristic());
+        }
+        if (!("Toughnes" in $$source)) {
+            /**
+             * @member
+             * @type {Characteristic}
+             */
+            this["Toughnes"] = (new Characteristic());
+        }
+        if (!("Initative" in $$source)) {
+            /**
+             * @member
+             * @type {Characteristic}
+             */
+            this["Initative"] = (new Characteristic());
+        }
+        if (!("Agility" in $$source)) {
+            /**
+             * @member
+             * @type {Characteristic}
+             */
+            this["Agility"] = (new Characteristic());
+        }
+        if (!("Dexterity" in $$source)) {
+            /**
+             * @member
+             * @type {Characteristic}
+             */
+            this["Dexterity"] = (new Characteristic());
+        }
+        if (!("Inteligence" in $$source)) {
+            /**
+             * @member
+             * @type {Characteristic}
+             */
+            this["Inteligence"] = (new Characteristic());
+        }
+        if (!("Willpower" in $$source)) {
+            /**
+             * @member
+             * @type {Characteristic}
+             */
+            this["Willpower"] = (new Characteristic());
+        }
+        if (!("Fellowhip" in $$source)) {
+            /**
+             * @member
+             * @type {Characteristic}
+             */
+            this["Fellowhip"] = (new Characteristic());
+        }
+
+        Object.assign(this, $$source);
+    }
+
+    /**
+     * Creates a new Characteristics instance from a string or object.
+     * @param {any} [$$source = {}]
+     * @returns {Characteristics}
+     */
+    static createFrom($$source = {}) {
+        const $$createField0_0 = $$createType31;
+        const $$createField1_0 = $$createType31;
+        const $$createField2_0 = $$createType31;
+        const $$createField3_0 = $$createType31;
+        const $$createField4_0 = $$createType31;
+        const $$createField5_0 = $$createType31;
+        const $$createField6_0 = $$createType31;
+        const $$createField7_0 = $$createType31;
+        const $$createField8_0 = $$createType31;
+        const $$createField9_0 = $$createType31;
+        let $$parsedSource = typeof $$source === 'string' ? JSON.parse($$source) : $$source;
+        if ("WeaponSkill" in $$parsedSource) {
+            $$parsedSource["WeaponSkill"] = $$createField0_0($$parsedSource["WeaponSkill"]);
+        }
+        if ("BalisticSkill" in $$parsedSource) {
+            $$parsedSource["BalisticSkill"] = $$createField1_0($$parsedSource["BalisticSkill"]);
+        }
+        if ("Strength" in $$parsedSource) {
+            $$parsedSource["Strength"] = $$createField2_0($$parsedSource["Strength"]);
+        }
+        if ("Toughnes" in $$parsedSource) {
+            $$parsedSource["Toughnes"] = $$createField3_0($$parsedSource["Toughnes"]);
+        }
+        if ("Initative" in $$parsedSource) {
+            $$parsedSource["Initative"] = $$createField4_0($$parsedSource["Initative"]);
+        }
+        if ("Agility" in $$parsedSource) {
+            $$parsedSource["Agility"] = $$createField5_0($$parsedSource["Agility"]);
+        }
+        if ("Dexterity" in $$parsedSource) {
+            $$parsedSource["Dexterity"] = $$createField6_0($$parsedSource["Dexterity"]);
+        }
+        if ("Inteligence" in $$parsedSource) {
+            $$parsedSource["Inteligence"] = $$createField7_0($$parsedSource["Inteligence"]);
+        }
+        if ("Willpower" in $$parsedSource) {
+            $$parsedSource["Willpower"] = $$createField8_0($$parsedSource["Willpower"]);
+        }
+        if ("Fellowhip" in $$parsedSource) {
+            $$parsedSource["Fellowhip"] = $$createField9_0($$parsedSource["Fellowhip"]);
+        }
+        return new Characteristics(/** @type {Partial<Characteristics>} */($$parsedSource));
     }
 }
 
@@ -824,7 +955,7 @@ export class Party {
      */
     static createFrom($$source = {}) {
         const $$createField1_0 = $$createType12;
-        const $$createField2_0 = $$createType32;
+        const $$createField2_0 = $$createType33;
         let $$parsedSource = typeof $$source === 'string' ? JSON.parse($$source) : $$source;
         if ("Ambitions" in $$parsedSource) {
             $$parsedSource["Ambitions"] = $$createField1_0($$parsedSource["Ambitions"]);
@@ -873,9 +1004,9 @@ export class Points {
      * @returns {Points}
      */
     static createFrom($$source = {}) {
-        const $$createField0_0 = $$createType33;
-        const $$createField1_0 = $$createType34;
-        const $$createField2_0 = $$createType35;
+        const $$createField0_0 = $$createType34;
+        const $$createField1_0 = $$createType35;
+        const $$createField2_0 = $$createType36;
         let $$parsedSource = typeof $$source === 'string' ? JSON.parse($$source) : $$source;
         if ("Fate" in $$parsedSource) {
             $$parsedSource["Fate"] = $$createField0_0($$parsedSource["Fate"]);
@@ -1092,7 +1223,7 @@ export class Skill {
      * @returns {Skill}
      */
     static createFrom($$source = {}) {
-        const $$createField0_0 = $$createType10;
+        const $$createField0_0 = $$createType31;
         let $$parsedSource = typeof $$source === 'string' ? JSON.parse($$source) : $$source;
         if ("Characteristic" in $$parsedSource) {
             $$parsedSource["Characteristic"] = $$createField0_0($$parsedSource["Characteristic"]);
@@ -1543,7 +1674,7 @@ const $$createType6 = $Create.Array($$createType5);
 const $$createType7 = Description.createFrom;
 const $$createType8 = Talent.createFrom;
 const $$createType9 = $Create.Array($$createType8);
-const $$createType10 = Characteristic.createFrom;
+const $$createType10 = Characteristics.createFrom;
 const $$createType11 = Movment.createFrom;
 const $$createType12 = Ambitions.createFrom;
 const $$createType13 = Party.createFrom;
@@ -1569,8 +1700,9 @@ var $$createType28 = /** @type {(...args: any[]) => any} */(function $$initCreat
 });
 const $$createType29 = $Create.Array($Create.Any);
 const $$createType30 = Points.createFrom;
-const $$createType31 = Caracter.createFrom;
-const $$createType32 = $Create.Array($$createType31);
-const $$createType33 = FPoint.createFrom;
-const $$createType34 = RPoint.createFrom;
-const $$createType35 = ExpPoints.createFrom;
+const $$createType31 = Characteristic.createFrom;
+const $$createType32 = Caracter.createFrom;
+const $$createType33 = $Create.Array($$createType32);
+const $$createType34 = FPoint.createFrom;
+const $$createType35 = RPoint.createFrom;
+const $$createType36 = ExpPoints.createFrom;
