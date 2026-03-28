@@ -17,14 +17,13 @@ import AppFooter from "@/components/general/AppFooter.vue";
 
 <style scoped>
 .wails-layout {
-  /* Let v-app fill the screen */
   height: 100vh;
-  overflow: hidden;
+  /* Removed hardware acceleration transforms from root as they can conflict with fixed bars */
 }
 
 .layout-main {
-  /* v-main with 'app' props on bar/footer handles its own padding */
-  height: 100vh;
+  /* Ensure v-main takes full height to allow internal scrolling components to function */
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
