@@ -22,8 +22,6 @@ const charOptions = [
   { title: 'Fel', value: 'Fellowhip' }
 ]
 
-const getLabel = (value: string) => charOptions.find(o => o.value === value)?.title || value
-
 // Local state for the "empty line"
 const newItem = ref({
   Name: '',
