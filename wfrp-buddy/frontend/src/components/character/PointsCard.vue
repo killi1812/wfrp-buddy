@@ -5,7 +5,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <v-card class="pa-4 header-sub-card h-100 elevation-2">
+  <v-card class="pa-4 header-sub-card elevation-2">
     <v-row dense>
       <v-col cols="6">
         <div class="text-center">
@@ -65,6 +65,8 @@ const props = defineProps<{
 .header-sub-card {
   border: 1px solid rgba(0,0,0,0.1);
   background-color: var(--v-theme-surface);
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .points-plain-input :deep(input) {

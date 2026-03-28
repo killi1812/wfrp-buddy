@@ -31,7 +31,7 @@ const props = defineProps<{
       <PointsCard :points="props.points" />
     </v-col>
     <v-col cols="12" md="2">
-      <v-card class="pa-4 header-sub-card h-100 d-flex flex-column align-center justify-center elevation-2">
+      <v-card class="pa-4 header-sub-card d-flex flex-column align-center justify-center elevation-2">
         <div class="section-title mb-1">Wounds</div>
         <div class="d-flex align-center">
           <v-number-input
@@ -55,6 +55,9 @@ const props = defineProps<{
 .header-sub-card {
   border: 1px solid rgba(0,0,0,0.1);
   background-color: var(--v-theme-surface);
+  /* Stabilize rendering */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .header-large-input :deep(input) {

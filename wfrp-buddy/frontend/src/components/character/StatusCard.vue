@@ -10,7 +10,7 @@ const expCurrent = computed(() => (props.exp?.Total || 0) - (props.exp?.Spent ||
 </script>
 
 <template>
-  <v-card class="pa-4 header-sub-card h-100" elevation="2">
+  <v-card class="pa-4 header-sub-card" elevation="2">
     <div class="text-h6 mb-2 text-primary section-title">Movement & Exp</div>
     <v-row dense>
       <v-col cols="4">
@@ -44,5 +44,7 @@ const expCurrent = computed(() => (props.exp?.Total || 0) - (props.exp?.Spent ||
 .header-sub-card {
   border: 1px solid rgba(0,0,0,0.1);
   background-color: var(--v-theme-surface);
+  will-change: transform;
+  transform: translateZ(0);
 }
 </style>
