@@ -10,3 +10,11 @@ type Talent struct {
 	Test        string `json:"test,omitempty"`
 	Description string
 }
+
+type LearnedTalent struct {
+	// Talent references the original talent this one is just the copy
+	Talent      Talent
+	Name        string
+	Lvl         int
+	Description string
+}

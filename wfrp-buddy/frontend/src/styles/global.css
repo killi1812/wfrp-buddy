@@ -1,3 +1,11 @@
+/* Global Layout */
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--v-theme-background);
+}
+
 /* Spacer utility */
 .spacer {
     flex-grow: 1;
@@ -9,17 +17,9 @@
 }
 
 .title-font {
-    font-family: 'Crimson Text', serif;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-}
-
-/* Global Layout */
-html,
-body {
-    height: 100%;
-    overflow: hidden;
 }
 
 /* Character Sheet Common Classes */
@@ -29,7 +29,6 @@ body {
 }
 
 .section-title {
-    font-family: 'Crimson Text', serif;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -41,20 +40,14 @@ body {
 }
 
 .grim-table th {
-    font-family: 'Crimson Text', serif;
     color: var(--v-theme-primary);
     font-weight: bold;
     text-transform: uppercase;
 }
 
-.grim-table td {
-    font-family: 'Crimson Text', serif;
-}
-
 /* Input Styles */
 .centered-input :deep(input) {
     text-align: center;
-    font-family: 'Crimson Text', serif;
 }
 
 .v-input--plain-underlined input.v-field__input,

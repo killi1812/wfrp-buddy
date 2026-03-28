@@ -42,8 +42,7 @@ const showPrayers = ref(false)
 
             <!-- Skills & Talents -->
             <v-col cols="12" md="6">
-              <SkillSection :skills="store.char.Skills" @add="store.addItem('Skills', $event)"
-                @remove="(idx) => store.removeItem('Skills', idx)" />
+              <SkillSection :skills="store.char.Skills" :getSkillTotal="store.getSkillTotal" @add="store.addItem('Skills', $event)" @remove="(idx) => store.removeItem('Skills', idx)" />
             </v-col>
             <v-col cols="12" md="6">
               <TalentList :talents="store.char.Talents" @add="store.addItem('Talents', $event)"

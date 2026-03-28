@@ -182,7 +182,7 @@ export class Caracter {
         if (!("Talents" in $$source)) {
             /**
              * @member
-             * @type {Talent[]}
+             * @type {LearnedTalent[]}
              */
             this["Talents"] = [];
         }
@@ -870,6 +870,60 @@ export class FPoint {
     }
 }
 
+export class LearnedTalent {
+    /**
+     * Creates a new LearnedTalent instance.
+     * @param {Partial<LearnedTalent>} [$$source = {}] - The source object to create the LearnedTalent.
+     */
+    constructor($$source = {}) {
+        if (!("Talent" in $$source)) {
+            /**
+             * Talent references the original talent this one is just the copy
+             * @member
+             * @type {Talent}
+             */
+            this["Talent"] = (new Talent());
+        }
+        if (!("Name" in $$source)) {
+            /**
+             * @member
+             * @type {string}
+             */
+            this["Name"] = "";
+        }
+        if (!("Lvl" in $$source)) {
+            /**
+             * @member
+             * @type {number}
+             */
+            this["Lvl"] = 0;
+        }
+        if (!("Description" in $$source)) {
+            /**
+             * @member
+             * @type {string}
+             */
+            this["Description"] = "";
+        }
+
+        Object.assign(this, $$source);
+    }
+
+    /**
+     * Creates a new LearnedTalent instance from a string or object.
+     * @param {any} [$$source = {}]
+     * @returns {LearnedTalent}
+     */
+    static createFrom($$source = {}) {
+        const $$createField0_0 = $$createType33;
+        let $$parsedSource = typeof $$source === 'string' ? JSON.parse($$source) : $$source;
+        if ("Talent" in $$parsedSource) {
+            $$parsedSource["Talent"] = $$createField0_0($$parsedSource["Talent"]);
+        }
+        return new LearnedTalent(/** @type {Partial<LearnedTalent>} */($$parsedSource));
+    }
+}
+
 /**
  * TODO: implement Location enum
  * @typedef {string} Location
@@ -955,7 +1009,7 @@ export class Party {
      */
     static createFrom($$source = {}) {
         const $$createField1_0 = $$createType12;
-        const $$createField2_0 = $$createType34;
+        const $$createField2_0 = $$createType35;
         let $$parsedSource = typeof $$source === 'string' ? JSON.parse($$source) : $$source;
         if ("Ambitions" in $$parsedSource) {
             $$parsedSource["Ambitions"] = $$createField1_0($$parsedSource["Ambitions"]);
@@ -1004,9 +1058,9 @@ export class Points {
      * @returns {Points}
      */
     static createFrom($$source = {}) {
-        const $$createField0_0 = $$createType35;
-        const $$createField1_0 = $$createType36;
-        const $$createField2_0 = $$createType37;
+        const $$createField0_0 = $$createType36;
+        const $$createField1_0 = $$createType37;
+        const $$createField2_0 = $$createType38;
         let $$parsedSource = typeof $$source === 'string' ? JSON.parse($$source) : $$source;
         if ("Fate" in $$parsedSource) {
             $$parsedSource["Fate"] = $$createField0_0($$parsedSource["Fate"]);
@@ -1199,12 +1253,12 @@ export class Skill {
              */
             this["Name"] = "";
         }
-        if (!("Characteristic" in $$source)) {
+        if (!("BaseChar" in $$source)) {
             /**
              * @member
-             * @type {Characteristic}
+             * @type {string}
              */
-            this["Characteristic"] = (new Characteristic());
+            this["BaseChar"] = "";
         }
         if (!("Basic" in $$source)) {
             /**
@@ -1230,11 +1284,7 @@ export class Skill {
      * @returns {Skill}
      */
     static createFrom($$source = {}) {
-        const $$createField1_0 = $$createType32;
         let $$parsedSource = typeof $$source === 'string' ? JSON.parse($$source) : $$source;
-        if ("Characteristic" in $$parsedSource) {
-            $$parsedSource["Characteristic"] = $$createField1_0($$parsedSource["Characteristic"]);
-        }
         return new Skill(/** @type {Partial<Skill>} */($$parsedSource));
     }
 }
@@ -1679,7 +1729,7 @@ var $$createType4 = /** @type {(...args: any[]) => any} */(function $$initCreate
 const $$createType5 = Skill.createFrom;
 const $$createType6 = $Create.Array($$createType5);
 const $$createType7 = Description.createFrom;
-const $$createType8 = Talent.createFrom;
+const $$createType8 = LearnedTalent.createFrom;
 const $$createType9 = $Create.Array($$createType8);
 const $$createType10 = Characteristics.createFrom;
 const $$createType11 = Movment.createFrom;
@@ -1709,8 +1759,9 @@ var $$createType29 = /** @type {(...args: any[]) => any} */(function $$initCreat
 const $$createType30 = $Create.Array($Create.Any);
 const $$createType31 = Points.createFrom;
 const $$createType32 = Characteristic.createFrom;
-const $$createType33 = Caracter.createFrom;
-const $$createType34 = $Create.Array($$createType33);
-const $$createType35 = FPoint.createFrom;
-const $$createType36 = RPoint.createFrom;
-const $$createType37 = ExpPoints.createFrom;
+const $$createType33 = Talent.createFrom;
+const $$createType34 = Caracter.createFrom;
+const $$createType35 = $Create.Array($$createType34);
+const $$createType36 = FPoint.createFrom;
+const $$createType37 = RPoint.createFrom;
+const $$createType38 = ExpPoints.createFrom;

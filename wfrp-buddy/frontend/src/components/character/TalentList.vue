@@ -10,6 +10,7 @@ const emit = defineEmits(['add', 'remove'])
 
 const newItem = ref({
   Name: '',
+  Advances: 1,
   MaxLvl: 1,
   Description: ''
 })
@@ -17,7 +18,7 @@ const newItem = ref({
 const onAdd = () => {
   if (newItem.value.Name) {
     emit('add', new (model as any).Talent(newItem.value as any))
-    newItem.value = { Name: '', MaxLvl: 1, Description: '' }
+    newItem.value = { Name: '', Advances: 1, MaxLvl: 1, Description: '' }
   }
 }
 </script>
@@ -29,6 +30,7 @@ const onAdd = () => {
       <thead>
         <tr>
           <th class="text-left talent-col">Talent Name</th>
+          <th class="text-center count-col">Lvl</th>
           <th class="text-center count-col">Max</th>
           <th class="text-left">Description</th>
           <th class="text-center action-col"></th>
@@ -40,7 +42,10 @@ const onAdd = () => {
             <v-text-field v-model="t.Name" hide-details density="compact" variant="plain" class="talent-name-input" />
           </td>
           <td class="text-center pa-1">
-            <v-number-input v-model="t.MaxLvl" hide-details density="compact" variant="plain" class="text-center" control-variant="stacked" hide-controls />
+            <v-number-input v-model="t.Advances" hide-details density="compact" variant="plain" class="text-center cell-bold text-primary" control-variant="stacked" hide-controls />
+          </td>
+          <td class="text-center pa-1">
+            <v-number-input v-model="t.MaxLvl" hide-details density="compact" variant="plain" class="text-center cell-text" control-variant="stacked" hide-controls />
           </td>
           <td class="pa-1">
             <v-text-field v-model="t.Description" hide-details density="compact" variant="plain" class="text-caption" />
@@ -53,6 +58,9 @@ const onAdd = () => {
         <tr class="new-item-row">
           <td class="pa-1">
             <v-text-field v-model="newItem.Name" placeholder="New Talent..." hide-details density="compact" variant="plain" class="talent-name-input" @keyup.enter="onAdd" />
+          </td>
+          <td class="text-center pa-1">
+            <v-number-input v-model="newItem.Advances" hide-details density="compact" variant="plain" class="text-center" control-variant="stacked" hide-controls />
           </td>
           <td class="text-center pa-1">
             <v-number-input v-model="newItem.MaxLvl" hide-details density="compact" variant="plain" class="text-center" control-variant="stacked" hide-controls />
@@ -71,13 +79,21 @@ const onAdd = () => {
 
 <style scoped>
 .talent-col { width: 30%; }
-.count-col { width: 10%; }
+.count-col { width: 60px; }
 .action-col { width: 40px; }
 
 .talent-name-input :deep(input) {
   font-size: 1.1rem;
   font-weight: bold;
-  font-family: 'Crimson Text', serif;
+}
+
+.cell-bold {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.cell-text {
+  font-size: 1rem;
 }
 
 .new-item-row {

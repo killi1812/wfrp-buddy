@@ -17,7 +17,7 @@ type Caracter struct {
 
 	Description Description
 
-	Talents         []Talent
+	Talents         []LearnedTalent
 	Characteristics Characteristics
 	Movment         Movment
 	Ambitions       Ambitions
@@ -61,10 +61,10 @@ type (
 
 	Skills []Skill
 	Skill  struct {
-		Name           string
-		Characteristic Characteristic
-		Basic          int
-		Advances       int
+		Name     string
+		BaseChar string
+		Basic    int
+		Advances int
 	}
 
 	Ambitions struct {

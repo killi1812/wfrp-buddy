@@ -10,7 +10,7 @@ export const useCharacterStore = defineStore('character', () => {
     Career: new model.Career({ Career: 'Slayer', CareerTier: 2, CareerPath: 'Troll Slayer' }),
     Status: new model.Status({ Tier: 'Brass', Level: 3 }),
     Description: new model.Description({ Age: 32, Height: '4\'8"', Hair: 'Orange', Eyes: 'Blue', Description: 'A standard slayer', Psychology: 'Grim' }),
-    Characteristics: new model.Characteristics({ // Fixed pluralization
+    Characteristics: new model.Characteristics({ 
       WeaponSkill: { Basic: 30, Advances: 5 },
       BalisticSkill: { Basic: 25, Advances: 0 },
       Strength: { Basic: 35, Advances: 10 },
@@ -36,12 +36,12 @@ export const useCharacterStore = defineStore('character', () => {
     Talents: [],
     Trappings: [],
     Weapons: [],
-    Armour: [], // Now an array
+    Armour: [],
     Spells: [],
     Prayers: [],
     Skills: [
-      new model.Skill({ Name: 'Athletics', Characteristic: { Basic: 30, Advances: 0 } as any, Basic: 30, Advances: 5 }),
-      new model.Skill({ Name: 'Dodge', Characteristic: { Basic: 30, Advances: 0 } as any, Basic: 30, Advances: 10 })
+      new model.Skill({ Name: 'Athletics', BaseChar: 'Agility', Basic: 0, Advances: 5 }),
+      new model.Skill({ Name: 'Dodge', BaseChar: 'Agility', Basic: 0, Advances: 10 })
     ]
   }))
 
@@ -72,7 +72,10 @@ export const useCharacterStore = defineStore('character', () => {
 
   const expCurrent = computed(() => char.value.Points.Exp.Total - char.value.Points.Exp.Spent)
 
-  const getSkillTotal = (skill: any) => skill.Basic + skill.Advances
+  const getSkillTotal = (skill: any) => {
+    const baseValue = getCharValue(skill.BaseChar)
+    return baseValue + skill.Advances
+  }
 
   return { char, maxWounds, expCurrent, getBonus, getCharValue, getSkillTotal, addItem, removeItem }
 })

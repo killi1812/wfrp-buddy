@@ -14,6 +14,7 @@ export {
     Encumbrance,
     ExpPoints,
     FPoint,
+    LearnedTalent,
     Movment,
     Party,
     Points,
