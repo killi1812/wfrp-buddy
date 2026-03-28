@@ -86,8 +86,8 @@ import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useBackStore } from "@/stores/app"
 
-const open = ref(true)
-const drawer = ref(true)
+const open = ref(false) // Default to collapsed (small)
+const drawer = ref(true) // Always present
 const router = useRouter()
 const route = useRoute()
 const back = useBackStore()
