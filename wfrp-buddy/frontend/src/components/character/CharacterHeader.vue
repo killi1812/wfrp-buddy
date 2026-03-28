@@ -22,25 +22,11 @@ const store = useCharacterStore()
       <v-card class="pa-4 header-sub-card h-100 d-flex flex-column align-center justify-center elevation-2">
         <div class="section-title mb-1">Wounds</div>
         <div class="d-flex align-center">
-          <v-number-input
-            v-model="store.char.Wounds.Current"
-            density="compact"
-            variant="plain"
-            hide-details
-            class="header-large-input"
-            control-variant="stacked"
-            hide-controls
-          />
+          <v-number-input v-model="store.char.Wounds.Current" density="compact" variant="plain" hide-details
+            class="header-large-input" control-variant="stacked" hide-controls />
           <div class="text-h4 mx-1 primary--text">/</div>
-          <v-number-input
-            v-model="store.char.Wounds.Max"
-            density="compact"
-            variant="plain"
-            hide-details
-            class="header-large-input"
-            control-variant="stacked"
-            hide-controls
-          />
+          <v-number-input v-model="store.char.Wounds.Max" density="compact" variant="plain" hide-details
+            class="header-large-input" control-variant="stacked" hide-controls />
         </div>
       </v-card>
     </v-col>
@@ -49,7 +35,7 @@ const store = useCharacterStore()
 
 <style scoped>
 .header-sub-card {
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: var(--v-theme-surface);
 }
 

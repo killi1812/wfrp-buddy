@@ -17,7 +17,7 @@ const store = useCharacterStore()
       </thead>
       <tbody>
         <tr v-if="!store.char.Spells || store.char.Spells.length === 0">
-           <td colspan="4" class="text-center text-grey py-4 placeholder-text">No spells memorized</td>
+          <td colspan="4" class="text-center text-grey py-4 placeholder-text">No spells memorized</td>
         </tr>
         <tr v-for="s in store.char.Spells" :key="s.Id">
           <td class="cell-bold">{{ s.Name }}</td>
@@ -35,9 +35,11 @@ const store = useCharacterStore()
   font-size: 1.2rem;
   font-weight: bold;
 }
+
 .cell-text {
   font-size: 1.1rem;
 }
+
 .placeholder-text {
   font-size: 1.1rem;
   font-style: italic;

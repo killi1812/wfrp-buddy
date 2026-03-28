@@ -21,15 +21,8 @@ const store = useCharacterStore()
           <td class="skill-name">{{ (s as any).Name }}</td>
           <td class="text-center text-subtitle-2">{{ s.Characteristic }}</td>
           <td class="text-center pa-1">
-            <v-number-input
-              v-model="s.Advances"
-              hide-details
-              density="compact"
-              variant="plain"
-              class="centered-input-adv"
-              control-variant="stacked"
-              hide-controls
-            />
+            <v-number-input v-model="s.Advances" hide-details density="compact" variant="plain"
+              class="centered-input-adv" control-variant="stacked" hide-controls />
           </td>
           <td class="text-center skill-total text-primary">
             {{ store.getSkillTotal(s) }}
@@ -43,7 +36,7 @@ const store = useCharacterStore()
 <style scoped>
 .skills-section {
   background-color: var(--v-theme-surface);
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .section-title {
@@ -86,7 +79,7 @@ td {
 .centered-input-adv :deep(input) {
   text-align: center;
   font-family: 'Crimson Text', serif;
-  background-color: rgba(0,0,0,0.05);
+  background-color: rgba(0, 0, 0, 0.05);
   border-radius: 4px;
   width: 50px;
   margin: 0 auto;

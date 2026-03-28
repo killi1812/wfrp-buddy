@@ -8,15 +8,8 @@ const store = useCharacterStore()
     <!-- Sin Counter -->
     <div class="sin-counter-box d-flex align-center">
       <div class="section-title mr-2" style="font-size: 0.7rem">SIN</div>
-      <v-number-input 
-        v-model="store.char.Sin" 
-        density="compact" 
-        variant="outlined" 
-        hide-details 
-        control-variant="stacked" 
-        hide-controls 
-        class="sin-number-input" 
-      />
+      <v-number-input v-model="store.char.Sin" density="compact" variant="outlined" hide-details
+        control-variant="stacked" hide-controls class="sin-number-input" />
     </div>
 
     <div class="text-h6 mb-2 text-primary px-2 section-title">Prayers & Blessings</div>
@@ -31,7 +24,7 @@ const store = useCharacterStore()
       </thead>
       <tbody>
         <tr v-if="!store.char.Prayers || store.char.Prayers.length === 0">
-           <td colspan="4" class="text-center text-grey py-4 placeholder-text">No prayers known</td>
+          <td colspan="4" class="text-center text-grey py-4 placeholder-text">No prayers known</td>
         </tr>
         <tr v-for="p in store.char.Prayers" :key="p.Name">
           <td class="cell-bold">{{ p.Name }}</td>
@@ -73,9 +66,11 @@ const store = useCharacterStore()
   font-size: 1.2rem;
   font-weight: bold;
 }
+
 .cell-text {
   font-size: 1.1rem;
 }
+
 .placeholder-text {
   font-size: 1.1rem;
   font-style: italic;

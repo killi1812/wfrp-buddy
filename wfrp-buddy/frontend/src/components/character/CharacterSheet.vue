@@ -26,7 +26,7 @@ const showPrayers = ref(false)
           <CharacterHeader />
         </v-col>
       </v-row>
-      
+
       <v-row dense class="mt-2">
         <!-- Left Column -->
         <v-col cols="12" md="8">
@@ -35,13 +35,13 @@ const showPrayers = ref(false)
             <v-col cols="12">
               <CharacteristicsTable />
             </v-col>
-            
+
             <!-- Skills & Talents -->
             <v-col cols="12" md="6">
-               <SkillSection />
+              <SkillSection />
             </v-col>
             <v-col cols="12" md="6">
-               <TalentList />
+              <TalentList />
             </v-col>
 
             <!-- Combat -->
@@ -55,14 +55,8 @@ const showPrayers = ref(false)
             <!-- Magic & Faith (Toggled) -->
             <v-col cols="12">
               <div class="d-flex align-center mb-1 px-2">
-                <v-checkbox 
-                  v-model="showPrayers" 
-                  label="Show Prayers instead of Spells" 
-                  density="compact" 
-                  hide-details 
-                  color="primary"
-                  class="toggle-magic-faith"
-                />
+                <v-checkbox v-model="showPrayers" label="Show Prayers instead of Spells" density="compact" hide-details
+                  color="primary" class="toggle-magic-faith" />
               </div>
               <transition name="fade" mode="out-in">
                 <div v-if="showPrayers" key="prayers">
@@ -80,7 +74,7 @@ const showPrayers = ref(false)
             </v-col>
           </v-row>
         </v-col>
-        
+
         <!-- Right Sidebar -->
         <v-col cols="12" md="4">
           <v-row dense>
@@ -121,10 +115,13 @@ const showPrayers = ref(false)
   font-size: 0.9rem;
 }
 
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 0.2s ease;
 }
-.fade-enter-from, .fade-leave-to {
+
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 </style>

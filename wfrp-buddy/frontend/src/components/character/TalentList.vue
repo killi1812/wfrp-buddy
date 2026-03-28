@@ -17,7 +17,7 @@ const store = useCharacterStore()
       </thead>
       <tbody>
         <tr v-if="store.char.Talents.length === 0">
-           <td colspan="3" class="text-center placeholder-text py-4">No talents added</td>
+          <td colspan="3" class="text-center placeholder-text py-4">No talents added</td>
         </tr>
         <tr v-for="t in store.char.Talents" :key="t.Name">
           <td class="talent-name">{{ t.Name }}</td>
@@ -32,7 +32,7 @@ const store = useCharacterStore()
 <style scoped>
 .talents-list {
   background-color: var(--v-theme-surface);
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .section-title {

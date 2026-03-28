@@ -16,13 +16,13 @@ const store = useCharacterStore()
       </thead>
       <tbody>
         <tr v-if="!store.char.Trappings || store.char.Trappings.length === 0">
-           <td colspan="3" class="text-center text-grey py-4 placeholder-text">No trappings added</td>
+          <td colspan="3" class="text-center text-grey py-4 placeholder-text">No trappings added</td>
         </tr>
         <tr v-for="t in store.char.Trappings" :key="t.Name">
           <td class="cell-bold">{{ t.Name }}</td>
           <td class="text-center cell-text">{{ t.Encumbrance }}</td>
           <td class="text-caption cell-text">
-            {{ t.Qualities?.map(q => q.Name).join(', ') }}
+            {{t.Qualities?.map(q => q.Name).join(', ')}}
           </td>
         </tr>
       </tbody>
@@ -37,6 +37,7 @@ const store = useCharacterStore()
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
+
 th {
   font-family: 'Crimson Text', serif;
   font-weight: bold !important;
@@ -44,16 +45,20 @@ th {
   font-size: 1rem !important;
   color: var(--v-theme-primary) !important;
 }
+
 td {
   font-family: 'Crimson Text', serif;
 }
+
 .cell-bold {
   font-size: 1.2rem;
   font-weight: bold;
 }
+
 .cell-text {
   font-size: 1rem;
 }
+
 .placeholder-text {
   font-size: 1.1rem;
   font-style: italic;

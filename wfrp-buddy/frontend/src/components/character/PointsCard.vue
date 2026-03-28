@@ -10,9 +10,11 @@ const store = useCharacterStore()
         <div class="text-center">
           <div class="section-title" style="font-size: 0.8rem">Fate</div>
           <div class="d-flex align-center justify-center">
-            <v-number-input v-model="store.char.Points.Fate.FateCurrent" density="compact" variant="plain" hide-details control-variant="stacked" hide-controls class="points-plain-input" />
+            <v-number-input v-model="store.char.Points.Fate.FateCurrent" density="compact" variant="plain" hide-details
+              control-variant="stacked" hide-controls class="points-plain-input" />
             <div class="mx-1 text-primary">/</div>
-            <v-number-input v-model="store.char.Points.Fate.FateMax" density="compact" variant="plain" hide-details control-variant="stacked" hide-controls class="points-plain-input" />
+            <v-number-input v-model="store.char.Points.Fate.FateMax" density="compact" variant="plain" hide-details
+              control-variant="stacked" hide-controls class="points-plain-input" />
           </div>
         </div>
       </v-col>
@@ -20,9 +22,11 @@ const store = useCharacterStore()
         <div class="text-center">
           <div class="section-title" style="font-size: 0.8rem">Fortune</div>
           <div class="d-flex align-center justify-center">
-            <v-number-input v-model="store.char.Points.Fate.FortuneCurrent" density="compact" variant="plain" hide-details control-variant="stacked" hide-controls class="points-plain-input" />
+            <v-number-input v-model="store.char.Points.Fate.FortuneCurrent" density="compact" variant="plain"
+              hide-details control-variant="stacked" hide-controls class="points-plain-input" />
             <div class="mx-1 text-primary">/</div>
-            <v-number-input v-model="store.char.Points.Fate.FortuneMax" density="compact" variant="plain" hide-details control-variant="stacked" hide-controls class="points-plain-input" />
+            <v-number-input v-model="store.char.Points.Fate.FortuneMax" density="compact" variant="plain" hide-details
+              control-variant="stacked" hide-controls class="points-plain-input" />
           </div>
         </div>
       </v-col>
@@ -30,9 +34,11 @@ const store = useCharacterStore()
         <div class="text-center">
           <div class="section-title" style="font-size: 0.8rem">Resilience</div>
           <div class="d-flex align-center justify-center">
-            <v-number-input v-model="store.char.Points.Resilience.ResilienceMCurrent" density="compact" variant="plain" hide-details control-variant="stacked" hide-controls class="points-plain-input" />
+            <v-number-input v-model="store.char.Points.Resilience.ResilienceMCurrent" density="compact" variant="plain"
+              hide-details control-variant="stacked" hide-controls class="points-plain-input" />
             <div class="mx-1 text-primary">/</div>
-            <v-number-input v-model="store.char.Points.Resilience.ResilienceMax" density="compact" variant="plain" hide-details control-variant="stacked" hide-controls class="points-plain-input" />
+            <v-number-input v-model="store.char.Points.Resilience.ResilienceMax" density="compact" variant="plain"
+              hide-details control-variant="stacked" hide-controls class="points-plain-input" />
           </div>
         </div>
       </v-col>
@@ -40,21 +46,17 @@ const store = useCharacterStore()
         <div class="text-center">
           <div class="section-title" style="font-size: 0.8rem">Resolve</div>
           <div class="d-flex align-center justify-center">
-            <v-number-input v-model="store.char.Points.Resilience.ResolveCurrent" density="compact" variant="plain" hide-details control-variant="stacked" hide-controls class="points-plain-input" />
+            <v-number-input v-model="store.char.Points.Resilience.ResolveCurrent" density="compact" variant="plain"
+              hide-details control-variant="stacked" hide-controls class="points-plain-input" />
             <div class="mx-1 text-primary">/</div>
-            <v-number-input v-model="store.char.Points.Resilience.ResolveMax" density="compact" variant="plain" hide-details control-variant="stacked" hide-controls class="points-plain-input" />
+            <v-number-input v-model="store.char.Points.Resilience.ResolveMax" density="compact" variant="plain"
+              hide-details control-variant="stacked" hide-controls class="points-plain-input" />
           </div>
         </div>
       </v-col>
       <v-col cols="12" class="mt-3">
-        <v-text-field 
-          v-model="store.char.Points.Resilience.Motive" 
-          label="Motivation" 
-          variant="outlined" 
-          density="compact" 
-          hide-details 
-          class="motivation-outlined" 
-        />
+        <v-text-field v-model="store.char.Points.Resilience.Motive" label="Motivation" variant="outlined"
+          density="compact" hide-details class="motivation-outlined" />
       </v-col>
     </v-row>
   </v-card>
@@ -62,7 +64,7 @@ const store = useCharacterStore()
 
 <style scoped>
 .header-sub-card {
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: var(--v-theme-surface);
 }
 
@@ -76,7 +78,8 @@ const store = useCharacterStore()
   color: var(--v-theme-primary);
 }
 
-.motivation-outlined :deep(label), .motivation-outlined :deep(input) {
+.motivation-outlined :deep(label),
+.motivation-outlined :deep(input) {
   font-family: 'Crimson Text', serif;
 }
 </style>
