@@ -1,28 +1,68 @@
 <script setup lang="ts">
-import { useCharacterStore } from '@/stores/character'
+import { ref } from 'vue'
+import * as model from '../../../bindings/changeme/model'
 
-const store = useCharacterStore()
+const props = defineProps<{
+  talents: any[]
+}>()
+
+const emit = defineEmits(['add', 'remove'])
+
+const newItem = ref({
+  Name: '',
+  MaxLvl: 1,
+  Description: ''
+})
+
+const onAdd = () => {
+  if (newItem.value.Name) {
+    emit('add', new (model as any).Talent(newItem.value as any))
+    newItem.value = { Name: '', MaxLvl: 1, Description: '' }
+  }
+}
 </script>
 
 <template>
-  <v-card class="pa-2 talents-list" elevation="2">
+  <v-card class="pa-2 grim-card h-100" elevation="2">
     <div class="text-h6 mb-2 text-primary px-2 section-title">Talents</div>
     <v-table density="compact" class="grim-table">
       <thead>
         <tr>
           <th class="text-left talent-col">Talent Name</th>
-          <th class="text-center count-col">Times</th>
+          <th class="text-center count-col">Max</th>
           <th class="text-left">Description</th>
+          <th class="text-center action-col"></th>
         </tr>
       </thead>
       <tbody>
-        <tr v-if="store.char.Talents.length === 0">
-          <td colspan="3" class="text-center placeholder-text py-4">No talents added</td>
+        <tr v-for="(t, index) in props.talents" :key="index">
+          <td class="pa-1">
+            <v-text-field v-model="t.Name" hide-details density="compact" variant="plain" class="talent-name-input" />
+          </td>
+          <td class="text-center pa-1">
+            <v-number-input v-model="t.MaxLvl" hide-details density="compact" variant="plain" class="text-center" control-variant="stacked" hide-controls />
+          </td>
+          <td class="pa-1">
+            <v-text-field v-model="t.Description" hide-details density="compact" variant="plain" class="text-caption" />
+          </td>
+          <td class="text-center pa-0">
+            <v-btn icon="mdi-trash-can-outline" variant="plain" density="compact" color="error" @click="emit('remove', index)" />
+          </td>
         </tr>
-        <tr v-for="t in store.char.Talents" :key="t.Name">
-          <td class="talent-name">{{ t.Name }}</td>
-          <td class="text-center talent-count">{{ t.MaxLvl || 1 }}</td>
-          <td class="talent-desc">{{ t.Description }}</td>
+        <!-- NEW ITEM LINE -->
+        <tr class="new-item-row">
+          <td class="pa-1">
+            <v-text-field v-model="newItem.Name" placeholder="New Talent..." hide-details density="compact" variant="plain" class="talent-name-input" @keyup.enter="onAdd" />
+          </td>
+          <td class="text-center pa-1">
+            <v-number-input v-model="newItem.MaxLvl" hide-details density="compact" variant="plain" class="text-center" control-variant="stacked" hide-controls />
+          </td>
+          <td class="pa-1">
+            <v-text-field v-model="newItem.Description" placeholder="Description..." hide-details density="compact" variant="plain" class="text-caption" />
+          </td>
+          <td class="text-center pa-0">
+            <v-btn icon="mdi-plus-circle-outline" variant="plain" density="compact" color="primary" @click="onAdd" :disabled="!newItem.Name" />
+          </td>
         </tr>
       </tbody>
     </v-table>
@@ -30,60 +70,17 @@ const store = useCharacterStore()
 </template>
 
 <style scoped>
-.talents-list {
-  background-color: var(--v-theme-surface);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
+.talent-col { width: 30%; }
+.count-col { width: 10%; }
+.action-col { width: 40px; }
 
-.section-title {
-  font-family: 'Crimson Text', serif;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.grim-table {
-  background: transparent !important;
-}
-
-.talent-col {
-  width: 30%;
-}
-
-.count-col {
-  width: 10%;
-}
-
-.placeholder-text {
-  font-family: 'Crimson Text', serif;
-  color: var(--v-theme-subtext);
-  font-style: italic;
+.talent-name-input :deep(input) {
   font-size: 1.1rem;
-}
-
-th {
-  font-family: 'Crimson Text', serif;
-  color: var(--v-theme-primary) !important;
-  font-weight: bold !important;
-  text-transform: uppercase;
-  font-size: 1rem !important;
-}
-
-td {
-  font-family: 'Crimson Text', serif;
-}
-
-.talent-name {
-  font-size: 1.2rem;
   font-weight: bold;
+  font-family: 'Crimson Text', serif;
 }
 
-.talent-count {
-  font-size: 1.1rem;
-}
-
-.talent-desc {
-  font-size: 1rem;
-  color: var(--v-theme-subtext);
+.new-item-row {
+  background-color: rgba(var(--v-theme-primary), 0.05);
 }
 </style>

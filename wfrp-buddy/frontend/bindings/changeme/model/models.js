@@ -217,9 +217,9 @@ export class Caracter {
         if (!("Armour" in $$source)) {
             /**
              * @member
-             * @type {Armour}
+             * @type {Armour[]}
              */
-            this["Armour"] = (new Armour());
+            this["Armour"] = [];
         }
         if (!("Trappings" in $$source)) {
             /**
@@ -317,17 +317,17 @@ export class Caracter {
         const $$createField10_0 = $$createType11;
         const $$createField11_0 = $$createType12;
         const $$createField12_0 = $$createType14;
-        const $$createField13_0 = $$createType15;
-        const $$createField14_0 = $$createType17;
-        const $$createField15_0 = $$createType18;
-        const $$createField16_0 = $$createType19;
-        const $$createField17_0 = $$createType20;
-        const $$createField18_0 = $$createType22;
-        const $$createField19_0 = $$createType24;
-        const $$createField20_0 = $$createType26;
-        const $$createField22_0 = $$createType27;
-        const $$createField23_0 = $$createType28;
-        const $$createField24_0 = $$createType30;
+        const $$createField13_0 = $$createType16;
+        const $$createField14_0 = $$createType18;
+        const $$createField15_0 = $$createType19;
+        const $$createField16_0 = $$createType20;
+        const $$createField17_0 = $$createType21;
+        const $$createField18_0 = $$createType23;
+        const $$createField19_0 = $$createType25;
+        const $$createField20_0 = $$createType27;
+        const $$createField22_0 = $$createType28;
+        const $$createField23_0 = $$createType29;
+        const $$createField24_0 = $$createType31;
         let $$parsedSource = typeof $$source === 'string' ? JSON.parse($$source) : $$source;
         if ("Career" in $$parsedSource) {
             $$parsedSource["Career"] = $$createField4_0($$parsedSource["Career"]);
@@ -557,16 +557,16 @@ export class Characteristics {
      * @returns {Characteristics}
      */
     static createFrom($$source = {}) {
-        const $$createField0_0 = $$createType31;
-        const $$createField1_0 = $$createType31;
-        const $$createField2_0 = $$createType31;
-        const $$createField3_0 = $$createType31;
-        const $$createField4_0 = $$createType31;
-        const $$createField5_0 = $$createType31;
-        const $$createField6_0 = $$createType31;
-        const $$createField7_0 = $$createType31;
-        const $$createField8_0 = $$createType31;
-        const $$createField9_0 = $$createType31;
+        const $$createField0_0 = $$createType32;
+        const $$createField1_0 = $$createType32;
+        const $$createField2_0 = $$createType32;
+        const $$createField3_0 = $$createType32;
+        const $$createField4_0 = $$createType32;
+        const $$createField5_0 = $$createType32;
+        const $$createField6_0 = $$createType32;
+        const $$createField7_0 = $$createType32;
+        const $$createField8_0 = $$createType32;
+        const $$createField9_0 = $$createType32;
         let $$parsedSource = typeof $$source === 'string' ? JSON.parse($$source) : $$source;
         if ("WeaponSkill" in $$parsedSource) {
             $$parsedSource["WeaponSkill"] = $$createField0_0($$parsedSource["WeaponSkill"]);
@@ -644,7 +644,7 @@ export class Corruption {
      * @returns {Corruption}
      */
     static createFrom($$source = {}) {
-        const $$createField2_0 = $$createType29;
+        const $$createField2_0 = $$createType30;
         let $$parsedSource = typeof $$source === 'string' ? JSON.parse($$source) : $$source;
         if ("Mutations" in $$parsedSource) {
             $$parsedSource["Mutations"] = $$createField2_0($$parsedSource["Mutations"]);
@@ -955,7 +955,7 @@ export class Party {
      */
     static createFrom($$source = {}) {
         const $$createField1_0 = $$createType12;
-        const $$createField2_0 = $$createType33;
+        const $$createField2_0 = $$createType34;
         let $$parsedSource = typeof $$source === 'string' ? JSON.parse($$source) : $$source;
         if ("Ambitions" in $$parsedSource) {
             $$parsedSource["Ambitions"] = $$createField1_0($$parsedSource["Ambitions"]);
@@ -1004,9 +1004,9 @@ export class Points {
      * @returns {Points}
      */
     static createFrom($$source = {}) {
-        const $$createField0_0 = $$createType34;
-        const $$createField1_0 = $$createType35;
-        const $$createField2_0 = $$createType36;
+        const $$createField0_0 = $$createType35;
+        const $$createField1_0 = $$createType36;
+        const $$createField2_0 = $$createType37;
         let $$parsedSource = typeof $$source === 'string' ? JSON.parse($$source) : $$source;
         if ("Fate" in $$parsedSource) {
             $$parsedSource["Fate"] = $$createField0_0($$parsedSource["Fate"]);
@@ -1192,6 +1192,13 @@ export class Skill {
      * @param {Partial<Skill>} [$$source = {}] - The source object to create the Skill.
      */
     constructor($$source = {}) {
+        if (!("Name" in $$source)) {
+            /**
+             * @member
+             * @type {string}
+             */
+            this["Name"] = "";
+        }
         if (!("Characteristic" in $$source)) {
             /**
              * @member
@@ -1223,10 +1230,10 @@ export class Skill {
      * @returns {Skill}
      */
     static createFrom($$source = {}) {
-        const $$createField0_0 = $$createType31;
+        const $$createField1_0 = $$createType32;
         let $$parsedSource = typeof $$source === 'string' ? JSON.parse($$source) : $$source;
         if ("Characteristic" in $$parsedSource) {
-            $$parsedSource["Characteristic"] = $$createField0_0($$parsedSource["Characteristic"]);
+            $$parsedSource["Characteristic"] = $$createField1_0($$parsedSource["Characteristic"]);
         }
         return new Skill(/** @type {Partial<Skill>} */($$parsedSource));
     }
@@ -1487,7 +1494,7 @@ export class Trapping {
      */
     static createFrom($$source = {}) {
         const $$createField2_0 = $$createType1;
-        const $$createField7_0 = $$createType17;
+        const $$createField7_0 = $$createType18;
         let $$parsedSource = typeof $$source === 'string' ? JSON.parse($$source) : $$source;
         if ("Qualities" in $$parsedSource) {
             $$parsedSource["Qualities"] = $$createField2_0($$parsedSource["Qualities"]);
@@ -1680,29 +1687,30 @@ const $$createType12 = Ambitions.createFrom;
 const $$createType13 = Party.createFrom;
 const $$createType14 = $Create.Nullable($$createType13);
 const $$createType15 = Armour.createFrom;
-const $$createType16 = Trapping.createFrom;
-const $$createType17 = $Create.Array($$createType16);
-const $$createType18 = Encumbrance.createFrom;
-const $$createType19 = Welth.createFrom;
-const $$createType20 = Wounds.createFrom;
-const $$createType21 = Weapon.createFrom;
-const $$createType22 = $Create.Array($$createType21);
-const $$createType23 = Spell.createFrom;
-const $$createType24 = $Create.Array($$createType23);
-const $$createType25 = Prayer.createFrom;
-const $$createType26 = $Create.Array($$createType25);
-const $$createType27 = Corruption.createFrom;
-var $$createType28 = /** @type {(...args: any[]) => any} */(function $$initCreateType28(...args) {
-    if ($$createType28 === $$initCreateType28) {
-        $$createType28 = $$createType29;
+const $$createType16 = $Create.Array($$createType15);
+const $$createType17 = Trapping.createFrom;
+const $$createType18 = $Create.Array($$createType17);
+const $$createType19 = Encumbrance.createFrom;
+const $$createType20 = Welth.createFrom;
+const $$createType21 = Wounds.createFrom;
+const $$createType22 = Weapon.createFrom;
+const $$createType23 = $Create.Array($$createType22);
+const $$createType24 = Spell.createFrom;
+const $$createType25 = $Create.Array($$createType24);
+const $$createType26 = Prayer.createFrom;
+const $$createType27 = $Create.Array($$createType26);
+const $$createType28 = Corruption.createFrom;
+var $$createType29 = /** @type {(...args: any[]) => any} */(function $$initCreateType29(...args) {
+    if ($$createType29 === $$initCreateType29) {
+        $$createType29 = $$createType30;
     }
-    return $$createType28(...args);
+    return $$createType29(...args);
 });
-const $$createType29 = $Create.Array($Create.Any);
-const $$createType30 = Points.createFrom;
-const $$createType31 = Characteristic.createFrom;
-const $$createType32 = Caracter.createFrom;
-const $$createType33 = $Create.Array($$createType32);
-const $$createType34 = FPoint.createFrom;
-const $$createType35 = RPoint.createFrom;
-const $$createType36 = ExpPoints.createFrom;
+const $$createType30 = $Create.Array($Create.Any);
+const $$createType31 = Points.createFrom;
+const $$createType32 = Characteristic.createFrom;
+const $$createType33 = Caracter.createFrom;
+const $$createType34 = $Create.Array($$createType33);
+const $$createType35 = FPoint.createFrom;
+const $$createType36 = RPoint.createFrom;
+const $$createType37 = ExpPoints.createFrom;

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useCharacterStore } from '@/stores/character'
 import CharacterHeader from './CharacterHeader.vue'
 import CharacteristicsTable from './CharacteristicsTable.vue'
 import ArmourSilhouette from './ArmourSilhouette.vue'
@@ -14,6 +15,7 @@ import AmbitionsPartyCard from './AmbitionsPartyCard.vue'
 import WealthCard from './WealthCard.vue'
 import CorruptionPsychologyCard from './CorruptionPsychologyCard.vue'
 
+const store = useCharacterStore()
 const showPrayers = ref(false)
 </script>
 
@@ -23,7 +25,9 @@ const showPrayers = ref(false)
       <!-- Header Row -->
       <v-row dense>
         <v-col cols="12">
-          <CharacterHeader />
+          <CharacterHeader :name="store.char.Name" :career="store.char.Career" :status="store.char.Status"
+            :description="store.char.Description" :movment="store.char.Movment" :points="store.char.Points"
+            :wounds="store.char.Wounds" />
         </v-col>
       </v-row>
 
@@ -33,23 +37,27 @@ const showPrayers = ref(false)
           <v-row dense>
             <!-- Characteristics -->
             <v-col cols="12">
-              <CharacteristicsTable />
+              <CharacteristicsTable :characteristics="store.char.Characteristics" />
             </v-col>
 
             <!-- Skills & Talents -->
             <v-col cols="12" md="6">
-              <SkillSection />
+              <SkillSection :skills="store.char.Skills" @add="store.addItem('Skills', $event)"
+                @remove="(idx) => store.removeItem('Skills', idx)" />
             </v-col>
             <v-col cols="12" md="6">
-              <TalentList />
+              <TalentList :talents="store.char.Talents" @add="store.addItem('Talents', $event)"
+                @remove="(idx) => store.removeItem('Talents', idx)" />
             </v-col>
 
             <!-- Combat -->
             <v-col cols="12" md="6">
-              <WeaponTable />
+              <WeaponTable :weapons="store.char.Weapons" @add="store.addItem('Weapons', $event)"
+                @remove="(idx) => store.removeItem('Weapons', idx)" />
             </v-col>
             <v-col cols="12" md="6">
-              <ArmourTable />
+              <ArmourTable :armour="store.char.Armour" @add="store.addItem('Armour', $event)"
+                @remove="(idx) => store.removeItem('Armour', idx)" />
             </v-col>
 
             <!-- Magic & Faith (Toggled) -->
@@ -60,17 +68,21 @@ const showPrayers = ref(false)
               </div>
               <transition name="fade" mode="out-in">
                 <div v-if="showPrayers" key="prayers">
-                  <PrayersTable />
+                  <PrayersTable :prayers="store.char.Prayers" :sin="store.char.Sin"
+                    @update:sin="store.char.Sin = $event" @add="store.addItem('Prayers', $event)"
+                    @remove="(idx) => store.removeItem('Prayers', idx)" />
                 </div>
                 <div v-else key="spells">
-                  <SpellTable />
+                  <SpellTable :spells="store.char.Spells" @add="store.addItem('Spells', $event)"
+                    @remove="(idx) => store.removeItem('Spells', idx)" />
                 </div>
               </transition>
             </v-col>
 
             <!-- Gear -->
             <v-col cols="12">
-              <TrappingsTable />
+              <TrappingsTable :trappings="store.char.Trappings" @add="store.addItem('Trappings', $event)"
+                @remove="(idx) => store.removeItem('Trappings', idx)" />
             </v-col>
           </v-row>
         </v-col>
@@ -79,16 +91,17 @@ const showPrayers = ref(false)
         <v-col cols="12" md="4">
           <v-row dense>
             <v-col cols="12">
-              <ArmourSilhouette />
+              <ArmourSilhouette :armour="store.char.Armour" />
             </v-col>
             <v-col cols="12">
-              <WealthCard />
+              <WealthCard :wealth="store.char.Welth" />
             </v-col>
             <v-col cols="12">
-              <AmbitionsPartyCard />
+              <AmbitionsPartyCard :ambitions="store.char.Ambitions" :party="store.char.Party" />
             </v-col>
             <v-col cols="12">
-              <CorruptionPsychologyCard />
+              <CorruptionPsychologyCard :corruption="store.char.Corruption" :psychology="store.char.Psychology"
+                @update:psychology="store.char.Psychology = $event" />
             </v-col>
           </v-row>
         </v-col>

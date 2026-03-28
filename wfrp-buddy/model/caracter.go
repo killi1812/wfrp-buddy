@@ -24,7 +24,7 @@ type Caracter struct {
 
 	Party *Party
 
-	Armour      Armour
+	Armour      []Armour
 	Trappings   []Trapping
 	Encumbrance Encumbrance
 	Welth       Welth
@@ -61,6 +61,7 @@ type (
 
 	Skills []Skill
 	Skill  struct {
+		Name           string
 		Characteristic Characteristic
 		Basic          int
 		Advances       int

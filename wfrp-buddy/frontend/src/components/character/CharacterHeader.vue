@@ -2,31 +2,49 @@
 import PersonalInfoCard from './PersonalInfoCard.vue'
 import StatusCard from './StatusCard.vue'
 import PointsCard from './PointsCard.vue'
-import { useCharacterStore } from '@/stores/character'
 
-const store = useCharacterStore()
+const props = defineProps<{
+  name: string,
+  career: any,
+  status: any,
+  description: any,
+  movment: any,
+  points: any,
+  wounds: any
+}>()
 </script>
 
 <template>
   <v-row dense>
     <v-col cols="12" md="4">
-      <PersonalInfoCard />
+      <PersonalInfoCard 
+        :name="props.name" 
+        :career="props.career"
+        :status="props.status"
+        :description="props.description"
+      />
     </v-col>
     <v-col cols="12" md="3">
-      <StatusCard />
+      <StatusCard :movment="props.movment" :exp="props.points.Exp" />
     </v-col>
     <v-col cols="12" md="3">
-      <PointsCard />
+      <PointsCard :points="props.points" />
     </v-col>
     <v-col cols="12" md="2">
       <v-card class="pa-4 header-sub-card h-100 d-flex flex-column align-center justify-center elevation-2">
         <div class="section-title mb-1">Wounds</div>
         <div class="d-flex align-center">
-          <v-number-input v-model="store.char.Wounds.Current" density="compact" variant="plain" hide-details
-            class="header-large-input" control-variant="stacked" hide-controls />
+          <v-number-input
+            v-model="props.wounds.Current"
+            density="compact"
+            variant="plain"
+            hide-details
+            class="header-large-input"
+            control-variant="stacked"
+            hide-controls
+          />
           <div class="text-h4 mx-1 primary--text">/</div>
-          <v-number-input v-model="store.char.Wounds.Max" density="compact" variant="plain" hide-details
-            class="header-large-input" control-variant="stacked" hide-controls />
+          <div class="text-h4 font-weight-bold primary--text">{{ props.wounds.Max }}</div>
         </div>
       </v-card>
     </v-col>
@@ -35,7 +53,7 @@ const store = useCharacterStore()
 
 <style scoped>
 .header-sub-card {
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0,0,0,0.1);
   background-color: var(--v-theme-surface);
 }
 

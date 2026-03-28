@@ -10,7 +10,7 @@ export const useCharacterStore = defineStore('character', () => {
     Career: new model.Career({ Career: 'Slayer', CareerTier: 2, CareerPath: 'Troll Slayer' }),
     Status: new model.Status({ Tier: 'Brass', Level: 3 }),
     Description: new model.Description({ Age: 32, Height: '4\'8"', Hair: 'Orange', Eyes: 'Blue', Description: 'A standard slayer', Psychology: 'Grim' }),
-    Characteristics: new model.Characteristics({
+    Characteristics: new model.Characteristics({ // Fixed pluralization
       WeaponSkill: { Basic: 30, Advances: 5 },
       BalisticSkill: { Basic: 25, Advances: 0 },
       Strength: { Basic: 35, Advances: 10 },
@@ -36,14 +36,28 @@ export const useCharacterStore = defineStore('character', () => {
     Talents: [],
     Trappings: [],
     Weapons: [],
+    Armour: [], // Now an array
     Spells: [],
     Prayers: [],
-    Skills: []
+    Skills: [
+      new model.Skill({ Name: 'Athletics', Characteristic: { Basic: 30, Advances: 0 } as any, Basic: 30, Advances: 5 }),
+      new model.Skill({ Name: 'Dodge', Characteristic: { Basic: 30, Advances: 0 } as any, Basic: 30, Advances: 10 })
+    ]
   }))
+
+  const addItem = (listName: 'Skills' | 'Talents' | 'Weapons' | 'Trappings' | 'Spells' | 'Prayers' | 'Armour', item: any) => {
+    // @ts-ignore
+    char.value[listName].push(item)
+  }
+
+  const removeItem = (listName: 'Skills' | 'Talents' | 'Weapons' | 'Trappings' | 'Spells' | 'Prayers' | 'Armour', index: number) => {
+    // @ts-ignore
+    char.value[listName].splice(index, 1)
+  }
 
   const getCharValue = (key: string) => {
     // @ts-ignore
-    const c = char.value.Characteristic[key]
+    const c = char.value.Characteristics[key]
     return c ? (c.Basic + c.Advances) : 0
   }
 
@@ -60,5 +74,5 @@ export const useCharacterStore = defineStore('character', () => {
 
   const getSkillTotal = (skill: any) => skill.Basic + skill.Advances
 
-  return { char, maxWounds, expCurrent, getBonus, getCharValue, getSkillTotal }
+  return { char, maxWounds, expCurrent, getBonus, getCharValue, getSkillTotal, addItem, removeItem }
 })

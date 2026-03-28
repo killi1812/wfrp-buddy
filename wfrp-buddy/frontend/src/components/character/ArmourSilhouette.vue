@@ -1,18 +1,19 @@
 <script setup lang="ts">
-import { useCharacterStore } from '@/stores/character'
-
-const store = useCharacterStore()
+const props = defineProps<{
+  armour: any[]
+}>()
 
 const getAP = (location: string) => {
-  if (!store.char.Armour) return 0
-  // In the current Go struct, Armour is a single object.
-  // We check if that specific piece matches the location.
-  return store.char.Armour.Location === location ? store.char.Armour.ArmourPoints : 0
+  if (!props.armour) return 0
+  // Sum AP for all pieces at this location
+  return props.armour
+    .filter(a => a.Location.toLowerCase() === location.toLowerCase())
+    .reduce((sum, a) => sum + (a.ArmourPoints || 0), 0)
 }
 </script>
 
 <template>
-  <v-card class="pa-4 silhouette-card" elevation="2">
+  <v-card class="pa-4 silhouette-card elevation-2">
     <div class="text-h6 mb-4 text-primary section-title">Armour Points</div>
     <div class="silhouette-container">
       <svg viewBox="0 0 100 200" class="silhouette-svg">
@@ -56,7 +57,7 @@ const getAP = (location: string) => {
 <style scoped>
 .silhouette-card {
   background-color: var(--v-theme-surface);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0,0,0,0.1);
   height: 100%;
 }
 
@@ -92,7 +93,7 @@ const getAP = (location: string) => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   z-index: 2;
 }
 
@@ -112,36 +113,10 @@ const getAP = (location: string) => {
   line-height: 1;
 }
 
-/* Positioning boxes based on human anatomy */
-.head {
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.body {
-  top: 60px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.l-arm {
-  top: 70px;
-  left: -10px;
-}
-
-.r-arm {
-  top: 70px;
-  right: -10px;
-}
-
-.l-leg {
-  bottom: 20px;
-  left: 0px;
-}
-
-.r-leg {
-  bottom: 20px;
-  right: 0px;
-}
+.head { top: 0; left: 50%; transform: translateX(-50%); }
+.body { top: 60px; left: 50%; transform: translateX(-50%); }
+.l-arm { top: 70px; left: -10px; }
+.r-arm { top: 70px; right: -10px; }
+.l-leg { bottom: 20px; left: 0px; }
+.r-leg { bottom: 20px; right: 0px; }
 </style>
