@@ -1,14 +1,14 @@
 <template>
   <v-app-bar color="primary" :elevation="8" height="60" app>
-    <v-app-bar-nav-icon class="text-white" @click="open = !open" />
-    <img id="logo" src="../../assets/logo.png" alt="logo" class="ml-2" />
-    <v-app-bar-title class="ml-2 text-white font-weight-bold uppercase">WFRP BUDDY</v-app-bar-title>
-    
-    <v-spacer />
-    
+
     <v-btn icon @click="goBack" class="text-white">
       <v-icon>mdi-arrow-left</v-icon>
     </v-btn>
+    <img id="logo" src="../../assets/logo.png" alt="logo" class="ml-2" />
+    <v-app-bar-title class="ml-2 text-white font-weight-bold uppercase">WFRP BUDDY</v-app-bar-title>
+
+    <v-spacer />
+
 
     <!-- Profile Menu -->
     <v-menu location="bottom">
@@ -24,51 +24,27 @@
     </v-menu>
   </v-app-bar>
 
-  <v-navigation-drawer
-    v-model="drawer"
-    :rail="!open"
-    rail-width="60"
-    location="left"
-    permanent
-    persistent
-    elevation="2"
-    color="surface"
-    class="sidebar-offset"
-  >
+  <v-navigation-drawer v-model="drawer" :rail="!open" rail-width="60" location="left" permanent persistent elevation="2"
+    color="surface" class="sidebar-offset">
     <v-list nav density="compact">
       <!-- Information section -->
       <v-list-item v-show="open" readonly class="text-caption text-uppercase text-grey">Information</v-list-item>
       <v-divider v-show="open"></v-divider>
-      
-      <v-list-item 
-        to="/" 
-        :prepend-icon="route.path === '/' ? 'mdi-home' : 'mdi-home-outline'" 
-        title="Home" 
-        color="primary" 
-      />
-      <v-list-item 
-        to="/character-sheet" 
-        :prepend-icon="route.path === '/character-sheet' ? 'mdi-account-details' : 'mdi-account-details-outline'" 
-        title="Character Sheet" 
-        color="primary" 
-      />
+
+      <v-list-item to="/" :prepend-icon="route.path === '/' ? 'mdi-home' : 'mdi-home-outline'" title="Home"
+        color="primary" />
+      <v-list-item to="/characters"
+        :prepend-icon="route.path === '/characters' ? 'mdi-account-group' : 'mdi-account-group-outline'"
+        title="Characters" color="primary" />
 
       <!-- Help section -->
       <v-list-item v-show="open" readonly class="text-caption text-uppercase text-grey mt-4">Help</v-list-item>
       <v-divider v-show="open"></v-divider>
-      
-      <v-list-item 
-        to="/help" 
-        :prepend-icon="route.path === '/help' ? 'mdi-help-circle' : 'mdi-help-circle-outline'" 
-        title="Help" 
-        color="primary" 
-      />
-      <v-list-item 
-        to="/about" 
-        :prepend-icon="route.path === '/about' ? 'mdi-information' : 'mdi-information-outline'" 
-        title="About" 
-        color="primary" 
-      />
+
+      <v-list-item to="/help" :prepend-icon="route.path === '/help' ? 'mdi-help-circle' : 'mdi-help-circle-outline'"
+        title="Help" color="primary" />
+      <v-list-item to="/about" :prepend-icon="route.path === '/about' ? 'mdi-information' : 'mdi-information-outline'"
+        title="About" color="primary" />
 
       <!-- Exit -->
       <v-divider class="my-2"></v-divider>
@@ -77,7 +53,16 @@
           <v-list-item v-bind="props" @click="handleQuit" prepend-icon="mdi-power" title="Exit" color="error" />
         </template>
       </v-tooltip>
+      <v-spacer />
+      <v-tooltip :disabled="open" text="Expand" location="right">
+        <template v-slot:activator="{ props }">
+          <v-list-item v-bind="props" @click="open = !open" :prepend-icon="open ? 'mdi-arrow-left' : 'mdi-arrow-right'"
+            title="Shrink" />
+        </template>
+      </v-tooltip>
+
     </v-list>
+
   </v-navigation-drawer>
 </template>
 

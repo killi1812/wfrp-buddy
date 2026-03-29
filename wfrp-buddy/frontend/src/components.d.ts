@@ -15,6 +15,7 @@ declare module 'vue' {
     AwaitDialog: typeof import('./components/general/AwaitDialog.vue')['default']
     CharacterHeader: typeof import('./components/character/CharacterHeader.vue')['default']
     CharacteristicsTable: typeof import('./components/character/CharacteristicsTable.vue')['default']
+    CharacterSelection: typeof import('./components/character/CharacterSelection.vue')['default']
     CharacterSheet: typeof import('./components/character/CharacterSheet.vue')['default']
     CompTwo: typeof import('./components/general/compTwo.vue')['default']
     ConfirmDialog: typeof import('./components/general/ConfirmDialog.vue')['default']
