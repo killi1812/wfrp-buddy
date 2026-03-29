@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { useCharacterStore } from '@/stores/character'
+import { useUIStore } from '@/stores/ui'
 import CharacterSheet from './CharacterSheet.vue'
 import { markRaw } from 'vue'
 
@@ -9,7 +9,7 @@ const props = defineProps<{
 }>()
 
 const store = useCharacterStore()
-const viewMode = ref<'grid' | 'list'>('grid')
+const uiStore = useUIStore()
 
 const select = (char: any) => {
   props.open({
@@ -25,7 +25,7 @@ const select = (char: any) => {
 
 <template>
   <v-container>
-    <div class="d-flex align-center justify-space-between mb-6">
+    <div class="d-flex align-center justify-space-between mb-6 ">
       <div class="text-h4 text-primary section-title">Characters</div>
 
       <div class="d-flex align-center gap-2">
@@ -34,17 +34,18 @@ const select = (char: any) => {
           New Character
         </v-btn>
 
-        <!-- View Toggle -->
-        <v-btn-toggle v-model="viewMode" mandatory color="primary" density="compact" variant="outlined">
+        <!-- View Toggle using UI Store -->
+        <v-btn-toggle v-model="uiStore.characterListViewMode" mandatory color="primary" density="compact"
+          variant="outlined">
           <v-btn value="grid" icon="mdi-view-grid-outline" />
           <v-btn value="list" icon="mdi-view-list" />
         </v-btn-toggle>
       </div>
     </div>
 
-    <v-window v-model="viewMode" disabled>
+    <v-window v-model="uiStore.characterListViewMode" disabled>
       <!-- GRID VIEW -->
-      <v-window-item value="grid">
+      <v-window-item value="grid" class="pa-1">
         <v-row>
           <v-col v-for="char in store.characters" :key="char.CaracterId" cols="12" sm="6" md="4">
             <v-card class="grim-card char-card pa-4" @click="select(char)" hover elevation="4">
