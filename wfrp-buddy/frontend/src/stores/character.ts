@@ -14,15 +14,15 @@ export const useCharacterStore = defineStore('character', () => {
   const init = () => {
     if (characters.value.length > 0) return
 
-    const char1 = new model.Caracter({
+    const char1 = new model.CaracterDetails({
       CaracterId: '11111111-1111-1111-1111-111111111111',
       Name: 'Gottfried von Berlichingen',
       Species: 'Dwarf',
       Class: 'Warrior',
       Career: new model.Career({ Career: 'Slayer', CareerTier: 2, CareerPath: 'Troll Slayer' }),
-      Status: new model.Status({ Tier: 'Brass', Level: 3 }),
+      Status: new model.Status({ Tier: model.StatusTier.Brass, Level: 3 }),
       Description: new model.Description({ Age: 32, Height: '4\'8"', Hair: 'Orange', Eyes: 'Blue', Description: 'A standard slayer', Psychology: 'Grim' }),
-      Characteristics: new model.Characteristics({ 
+      Characteristics: new model.Characteristics({
         WeaponSkill: { Basic: 30, Advances: 5 },
         BalisticSkill: { Basic: 25, Advances: 0 },
         Strength: { Basic: 35, Advances: 10 },
@@ -57,15 +57,15 @@ export const useCharacterStore = defineStore('character', () => {
       ]
     })
 
-    const char2 = new model.Caracter({
+    const char2 = new model.CaracterDetails({
       CaracterId: '22222222-2222-2222-2222-222222222222',
       Name: 'Elara Swiftfoot',
       Species: 'Elf',
       Class: 'Ranger',
       Career: new model.Career({ Career: 'Hunter', CareerTier: 1, CareerPath: 'Scout' }),
-      Status: new model.Status({ Tier: 'Brass', Level: 5 }),
+      Status: new model.Status({ Tier: model.StatusTier.Brass, Level: 5 }),
       Description: new model.Description({ Age: 120, Height: '6\'1"', Hair: 'Silver', Eyes: 'Green', Description: 'An agile woodsman', Psychology: 'Calm' }),
-      Characteristics: new model.Characteristics({ 
+      Characteristics: new model.Characteristics({
         WeaponSkill: { Basic: 30, Advances: 0 },
         BalisticSkill: { Basic: 40, Advances: 10 },
         Strength: { Basic: 30, Advances: 0 },
@@ -132,16 +132,16 @@ export const useCharacterStore = defineStore('character', () => {
     return baseValue + skill.Advances
   }
 
-  return { 
-    characters, 
-    selectedCharacterId, 
-    selectedCharacter, 
-    init, 
-    selectCharacter, 
-    addItem, 
-    removeItem, 
-    getCharValue, 
-    getBonus, 
-    getSkillTotal 
+  return {
+    characters,
+    selectedCharacterId,
+    selectedCharacter,
+    init,
+    selectCharacter,
+    addItem,
+    removeItem,
+    getCharValue,
+    getBonus,
+    getSkillTotal
   }
 })

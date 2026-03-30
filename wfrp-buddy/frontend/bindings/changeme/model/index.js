@@ -5,7 +5,10 @@
 export {
     Ambitions,
     Armour,
-    Caracter,
+    ArmourLocation,
+    BookVersion,
+    CaracterDetails,
+    CaracterPreview,
     Career,
     Characteristic,
     Characteristics,
@@ -24,6 +27,7 @@ export {
     Skill,
     Spell,
     Status,
+    StatusTier,
     Talent,
     Trapping,
     Weapon,
@@ -34,18 +38,7 @@ export {
 import * as $models from "./models.js";
 
 /**
- * TODO: implement BookVersion enum
- * @typedef {$models.BookVersion} BookVersion
- */
-
-/**
- * TODO: implement class enum
  * @typedef {$models.Class} Class
- */
-
-/**
- * TODO: implement Location enum
- * @typedef {$models.Location} Location
  */
 
 /**
@@ -57,16 +50,9 @@ import * as $models from "./models.js";
  */
 
 /**
- * TODO: implement species enum
  * @typedef {$models.Species} Species
  */
 
 /**
- * TODO: implement StatusTier enum
- * @typedef {$models.StatusTier} StatusTier
- */
-
-/**
- * TODO: implement WeaponGroup enum
  * @typedef {$models.WeaponGroup} WeaponGroup
  */

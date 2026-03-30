@@ -61,9 +61,9 @@ export class Armour {
         if (!("Location" in $$source)) {
             /**
              * @member
-             * @type {Location}
+             * @type {ArmourLocation}
              */
-            this["Location"] = "";
+            this["Location"] = ArmourLocation.$zero;
         }
         if (!("Encumbrance" in $$source)) {
             /**
@@ -113,14 +113,47 @@ export class Armour {
 }
 
 /**
- * TODO: implement BookVersion enum
- * @typedef {string} BookVersion
+ * @readonly
+ * @enum {number}
  */
-
-export class Caracter {
+export const ArmourLocation = {
     /**
-     * Creates a new Caracter instance.
-     * @param {Partial<Caracter>} [$$source = {}] - The source object to create the Caracter.
+     * The Go zero value for the underlying type of the enum.
+     */
+    $zero: 0,
+
+    Head: 0,
+    Body: 1,
+    LeftArm: 2,
+    RightArm: 3,
+    LeftLeg: 4,
+    RightLeg: 5,
+
+    /**
+     * Shield covers whole body
+     */
+    Shield: 6,
+};
+
+/**
+ * @readonly
+ * @enum {number}
+ */
+export const BookVersion = {
+    /**
+     * The Go zero value for the underlying type of the enum.
+     */
+    $zero: 0,
+
+    Core: 0,
+    WindsOfMagic: 1,
+    UpInArms: 2,
+};
+
+export class CaracterDetails {
+    /**
+     * Creates a new CaracterDetails instance.
+     * @param {Partial<CaracterDetails>} [$$source = {}] - The source object to create the CaracterDetails.
      */
     constructor($$source = {}) {
         if (!("CaracterId" in $$source)) {
@@ -165,19 +198,19 @@ export class Caracter {
              */
             this["Status"] = (new Status());
         }
-        if (!("Skills" in $$source)) {
-            /**
-             * @member
-             * @type {Skills}
-             */
-            this["Skills"] = [];
-        }
         if (!("Description" in $$source)) {
             /**
              * @member
              * @type {Description}
              */
             this["Description"] = (new Description());
+        }
+        if (!("Skills" in $$source)) {
+            /**
+             * @member
+             * @type {Skills}
+             */
+            this["Skills"] = [];
         }
         if (!("Talents" in $$source)) {
             /**
@@ -303,15 +336,15 @@ export class Caracter {
     }
 
     /**
-     * Creates a new Caracter instance from a string or object.
+     * Creates a new CaracterDetails instance from a string or object.
      * @param {any} [$$source = {}]
-     * @returns {Caracter}
+     * @returns {CaracterDetails}
      */
     static createFrom($$source = {}) {
         const $$createField4_0 = $$createType2;
         const $$createField5_0 = $$createType3;
         const $$createField6_0 = $$createType4;
-        const $$createField7_0 = $$createType7;
+        const $$createField7_0 = $$createType5;
         const $$createField8_0 = $$createType9;
         const $$createField9_0 = $$createType10;
         const $$createField10_0 = $$createType11;
@@ -335,11 +368,11 @@ export class Caracter {
         if ("Status" in $$parsedSource) {
             $$parsedSource["Status"] = $$createField5_0($$parsedSource["Status"]);
         }
-        if ("Skills" in $$parsedSource) {
-            $$parsedSource["Skills"] = $$createField6_0($$parsedSource["Skills"]);
-        }
         if ("Description" in $$parsedSource) {
-            $$parsedSource["Description"] = $$createField7_0($$parsedSource["Description"]);
+            $$parsedSource["Description"] = $$createField6_0($$parsedSource["Description"]);
+        }
+        if ("Skills" in $$parsedSource) {
+            $$parsedSource["Skills"] = $$createField7_0($$parsedSource["Skills"]);
         }
         if ("Talents" in $$parsedSource) {
             $$parsedSource["Talents"] = $$createField8_0($$parsedSource["Talents"]);
@@ -389,7 +422,89 @@ export class Caracter {
         if ("Points" in $$parsedSource) {
             $$parsedSource["Points"] = $$createField24_0($$parsedSource["Points"]);
         }
-        return new Caracter(/** @type {Partial<Caracter>} */($$parsedSource));
+        return new CaracterDetails(/** @type {Partial<CaracterDetails>} */($$parsedSource));
+    }
+}
+
+export class CaracterPreview {
+    /**
+     * Creates a new CaracterPreview instance.
+     * @param {Partial<CaracterPreview>} [$$source = {}] - The source object to create the CaracterPreview.
+     */
+    constructor($$source = {}) {
+        if (!("CaracterId" in $$source)) {
+            /**
+             * @member
+             * @type {uuid$0.UUID}
+             */
+            this["CaracterId"] = "";
+        }
+        if (!("Name" in $$source)) {
+            /**
+             * @member
+             * @type {string}
+             */
+            this["Name"] = "";
+        }
+        if (!("Species" in $$source)) {
+            /**
+             * @member
+             * @type {Species}
+             */
+            this["Species"] = "";
+        }
+        if (!("Class" in $$source)) {
+            /**
+             * @member
+             * @type {Class}
+             */
+            this["Class"] = "";
+        }
+        if (!("Career" in $$source)) {
+            /**
+             * @member
+             * @type {Career}
+             */
+            this["Career"] = (new Career());
+        }
+        if (!("Status" in $$source)) {
+            /**
+             * @member
+             * @type {Status}
+             */
+            this["Status"] = (new Status());
+        }
+        if (!("Description" in $$source)) {
+            /**
+             * @member
+             * @type {Description}
+             */
+            this["Description"] = (new Description());
+        }
+
+        Object.assign(this, $$source);
+    }
+
+    /**
+     * Creates a new CaracterPreview instance from a string or object.
+     * @param {any} [$$source = {}]
+     * @returns {CaracterPreview}
+     */
+    static createFrom($$source = {}) {
+        const $$createField4_0 = $$createType2;
+        const $$createField5_0 = $$createType3;
+        const $$createField6_0 = $$createType4;
+        let $$parsedSource = typeof $$source === 'string' ? JSON.parse($$source) : $$source;
+        if ("Career" in $$parsedSource) {
+            $$parsedSource["Career"] = $$createField4_0($$parsedSource["Career"]);
+        }
+        if ("Status" in $$parsedSource) {
+            $$parsedSource["Status"] = $$createField5_0($$parsedSource["Status"]);
+        }
+        if ("Description" in $$parsedSource) {
+            $$parsedSource["Description"] = $$createField6_0($$parsedSource["Description"]);
+        }
+        return new CaracterPreview(/** @type {Partial<CaracterPreview>} */($$parsedSource));
     }
 }
 
@@ -603,7 +718,6 @@ export class Characteristics {
 }
 
 /**
- * TODO: implement class enum
  * @typedef {string} Class
  */
 
@@ -870,6 +984,9 @@ export class FPoint {
     }
 }
 
+/**
+ * LearnedTalent this is a copy of the original talent
+ */
 export class LearnedTalent {
     /**
      * Creates a new LearnedTalent instance.
@@ -878,11 +995,11 @@ export class LearnedTalent {
     constructor($$source = {}) {
         if (!("Talent" in $$source)) {
             /**
-             * Talent references the original talent this one is just the copy
+             * references the original talent
              * @member
-             * @type {Talent}
+             * @type {Talent | null}
              */
-            this["Talent"] = (new Talent());
+            this["Talent"] = null;
         }
         if (!("Name" in $$source)) {
             /**
@@ -915,7 +1032,7 @@ export class LearnedTalent {
      * @returns {LearnedTalent}
      */
     static createFrom($$source = {}) {
-        const $$createField0_0 = $$createType33;
+        const $$createField0_0 = $$createType34;
         let $$parsedSource = typeof $$source === 'string' ? JSON.parse($$source) : $$source;
         if ("Talent" in $$parsedSource) {
             $$parsedSource["Talent"] = $$createField0_0($$parsedSource["Talent"]);
@@ -923,11 +1040,6 @@ export class LearnedTalent {
         return new LearnedTalent(/** @type {Partial<LearnedTalent>} */($$parsedSource));
     }
 }
-
-/**
- * TODO: implement Location enum
- * @typedef {string} Location
- */
 
 export class Movment {
     /**
@@ -994,7 +1106,7 @@ export class Party {
         if (!("Members" in $$source)) {
             /**
              * @member
-             * @type {Caracter[]}
+             * @type {CaracterDetails[]}
              */
             this["Members"] = [];
         }
@@ -1009,7 +1121,7 @@ export class Party {
      */
     static createFrom($$source = {}) {
         const $$createField1_0 = $$createType12;
-        const $$createField2_0 = $$createType35;
+        const $$createField2_0 = $$createType36;
         let $$parsedSource = typeof $$source === 'string' ? JSON.parse($$source) : $$source;
         if ("Ambitions" in $$parsedSource) {
             $$parsedSource["Ambitions"] = $$createField1_0($$parsedSource["Ambitions"]);
@@ -1058,9 +1170,9 @@ export class Points {
      * @returns {Points}
      */
     static createFrom($$source = {}) {
-        const $$createField0_0 = $$createType36;
-        const $$createField1_0 = $$createType37;
-        const $$createField2_0 = $$createType38;
+        const $$createField0_0 = $$createType37;
+        const $$createField1_0 = $$createType38;
+        const $$createField2_0 = $$createType39;
         let $$parsedSource = typeof $$source === 'string' ? JSON.parse($$source) : $$source;
         if ("Fate" in $$parsedSource) {
             $$parsedSource["Fate"] = $$createField0_0($$parsedSource["Fate"]);
@@ -1294,7 +1406,6 @@ export class Skill {
  */
 
 /**
- * TODO: implement species enum
  * @typedef {string} Species
  */
 
@@ -1379,7 +1490,7 @@ export class Status {
              * @member
              * @type {StatusTier}
              */
-            this["Tier"] = "";
+            this["Tier"] = StatusTier.$zero;
         }
         if (!("Level" in $$source)) {
             /**
@@ -1404,9 +1515,19 @@ export class Status {
 }
 
 /**
- * TODO: implement StatusTier enum
- * @typedef {string} StatusTier
+ * @readonly
+ * @enum {number}
  */
+export const StatusTier = {
+    /**
+     * The Go zero value for the underlying type of the enum.
+     */
+    $zero: 0,
+
+    Brass: 0,
+    Silver: 1,
+    Gold: 2,
+};
 
 export class Talent {
     /**
@@ -1433,7 +1554,7 @@ export class Talent {
              * @member
              * @type {BookVersion}
              */
-            this["Version"] = "";
+            this["Version"] = BookVersion.$zero;
         }
         if (!("MaxLvl" in $$source)) {
             /**
@@ -1631,7 +1752,6 @@ export class Weapon {
 }
 
 /**
- * TODO: implement WeaponGroup enum
  * @typedef {string} WeaponGroup
  */
 
@@ -1720,15 +1840,15 @@ const $$createType0 = Quality.createFrom;
 const $$createType1 = $Create.Array($$createType0);
 const $$createType2 = Career.createFrom;
 const $$createType3 = Status.createFrom;
-var $$createType4 = /** @type {(...args: any[]) => any} */(function $$initCreateType4(...args) {
-    if ($$createType4 === $$initCreateType4) {
-        $$createType4 = $$createType6;
+const $$createType4 = Description.createFrom;
+var $$createType5 = /** @type {(...args: any[]) => any} */(function $$initCreateType5(...args) {
+    if ($$createType5 === $$initCreateType5) {
+        $$createType5 = $$createType7;
     }
-    return $$createType4(...args);
+    return $$createType5(...args);
 });
-const $$createType5 = Skill.createFrom;
-const $$createType6 = $Create.Array($$createType5);
-const $$createType7 = Description.createFrom;
+const $$createType6 = Skill.createFrom;
+const $$createType7 = $Create.Array($$createType6);
 const $$createType8 = LearnedTalent.createFrom;
 const $$createType9 = $Create.Array($$createType8);
 const $$createType10 = Characteristics.createFrom;
@@ -1760,8 +1880,9 @@ const $$createType30 = $Create.Array($Create.Any);
 const $$createType31 = Points.createFrom;
 const $$createType32 = Characteristic.createFrom;
 const $$createType33 = Talent.createFrom;
-const $$createType34 = Caracter.createFrom;
-const $$createType35 = $Create.Array($$createType34);
-const $$createType36 = FPoint.createFrom;
-const $$createType37 = RPoint.createFrom;
-const $$createType38 = ExpPoints.createFrom;
+const $$createType34 = $Create.Nullable($$createType33);
+const $$createType35 = CaracterDetails.createFrom;
+const $$createType36 = $Create.Array($$createType35);
+const $$createType37 = FPoint.createFrom;
+const $$createType38 = RPoint.createFrom;
+const $$createType39 = ExpPoints.createFrom;

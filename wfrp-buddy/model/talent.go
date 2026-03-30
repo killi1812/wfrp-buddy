@@ -11,9 +11,9 @@ type Talent struct {
 	Description string
 }
 
+// LearnedTalent this is a copy of the original talent
 type LearnedTalent struct {
-	// Talent references the original talent this one is just the copy
-	Talent      Talent
+	Talent      *Talent // references the original talent
 	Name        string
 	Lvl         int
 	Description string

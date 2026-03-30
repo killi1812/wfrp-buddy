@@ -1,16 +1,33 @@
 package model
 
 type (
-	// TODO: implement species enum
-	Species string
-	// TODO: implement class enum
-	Class string
-	// TODO: implement BookVersion enum
-	BookVersion string
-	// TODO: implement StatusTier enum
-	StatusTier string
-	// TODO: implement Location enum
-	Location string
-	// TODO: implement WeaponGroup enum
-	WeaponGroup string
+	Species     = string
+	Class       = string
+	WeaponGroup = string
+
+	BookVersion    int
+	StatusTier     int
+	ArmourLocation int
+)
+
+const (
+	Core BookVersion = iota
+	WindsOfMagic
+	UpInArms
+)
+
+const (
+	Head ArmourLocation = iota
+	Body
+	LeftArm
+	RightArm
+	LeftLeg
+	RightLeg
+	Shield // Shield covers whole body
+)
+
+const (
+	Brass StatusTier = iota
+	Silver
+	Gold
 )

@@ -4,19 +4,26 @@ import (
 	"github.com/google/uuid"
 )
 
-type Caracter struct {
-	CaracterId uuid.UUID
-	Name       string
-	Species    Species
-	Class      Class
+type CaracterPreview struct {
+	CaracterId  uuid.UUID
+	Name        string
+	Species     Species
+	Class       Class
+	Career      Career
+	Status      Status
+	Description Description
+}
 
-	Career Career
-
-	Status Status
-	Skills Skills
-
+type CaracterDetails struct {
+	CaracterId  uuid.UUID
+	Name        string
+	Species     Species
+	Class       Class
+	Career      Career
+	Status      Status
 	Description Description
 
+	Skills          Skills
 	Talents         []LearnedTalent
 	Characteristics Characteristics
 	Movment         Movment
@@ -75,7 +82,7 @@ type (
 	Party struct {
 		Name      string
 		Ambitions Ambitions
-		Members   []Caracter
+		Members   []CaracterDetails
 	}
 
 	Movment struct {
@@ -107,7 +114,7 @@ type (
 	WornArmour []Armour
 	Armour     struct {
 		Name         string
-		Location     Location
+		Location     ArmourLocation
 		Encumbrance  int
 		ArmourPoints int
 		Qualities    []Quality

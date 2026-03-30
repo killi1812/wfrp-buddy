@@ -12,7 +12,26 @@ import * as model$0 from "../model/models.js";
 
 /**
  * @param {string} id
- * @returns {$CancellablePromise<model$0.Caracter | null>}
+ * @returns {$CancellablePromise<model$0.CaracterDetails | null>}
+ */
+export function GetCharacter(id) {
+    return $Call.ByID(2785694556, id).then(/** @type {($result: any) => any} */(($result) => {
+        return $$createType1($result);
+    }));
+}
+
+/**
+ * @returns {$CancellablePromise<model$0.CaracterPreview[]>}
+ */
+export function GetCharacterList() {
+    return $Call.ByID(1838292004).then(/** @type {($result: any) => any} */(($result) => {
+        return $$createType3($result);
+    }));
+}
+
+/**
+ * @param {string} id
+ * @returns {$CancellablePromise<model$0.CaracterDetails | null>}
  */
 export function Greet(id) {
     return $Call.ByID(1085101608, id).then(/** @type {($result: any) => any} */(($result) => {
@@ -21,5 +40,7 @@ export function Greet(id) {
 }
 
 // Private type creation functions
-const $$createType0 = model$0.Caracter.createFrom;
+const $$createType0 = model$0.CaracterDetails.createFrom;
 const $$createType1 = $Create.Nullable($$createType0);
+const $$createType2 = model$0.CaracterPreview.createFrom;
+const $$createType3 = $Create.Array($$createType2);
