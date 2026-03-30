@@ -65,4 +65,3 @@ coverage.html
 build
 build/linux/appimage/build
 build/windows/nsis/MicrosoftEdgeWebview2Setup.exe
-Baba_Reka*.json

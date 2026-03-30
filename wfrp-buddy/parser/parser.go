@@ -1,15 +1,56 @@
 package parser
 
 import (
+	"changeme/model"
 	"encoding/json"
+	"github.com/google/uuid"
 	"regexp"
 	"strconv"
 	"strings"
-
-	"changeme/model"
-
-	"github.com/google/uuid"
 )
+
+var (
+	reWeaponsName     = regexp.MustCompile(`^weapons-name-(\d+)$`)
+	reTrappingsName   = regexp.MustCompile(`^trappings-name-(\d+)$`)
+	reCustomSkillName = regexp.MustCompile(`^custom-skill-name-(\d+)$`)
+	reTalentsName     = regexp.MustCompile(`^talents-name-(\d+)$`)
+	reSpellsName      = regexp.MustCompile(`^spells-name-(\d+)$`)
+	rePrayersName     = regexp.MustCompile(`^prayers-name-(\d+)$`)
+)
+
+type basicSkillDef struct {
+	Name     string
+	BaseChar string
+	Slug     string
+}
+
+var basicSkillsList = []basicSkillDef{
+	{"Art", "Dexterity", "art"},
+	{"Athletics", "Agility", "athletics"},
+	{"Bribery", "Fellowhip", "bribery"},
+	{"Charm", "Fellowhip", "charm"},
+	{"Charm Animal", "Willpower", "charm-animal"},
+	{"Climb", "Strength", "climb"},
+	{"Consume Alcohol", "Toughnes", "consume-alcohol"},
+	{"Cool", "Willpower", "cool"},
+	{"Dodge", "Agility", "dodge"},
+	{"Drive", "Agility", "drive"},
+	{"Endurance", "Toughnes", "endurance"},
+	{"Entertain", "Fellowhip", "entertain"},
+	{"Gamble", "Inteligence", "gamble"},
+	{"Gossip", "Fellowhip", "gossip"},
+	{"Haggle", "Fellowhip", "haggle"},
+	{"Intimidate", "Strength", "intimidate"},
+	{"Intuition", "Initative", "intuition"},
+	{"Leadership", "Fellowhip", "leadership"},
+	{"Melee (Basic)", "WeaponSkill", "melee-basic"},
+	{"Navigation", "Initative", "navigation"},
+	{"Outdoor Survival", "Inteligence", "outdoor-survival"},
+	{"Perception", "Initative", "perception"},
+	{"Ride", "Agility", "ride"},
+	{"Row", "Strength", "row"},
+	{"Stealth", "Agility", "stealth"},
+}
 
 // ParseCharacter parses the flat character JSON backup format.
 func ParseCharacter(data []byte) (*model.CaracterDetails, error) {
@@ -164,9 +205,8 @@ func parseCharacteristics(raw map[string]string) model.Characteristics {
 
 func parseWeapons(raw map[string]string) []model.Weapon {
 	var weapons []model.Weapon
-	re := regexp.MustCompile(`^weapons-name-(\d+)$`)
 	for k, v := range raw {
-		match := re.FindStringSubmatch(k)
+		match := reWeaponsName.FindStringSubmatch(k)
 		if match != nil {
 			idx := match[1]
 			if v == "" {
@@ -187,9 +227,8 @@ func parseWeapons(raw map[string]string) []model.Weapon {
 
 func parseTrappings(raw map[string]string) []model.Trapping {
 	var trappings []model.Trapping
-	re := regexp.MustCompile(`^trappings-name-(\d+)$`)
 	for k, v := range raw {
-		match := re.FindStringSubmatch(k)
+		match := reTrappingsName.FindStringSubmatch(k)
 		if match != nil {
 			idx := match[1]
 			if v == "" {
@@ -207,9 +246,19 @@ func parseTrappings(raw map[string]string) []model.Trapping {
 
 func parseSkills(raw map[string]string) model.Skills {
 	var skills model.Skills
-	re := regexp.MustCompile(`^custom-skill-name-(\d+)$`)
+
+	// 1. Parse Basic Skills (always present)
+	for _, def := range basicSkillsList {
+		skills = append(skills, model.Skill{
+			Name:     def.Name,
+			BaseChar: def.BaseChar,
+			Advances: toInt(raw[def.Slug+"-aug"]),
+		})
+	}
+
+	// 2. Parse Custom/Advanced Skills
 	for k, v := range raw {
-		match := re.FindStringSubmatch(k)
+		match := reCustomSkillName.FindStringSubmatch(k)
 		if match != nil {
 			idx := match[1]
 			if v == "" {
@@ -253,9 +302,8 @@ func mapCharName(short string) string {
 
 func parseTalents(raw map[string]string) []model.LearnedTalent {
 	var talents []model.LearnedTalent
-	re := regexp.MustCompile(`^talents-name-(\d+)$`)
 	for k, v := range raw {
-		match := re.FindStringSubmatch(k)
+		match := reTalentsName.FindStringSubmatch(k)
 		if match != nil {
 			idx := match[1]
 			if v == "" {
@@ -273,9 +321,8 @@ func parseTalents(raw map[string]string) []model.LearnedTalent {
 
 func parseSpells(raw map[string]string) []model.Spell {
 	var spells []model.Spell
-	re := regexp.MustCompile(`^spells-name-(\d+)$`)
 	for k, v := range raw {
-		match := re.FindStringSubmatch(k)
+		match := reSpellsName.FindStringSubmatch(k)
 		if match != nil {
 			idx := match[1]
 			if v == "" {
@@ -296,9 +343,8 @@ func parseSpells(raw map[string]string) []model.Spell {
 
 func parsePrayers(raw map[string]string) []model.Prayer {
 	var prayers []model.Prayer
-	re := regexp.MustCompile(`^prayers-name-(\d+)$`)
 	for k, v := range raw {
-		match := re.FindStringSubmatch(k)
+		match := rePrayersName.FindStringSubmatch(k)
 		if match != nil {
 			idx := match[1]
 			if v == "" {
