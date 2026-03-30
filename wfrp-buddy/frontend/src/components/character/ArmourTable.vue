@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import * as model from '../../../bindings/changeme/model'
+import * as model from 'bindings/changeme/model'
 
 const props = defineProps<{
-  armour: any[]
+  armour: model.Armour[]
 }>()
 
 const emit = defineEmits(['add', 'remove'])

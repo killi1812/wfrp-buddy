@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import * as model from '../../../bindings/changeme/model'
 
 const props = defineProps<{
-  skills: any[],
+  skills: model.Skills,
   getSkillTotal: (skill: any) => number
 }>()
 
@@ -62,54 +62,47 @@ const onAdd = () => {
             <v-text-field v-model="s.Name" hide-details density="compact" variant="plain" class="skill-name-input" />
           </td>
           <td class="text-center pa-1">
-            <v-select
-              v-model="s.BaseChar"
-              :items="charOptions"
-              hide-details
-              density="compact"
-              variant="plain"
-              class="char-select"
-            >
+            <v-select v-model="s.BaseChar" :items="charOptions" hide-details density="compact" variant="plain"
+              class="char-select">
               <template v-slot:selection="{ item }">
                 <div class="text-center w-100 text-subtitle-2">{{ item.title }}</div>
               </template>
             </v-select>
           </td>
           <td class="text-center pa-1">
-            <v-number-input v-model="s.Advances" hide-details density="compact" variant="plain" class="centered-input-adv" control-variant="stacked" hide-controls />
+            <v-number-input v-model="s.Advances" hide-details density="compact" variant="plain"
+              class="centered-input-adv" control-variant="stacked" hide-controls />
           </td>
           <td class="text-center skill-total text-primary">
             {{ props.getSkillTotal(s) }}
           </td>
           <td class="text-center pa-0">
-            <v-btn icon="mdi-trash-can-outline" variant="plain" density="compact" color="error" @click="emit('remove', index)" />
+            <v-btn icon="mdi-trash-can-outline" variant="plain" density="compact" color="error"
+              @click="emit('remove', index)" />
           </td>
         </tr>
         <!-- ALWAYS PRESENT EMPTY LINE -->
         <tr class="new-item-row">
           <td class="pa-1">
-            <v-text-field v-model="newItem.Name" placeholder="New Skill..." hide-details density="compact" variant="plain" class="skill-name-input" @keyup.enter="onAdd" />
+            <v-text-field v-model="newItem.Name" placeholder="New Skill..." hide-details density="compact"
+              variant="plain" class="skill-name-input" @keyup.enter="onAdd" />
           </td>
           <td class="text-center pa-1">
-            <v-select
-              v-model="newItem.BaseChar"
-              :items="charOptions"
-              hide-details
-              density="compact"
-              variant="plain"
-              class="char-select"
-            >
+            <v-select v-model="newItem.BaseChar" :items="charOptions" hide-details density="compact" variant="plain"
+              class="char-select">
               <template v-slot:selection="{ item }">
                 <div class="text-center w-100 text-subtitle-2">{{ item.title }}</div>
               </template>
             </v-select>
           </td>
           <td class="text-center pa-1">
-            <v-number-input v-model="newItem.Advances" hide-details density="compact" variant="plain" class="centered-input-adv" control-variant="stacked" hide-controls />
+            <v-number-input v-model="newItem.Advances" hide-details density="compact" variant="plain"
+              class="centered-input-adv" control-variant="stacked" hide-controls />
           </td>
           <td class="text-center"></td>
           <td class="text-center pa-0">
-            <v-btn icon="mdi-plus-circle-outline" variant="plain" density="compact" color="primary" @click="onAdd" :disabled="!newItem.Name" />
+            <v-btn icon="mdi-plus-circle-outline" variant="plain" density="compact" color="primary" @click="onAdd"
+              :disabled="!newItem.Name" />
           </td>
         </tr>
       </tbody>
@@ -118,11 +111,25 @@ const onAdd = () => {
 </template>
 
 <style scoped>
-.skill-col { width: 35%; }
-.char-col { width: 60px; }
-.adv-col { width: 60px; }
-.total-col { width: 60px; }
-.action-col { width: 40px; }
+.skill-col {
+  width: 35%;
+}
+
+.char-col {
+  width: 60px;
+}
+
+.adv-col {
+  width: 60px;
+}
+
+.total-col {
+  width: 60px;
+}
+
+.action-col {
+  width: 40px;
+}
 
 .skill-name-input :deep(input) {
   font-size: 1.1rem;
@@ -141,7 +148,7 @@ const onAdd = () => {
 
 .centered-input-adv :deep(input) {
   text-align: center;
-  background-color: rgba(0,0,0,0.03);
+  background-color: rgba(0, 0, 0, 0.03);
   border-radius: 4px;
   width: 45px;
   margin: 0 auto;

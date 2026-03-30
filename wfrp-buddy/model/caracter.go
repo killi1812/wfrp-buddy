@@ -92,6 +92,7 @@ type (
 	}
 
 	Career struct {
+		Class      string
 		Career     string
 		CareerTier int // between 1 and 4
 		CareerPath string

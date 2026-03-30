@@ -4,7 +4,7 @@
       <div class="text-h2 mb-4 text-primary title-font">WFRP Buddy</div>
       <v-divider class="mb-6" />
       <div class="text-h5 italic-font text-grey">
-        "In the shadow of the Twin-Tailed Comet, 
+        "In the shadow of the Twin-Tailed Comet,
         your journey begins..."
       </div>
       <p class="mt-6 text-body-1">
@@ -15,14 +15,8 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import { useCharacterStore } from '@/stores/character'
 
-const store = useCharacterStore()
 
-onMounted(() => {
-  store.init()
-})
 </script>
 
 <style scoped>

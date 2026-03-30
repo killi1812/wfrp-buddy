@@ -1,33 +1,49 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { useCharacterStore } from '@/stores/character'
-import { useRouter } from 'vue-router'
+import { GetCharacter } from 'bindings/changeme/service/charactersrv'
+import { onMounted, ref } from 'vue'
+import * as model from '../../../bindings/changeme/model'
+import { useSnackbar } from '../general/SnackbarProvider.vue'
+import AmbitionsPartyCard from './AmbitionsPartyCard.vue'
+import ArmourSilhouette from './ArmourSilhouette.vue'
+import ArmourTable from './ArmourTable.vue'
 import CharacterHeader from './CharacterHeader.vue'
 import CharacteristicsTable from './CharacteristicsTable.vue'
-import ArmourSilhouette from './ArmourSilhouette.vue'
-import SkillSection from './SkillSection.vue'
-import TalentList from './TalentList.vue'
-import WeaponTable from './WeaponTable.vue'
-import ArmourTable from './ArmourTable.vue'
-import TrappingsTable from './TrappingsTable.vue'
-import PrayersTable from './PrayersTable.vue'
-import SpellTable from './SpellTable.vue'
-import AmbitionsPartyCard from './AmbitionsPartyCard.vue'
-import WealthCard from './WealthCard.vue'
 import CorruptionPsychologyCard from './CorruptionPsychologyCard.vue'
+import PrayersTable from './PrayersTable.vue'
+import SkillSection from './SkillSection.vue'
+import SpellTable from './SpellTable.vue'
+import TalentList from './TalentList.vue'
+import TrappingsTable from './TrappingsTable.vue'
+import WealthCard from './WealthCard.vue'
+import WeaponTable from './WeaponTable.vue'
 
 const props = defineProps<{
   characterId?: string // Passed directly via v-bind="item.args" in TabsLayout
 }>()
 
-const store = useCharacterStore()
-const router = useRouter()
+const snackbar = useSnackbar()
 const showPrayers = ref(false)
 
-const character = computed(() => {
-  return store.characters.find(c => c.CaracterId === props.characterId)
+const character = ref<model.CaracterDetails | null>()
+
+onMounted(async () => {
+  if (!props.characterId) {
+    return
+  }
+  try {
+    const rez = await GetCharacter(props.characterId)
+    character.value = rez
+  } catch {
+    snackbar.Error("Failed to load character")
+  }
 })
 
+const getSkillTotal = (skill: any) => {
+  if (!character.value) return 0
+  // @ts-ignore
+  const c = character.value.Characteristics[skill.BaseChar]
+  return (c ? (c.Basic + c.Advances) : 0) + skill.Advances
+}
 
 </script>
 
@@ -39,7 +55,7 @@ const character = computed(() => {
         <v-col cols="12">
           <CharacterHeader :name="character.Name" :career="character.Career" :status="character.Status"
             :description="character.Description" :movment="character.Movment" :points="character.Points"
-            :wounds="character.Wounds" />
+            :wounds="character.Wounds" :species="character.Species" />
         </v-col>
       </v-row>
 
@@ -54,22 +70,18 @@ const character = computed(() => {
 
             <!-- Skills & Talents -->
             <v-col cols="12" md="6">
-              <SkillSection :skills="character.Skills" :getSkillTotal="store.getSkillTotal"
-                @add="store.addItem('Skills', $event)" @remove="(idx) => store.removeItem('Skills', idx)" />
+              <SkillSection :skills="character.Skills" :getSkillTotal="getSkillTotal" />
             </v-col>
             <v-col cols="12" md="6">
-              <TalentList :talents="character.Talents" @add="store.addItem('Talents', $event)"
-                @remove="(idx) => store.removeItem('Talents', idx)" />
+              <TalentList :talents="character.Talents" />
             </v-col>
 
             <!-- Combat -->
             <v-col cols="12" md="6">
-              <WeaponTable :weapons="character.Weapons" @add="store.addItem('Weapons', $event)"
-                @remove="(idx) => store.removeItem('Weapons', idx)" />
+              <WeaponTable :weapons="character.Weapons" />
             </v-col>
             <v-col cols="12" md="6">
-              <ArmourTable :armour="character.Armour" @add="store.addItem('Armour', $event)"
-                @remove="(idx) => store.removeItem('Armour', idx)" />
+              <ArmourTable :armour="character.Armour" />
             </v-col>
 
             <!-- Magic & Faith -->
@@ -80,20 +92,18 @@ const character = computed(() => {
               </div>
               <transition name="fade" mode="out-in">
                 <div v-if="showPrayers" key="prayers">
-                  <PrayersTable :prayers="character.Prayers" :sin="character.Sin" @update:sin="character.Sin = $event"
-                    @add="store.addItem('Prayers', $event)" @remove="(idx) => store.removeItem('Prayers', idx)" />
+                  <PrayersTable :prayers="character.Prayers" :sin="character.Sin"
+                    @update:sin="character.Sin = $event" />
                 </div>
                 <div v-else key="spells">
-                  <SpellTable :spells="character.Spells" @add="store.addItem('Spells', $event)"
-                    @remove="(idx) => store.removeItem('Spells', idx)" />
+                  <SpellTable :spells="character.Spells" />
                 </div>
               </transition>
             </v-col>
 
             <!-- Gear -->
             <v-col cols="12">
-              <TrappingsTable :trappings="character.Trappings" @add="store.addItem('Trappings', $event)"
-                @remove="(idx) => store.removeItem('Trappings', idx)" />
+              <TrappingsTable :trappings="character.Trappings" />
             </v-col>
           </v-row>
         </v-col>

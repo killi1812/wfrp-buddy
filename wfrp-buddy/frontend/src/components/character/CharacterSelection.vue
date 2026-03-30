@@ -1,17 +1,30 @@
 <script setup lang="ts">
-import { useCharacterStore } from '@/stores/character'
 import { useUIStore } from '@/stores/ui'
 import CharacterSheet from './CharacterSheet.vue'
 import { markRaw } from 'vue'
+import * as model from 'bindings/changeme/model'
+import { GetCharacterList } from 'bindings/changeme/service/charactersrv'
+import { useSnackbar } from '../general/SnackbarProvider.vue'
 
 const props = defineProps<{
   open: (item: any) => void
 }>()
 
-const store = useCharacterStore()
 const uiStore = useUIStore()
+const snackbar = useSnackbar()
 
-const select = (char: any) => {
+const characters = ref<model.CaracterPreview[]>([])
+
+onMounted(async () => {
+  try {
+    const rez = await GetCharacterList()
+    characters.value = rez
+  } catch {
+    snackbar.Error("Failed to load characters")
+  }
+})
+
+const select = (char: model.CaracterPreview) => {
   props.open({
     key: `char-${char.CaracterId}`,
     titleKey: char.Name,
@@ -47,7 +60,7 @@ const select = (char: any) => {
       <!-- GRID VIEW -->
       <v-window-item value="grid" class="pa-1">
         <v-row>
-          <v-col v-for="char in store.characters" :key="char.CaracterId" cols="12" sm="6" md="4">
+          <v-col v-for="char in characters" :key="char.CaracterId" cols="12" sm="6" md="4">
             <v-card class="grim-card char-card pa-4" @click="select(char)" hover elevation="4">
               <div class="d-flex align-center mb-4">
                 <v-avatar color="primary" size="64" class="mr-4">
@@ -61,18 +74,16 @@ const select = (char: any) => {
               <v-divider class="mb-4" />
               <v-row dense class="text-center">
                 <v-col cols="4">
-                  <div class="text-caption text-grey">WS</div>
-                  <div class="text-h6">{{ char.Characteristics.WeaponSkill.Basic +
-                    char.Characteristics.WeaponSkill.Advances }}</div>
+                  <div class="text-caption text-grey">Class</div>
+                  <div class="text-h6">{{ char.Class }}</div>
                 </v-col>
                 <v-col cols="4">
-                  <div class="text-caption text-grey">BS</div>
-                  <div class="text-h6">{{ char.Characteristics.BalisticSkill.Basic +
-                    char.Characteristics.BalisticSkill.Advances }}</div>
+                  <div class="text-caption text-grey">Status Tier</div>
+                  <div class="text-h6">{{ ['Brass', 'Silver', 'Gold'][char.Status.Tier] }}</div>
                 </v-col>
                 <v-col cols="4">
-                  <div class="text-caption text-grey">Wounds</div>
-                  <div class="text-h6 text-primary">{{ char.Wounds.Max }}</div>
+                  <div class="text-caption text-grey">Level</div>
+                  <div class="text-h6 text-primary">{{ char.Status.Level }}</div>
                 </v-col>
               </v-row>
             </v-card>
@@ -89,21 +100,19 @@ const select = (char: any) => {
                 <th class="text-left">Name</th>
                 <th class="text-left">Species</th>
                 <th class="text-left">Career</th>
-                <th class="text-center">WS</th>
-                <th class="text-center">BS</th>
-                <th class="text-center">Wounds</th>
+                <th class="text-center">Class</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Level</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="char in store.characters" :key="char.CaracterId" class="list-row" @click="select(char)">
+              <tr v-for="char in characters" :key="char.CaracterId" class="list-row" @click="select(char)">
                 <td class="font-weight-bold text-h6">{{ char.Name }}</td>
                 <td>{{ char.Species }}</td>
                 <td>{{ char.Career.Career }}</td>
-                <td class="text-center">{{ char.Characteristics.WeaponSkill.Basic +
-                  char.Characteristics.WeaponSkill.Advances }}</td>
-                <td class="text-center">{{ char.Characteristics.BalisticSkill.Basic +
-                  char.Characteristics.BalisticSkill.Advances }}</td>
-                <td class="text-center text-primary font-weight-bold">{{ char.Wounds.Max }}</td>
+                <td class="text-center">{{ char.Class }}</td>
+                <td class="text-center">{{ ['Brass', 'Silver', 'Gold'][char.Status.Tier] }}</td>
+                <td class="text-center text-primary font-weight-bold">{{ char.Status.Level }}</td>
               </tr>
             </tbody>
           </v-table>

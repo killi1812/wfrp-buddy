@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import * as model from '../../../bindings/changeme/model'
+import * as model from 'bindings/changeme/model'
 
 const props = defineProps<{
-  talents: any[]
+  talents: model.LearnedTalent[]
 }>()
 
 const emit = defineEmits(['add', 'remove'])
@@ -42,34 +42,42 @@ const onAdd = () => {
             <v-text-field v-model="t.Name" hide-details density="compact" variant="plain" class="talent-name-input" />
           </td>
           <td class="text-center pa-1">
-            <v-number-input v-model="t.Advances" hide-details density="compact" variant="plain" class="text-center cell-bold text-primary" control-variant="stacked" hide-controls />
+            <v-number-input v-model="t.Lvl" hide-details density="compact" variant="plain"
+              class="text-center cell-bold text-primary" control-variant="stacked" hide-controls />
           </td>
-          <td class="text-center pa-1">
-            <v-number-input v-model="t.MaxLvl" hide-details density="compact" variant="plain" class="text-center cell-text" control-variant="stacked" hide-controls />
-          </td>
+          <!-- <td class="text-center pa-1"> -->
+          <!--   <v-number-input v-model="t.Talent?.MaxLvl" hide-details density="compact" variant="plain" -->
+          <!--     class="text-center cell-text" control-variant="stacked" hide-controls /> -->
+          <!-- </td> -->
           <td class="pa-1">
             <v-text-field v-model="t.Description" hide-details density="compact" variant="plain" class="text-caption" />
           </td>
           <td class="text-center pa-0">
-            <v-btn icon="mdi-trash-can-outline" variant="plain" density="compact" color="error" @click="emit('remove', index)" />
+            <v-btn icon="mdi-trash-can-outline" variant="plain" density="compact" color="error"
+              @click="emit('remove', index)" />
           </td>
         </tr>
         <!-- NEW ITEM LINE -->
         <tr class="new-item-row">
           <td class="pa-1">
-            <v-text-field v-model="newItem.Name" placeholder="New Talent..." hide-details density="compact" variant="plain" class="talent-name-input" @keyup.enter="onAdd" />
+            <v-text-field v-model="newItem.Name" placeholder="New Talent..." hide-details density="compact"
+              variant="plain" class="talent-name-input" @keyup.enter="onAdd" />
           </td>
           <td class="text-center pa-1">
-            <v-number-input v-model="newItem.Advances" hide-details density="compact" variant="plain" class="text-center" control-variant="stacked" hide-controls />
+            <v-number-input v-model="newItem.Advances" hide-details density="compact" variant="plain"
+              class="text-center" control-variant="stacked" hide-controls />
           </td>
           <td class="text-center pa-1">
-            <v-number-input v-model="newItem.MaxLvl" hide-details density="compact" variant="plain" class="text-center" control-variant="stacked" hide-controls />
+            <v-number-input v-model="newItem.MaxLvl" hide-details density="compact" variant="plain" class="text-center"
+              control-variant="stacked" hide-controls />
           </td>
           <td class="pa-1">
-            <v-text-field v-model="newItem.Description" placeholder="Description..." hide-details density="compact" variant="plain" class="text-caption" />
+            <v-text-field v-model="newItem.Description" placeholder="Description..." hide-details density="compact"
+              variant="plain" class="text-caption" />
           </td>
           <td class="text-center pa-0">
-            <v-btn icon="mdi-plus-circle-outline" variant="plain" density="compact" color="primary" @click="onAdd" :disabled="!newItem.Name" />
+            <v-btn icon="mdi-plus-circle-outline" variant="plain" density="compact" color="primary" @click="onAdd"
+              :disabled="!newItem.Name" />
           </td>
         </tr>
       </tbody>
@@ -78,9 +86,17 @@ const onAdd = () => {
 </template>
 
 <style scoped>
-.talent-col { width: 30%; }
-.count-col { width: 60px; }
-.action-col { width: 40px; }
+.talent-col {
+  width: 30%;
+}
+
+.count-col {
+  width: 60px;
+}
+
+.action-col {
+  width: 40px;
+}
 
 .talent-name-input :deep(input) {
   font-size: 1.1rem;

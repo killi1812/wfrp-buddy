@@ -1,10 +1,11 @@
 <script setup lang="ts">
+
 const props = defineProps<{
   characteristics: any
 }>()
 
 const characteristicKeys = [
-  'WeaponSkill', 'BalisticSkill', 'Strength', 'Toughnes', 'Initative', 
+  'WeaponSkill', 'BalisticSkill', 'Strength', 'Toughnes', 'Initative',
   'Agility', 'Dexterity', 'Inteligence', 'Willpower', 'Fellowhip'
 ]
 
@@ -30,43 +31,30 @@ const labels: Record<string, string> = {
         <tr>
           <td class="row-label">Initial</td>
           <td v-for="key in characteristicKeys" :key="key" class="pa-1">
-            <v-number-input
-              v-model="props.characteristics[key].Basic"
-              hide-details
-              density="compact"
-              variant="plain"
-              class="centered-input"
-              control-variant="stacked"
-              hide-controls
-            />
-            </td>
-            </tr>
-            <tr>
-            <td class="row-label">Advances</td>
-            <td v-for="key in characteristicKeys" :key="key" class="pa-1">
-            <v-number-input
-              v-model="props.characteristics[key].Advances"
-              hide-details
-              density="compact"
-              variant="plain"
-              class="centered-input"
-              control-variant="stacked"
-              hide-controls
-            />
-            </td>
-            </tr>
-            <tr class="current-row">
-            <td class="row-label text-primary font-weight-bold">Current</td>
-            <td v-for="key in characteristicKeys" :key="key" class="text-center text-h5 text-primary font-weight-bold py-1">
+            <v-number-input v-model="props.characteristics[key].Basic" hide-details density="compact" variant="plain"
+              class="centered-input" control-variant="stacked" hide-controls />
+          </td>
+        </tr>
+        <tr>
+          <td class="row-label">Advances</td>
+          <td v-for="key in characteristicKeys" :key="key" class="pa-1">
+            <v-number-input v-model="props.characteristics[key].Advances" hide-details density="compact" variant="plain"
+              class="centered-input" control-variant="stacked" hide-controls />
+          </td>
+        </tr>
+        <tr class="current-row">
+          <td class="row-label text-primary font-weight-bold">Current</td>
+          <td v-for="key in characteristicKeys" :key="key"
+            class="text-center text-h5 text-primary font-weight-bold py-1">
             {{ props.characteristics[key].Basic + props.characteristics[key].Advances }}
-            </td>
-            </tr>
-            <tr class="bonus-row">
-            <td class="row-label">Bonus</td>
-            <td v-for="key in characteristicKeys" :key="key" class="text-center text-h6 py-1">
+          </td>
+        </tr>
+        <tr class="bonus-row">
+          <td class="row-label">Bonus</td>
+          <td v-for="key in characteristicKeys" :key="key" class="text-center text-h6 py-1">
             {{ Math.floor((props.characteristics[key].Basic + props.characteristics[key].Advances) / 10) }}
-            </td>
-            </tr>
+          </td>
+        </tr>
       </tbody>
     </v-table>
   </v-card>
@@ -75,7 +63,7 @@ const labels: Record<string, string> = {
 <style scoped>
 .characteristics-table {
   background-color: var(--v-theme-surface);
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .char-col {
@@ -94,7 +82,7 @@ const labels: Record<string, string> = {
 }
 
 .current-row {
-  background-color: rgba(0,0,0,0.05);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .centered-input :deep(input) {

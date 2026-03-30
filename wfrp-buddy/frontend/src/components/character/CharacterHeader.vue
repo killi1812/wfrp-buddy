@@ -11,18 +11,15 @@ const props = defineProps<{
   movment: any,
   points: any,
   wounds: any
+  species: string
 }>()
 </script>
 
 <template>
   <v-row dense>
     <v-col cols="12" md="4">
-      <PersonalInfoCard 
-        :name="props.name" 
-        :career="props.career"
-        :status="props.status"
-        :description="props.description"
-      />
+      <PersonalInfoCard :name="props.name" :species="species" :career="props.career" :status="props.status"
+        :description="props.description" />
     </v-col>
     <v-col cols="12" md="3">
       <StatusCard :movment="props.movment" :exp="props.points.Exp" />
@@ -34,15 +31,8 @@ const props = defineProps<{
       <v-card class="pa-4 header-sub-card d-flex flex-column align-center justify-center elevation-2">
         <div class="section-title mb-1">Wounds</div>
         <div class="d-flex align-center">
-          <v-number-input
-            v-model="props.wounds.Current"
-            density="compact"
-            variant="plain"
-            hide-details
-            class="header-large-input"
-            control-variant="stacked"
-            hide-controls
-          />
+          <v-number-input v-model="props.wounds.Current" density="compact" variant="plain" hide-details
+            class="header-large-input" control-variant="stacked" hide-controls />
           <div class="text-h4 mx-1 primary--text">/</div>
           <div class="text-h4 font-weight-bold primary--text">{{ props.wounds.Max }}</div>
         </div>
@@ -53,7 +43,7 @@ const props = defineProps<{
 
 <style scoped>
 .header-sub-card {
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: var(--v-theme-surface);
   /* Stabilize rendering */
   will-change: transform;

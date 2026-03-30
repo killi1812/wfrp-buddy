@@ -514,6 +514,13 @@ export class Career {
      * @param {Partial<Career>} [$$source = {}] - The source object to create the Career.
      */
     constructor($$source = {}) {
+        if (!("Class" in $$source)) {
+            /**
+             * @member
+             * @type {string}
+             */
+            this["Class"] = "";
+        }
         if (!("Career" in $$source)) {
             /**
              * @member

@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { Welth } from 'bindings/changeme/model';
+
 const props = defineProps<{
-  wealth: any
+  wealth: Welth
 }>()
 </script>
 
@@ -9,40 +11,16 @@ const props = defineProps<{
     <div class="text-h6 mb-2 text-primary section-title">Wealth</div>
     <v-row dense>
       <v-col cols="4">
-        <v-number-input 
-          v-model="props.wealth.GoldCrown" 
-          label="GC" 
-          variant="outlined" 
-          density="compact" 
-          hide-details 
-          control-variant="stacked" 
-          hide-controls 
-          class="wealth-input"
-        />
+        <v-number-input v-model="props.wealth.GoldCrown" label="GC" variant="outlined" density="compact" hide-details
+          control-variant="stacked" hide-controls class="wealth-input" />
       </v-col>
       <v-col cols="4">
-        <v-number-input 
-          v-model="props.wealth.SilverShilling" 
-          label="SS" 
-          variant="outlined" 
-          density="compact" 
-          hide-details 
-          control-variant="stacked" 
-          hide-controls 
-          class="wealth-input"
-        />
+        <v-number-input v-model="props.wealth.SilverShilling" label="SS" variant="outlined" density="compact"
+          hide-details control-variant="stacked" hide-controls class="wealth-input" />
       </v-col>
       <v-col cols="4">
-        <v-number-input 
-          v-model="props.wealth.BrassPenny" 
-          label="D" 
-          variant="outlined" 
-          density="compact" 
-          hide-details 
-          control-variant="stacked" 
-          hide-controls 
-          class="wealth-input"
-        />
+        <v-number-input v-model="props.wealth.BrassPenny" label="D" variant="outlined" density="compact" hide-details
+          control-variant="stacked" hide-controls class="wealth-input" />
       </v-col>
     </v-row>
     <div class="text-caption text-center mt-2 text-subtext italic-font">
@@ -53,7 +31,7 @@ const props = defineProps<{
 
 <style scoped>
 .header-sub-card {
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: var(--v-theme-surface);
 }
 
