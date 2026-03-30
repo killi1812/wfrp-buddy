@@ -29,6 +29,7 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Search: typeof import('./components/general/Search.vue')['default']
+    SidebarItem: typeof import('./components/general/SidebarItem.vue')['default']
     SkillSection: typeof import('./components/character/SkillSection.vue')['default']
     SnackbarProvider: typeof import('./components/general/SnackbarProvider.vue')['default']
     SpellTable: typeof import('./components/character/SpellTable.vue')['default']

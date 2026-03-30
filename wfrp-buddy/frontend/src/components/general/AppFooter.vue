@@ -2,8 +2,8 @@
   <v-footer color="surface" app height="40">
     <div class="text-caption" style="position: absolute; left: 16px">
       <span v-if="appVersion">{{ appVersion }} &ThinSpace;</span>
-      <span v-if="appStore.getCashRegisterNumber()">
-        | &ThinSpace; {{ appStore.getCashRegisterNumber() }} &ThinSpace;
+      <span v-if="false">
+        | &ThinSpace; {{ false }} &ThinSpace;
       </span>
       <span v-if="false">
         | &ThinSpace; user &ThinSpace;
@@ -16,7 +16,6 @@
 </template>
 
 <script lang="ts" setup>
-import { useAppStore } from "@/stores/app";
 
 
 // Variables
@@ -26,7 +25,6 @@ const currentTime = ref<string>();
 const appVersion = ref<string>();
 
 // Store providers
-const appStore = useAppStore();
 
 const updateTime = () => {
   currentTime.value = new Date().toLocaleString(timeFormatCode);

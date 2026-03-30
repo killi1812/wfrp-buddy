@@ -31,36 +31,22 @@
       <v-list-item v-show="open" readonly class="text-caption text-uppercase text-grey">Information</v-list-item>
       <v-divider v-show="open"></v-divider>
 
-      <v-list-item to="/" :prepend-icon="route.path === '/' ? 'mdi-home' : 'mdi-home-outline'" title="Home"
-        color="primary" />
-      <v-list-item to="/characters"
-        :prepend-icon="route.path === '/characters' ? 'mdi-account-group' : 'mdi-account-group-outline'"
-        title="Characters" color="primary" />
+      <SidebarItem to="/" icon="mdi-home" title="Home" color="primary" :open="open" />
+      <SidebarItem to="/characters" icon="mdi-account-group" title="Characters" color="primary" :open="open" />
 
       <!-- Help section -->
       <v-list-item v-show="open" readonly class="text-caption text-uppercase text-grey mt-4">Help</v-list-item>
       <v-divider v-show="open"></v-divider>
 
-      <v-list-item to="/help" :prepend-icon="route.path === '/help' ? 'mdi-help-circle' : 'mdi-help-circle-outline'"
-        title="Help" color="primary" />
-      <v-list-item to="/about" :prepend-icon="route.path === '/about' ? 'mdi-information' : 'mdi-information-outline'"
-        title="About" color="primary" />
+      <SidebarItem to="/info" icon="mdi-help-circle" title="info" color="primary" :open="open" />
+      <SidebarItem to="/about" icon="mdi-information" title="About" color="primary" :open="open" />
 
       <!-- Exit -->
       <v-divider class="my-2"></v-divider>
-      <v-tooltip :disabled="open" text="Program End" location="right">
-        <template v-slot:activator="{ props }">
-          <v-list-item v-bind="props" @click="handleQuit" prepend-icon="mdi-power" title="Exit" color="error" />
-        </template>
-      </v-tooltip>
+      <SidebarItem @click="handleQuit" icon="mdi-power" title="Exit" color="error" :open="open" />
       <v-spacer />
-      <v-tooltip :disabled="open" text="Expand" location="right">
-        <template v-slot:activator="{ props }">
-          <v-list-item v-bind="props" @click="open = !open" :prepend-icon="open ? 'mdi-arrow-left' : 'mdi-arrow-right'"
-            title="Shrink" />
-        </template>
-      </v-tooltip>
-
+      <SidebarItem @click="open = !open" :icon="open ? 'mdi-arrow-left' : 'mdi-arrow-right'"
+        :title="open ? 'Shrink' : 'Expand'" :tooltip-text="open ? 'Shrink' : 'Expand'" :open="open" />
     </v-list>
 
   </v-navigation-drawer>
@@ -70,9 +56,11 @@
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useBackStore } from "@/stores/app"
+import { Window } from '@wailsio/runtime'
+import SidebarItem from './SidebarItem.vue'
 
-const open = ref(false) // Default to collapsed (small)
-const drawer = ref(true) // Always present
+const open = ref(false)
+const drawer = ref(true)
 const router = useRouter()
 const route = useRoute()
 const back = useBackStore()
@@ -95,8 +83,8 @@ const handleLogout = () => {
   router.replace("/")
 }
 
-const handleQuit = () => {
-  console.log('Quit clicked')
+const handleQuit = async () => {
+  await Window.Close()
 }
 </script>
 
