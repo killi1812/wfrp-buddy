@@ -3,9 +3,8 @@ package main
 import (
 	"embed"
 	_ "embed"
+	"fmt"
 	"log"
-	"os"
-	"path/filepath"
 	"time"
 
 	"changeme/service"
@@ -70,16 +69,18 @@ func main() {
 		EnableFileDrop:   true,
 	})
 
+	// Generic File Drop Handler
 	window.OnWindowEvent(events.Common.WindowFilesDropped, func(event *application.WindowEvent) {
 		files := event.Context().DroppedFiles()
-		for _, file := range files {
-			if filepath.Ext(file) == ".json" {
-				content, err := os.ReadFile(file)
-				if err == nil {
-					app.Event.Emit("character-file-dropped", string(content))
-				}
-			}
-		}
+		details := event.Context().DropTargetDetails()
+
+		fmt.Printf("Go: Files dropped! Count: %d, TargetID: '%s'\n", len(files), details.ElementID)
+
+		// Emit a generic event with paths and target ID
+		app.Event.Emit("wails:file-drop", map[string]any{
+			"paths":    files,
+			"targetId": details.ElementID,
+		})
 	})
 
 	// Create a goroutine that emits an event containing the current time every second.

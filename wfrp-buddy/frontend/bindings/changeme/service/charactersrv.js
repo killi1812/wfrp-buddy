@@ -49,6 +49,14 @@ export function ImportCharacter(jsonData) {
     }));
 }
 
+/**
+ * @param {string} path
+ * @returns {$CancellablePromise<string>}
+ */
+export function ReadFile(path) {
+    return $Call.ByID(1448906061, path);
+}
+
 // Private type creation functions
 const $$createType0 = model$0.CaracterDetails.createFrom;
 const $$createType1 = $Create.Nullable($$createType0);

@@ -8,15 +8,14 @@
       <v-card-text>
         <p class="text-body-1 text-center mb-6">Create a new character manually or import from a file.</p>
 
-        <!-- Drag and Drop Zone -->
-        <div id="character-drop-zone" class="drop-zone mb-6" data-file-drop-target :class="{ 'drag-over': isDragging }"
-          @dragover="onDragOver" @dragenter="onDragEnter" @dragleave="onDragLeave" @drop="onDrop"
-          @click="triggerFileInput">
-          <v-icon size="48" color="primary" class="mb-2">mdi-file-import-outline</v-icon>
-          <div class="text-h6">Create a character from a file</div>
-          <div class="text-caption text-grey">Drag & Drop .json file here or click to browse</div>
-          <input type="file" ref="fileInput" accept=".json" style="display: none" @change="onFileSelected" />
-        </div>
+        <FileDropZone
+          id="character-import-zone"
+          class="mb-6"
+          title="Create a character from a file"
+          subtitle="Drag & Drop .json file here or click to browse"
+          accept=".json"
+          @dropped="onFilesDropped"
+        />
 
         <v-btn block color="primary" size="large" prepend-icon="mdi-plus" @click="createNew">
           New Character
@@ -32,11 +31,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { computed } from 'vue'
 import { ImportCharacter } from '../../../bindings/changeme/service/charactersrv'
 import { useSnackbar } from '../general/SnackbarProvider.vue'
-import { Events } from '@wailsio/runtime'
-import { WailsEvent } from 'node_modules/@wailsio/runtime/types/events';
+import FileDropZone from '../general/FileDropZone.vue'
 
 const props = defineProps<{
   modelValue: boolean
@@ -50,132 +48,29 @@ const internalOpen = computed({
 })
 
 const snackbar = useSnackbar()
-const isDragging = ref(false)
-const fileInput = ref<HTMLInputElement | null>(null)
 
-// Handle Wails File Drop
-let unsubscribe: () => void
-
-onMounted(() => {
-  unsubscribe = Events.On('character-file-dropped', async (content: WailsEvent) => {
-    if (!internalOpen.value) return
-
-    try {
-      snackbar.Info('Importing character...')
-      await ImportCharacter(content.data)
-      snackbar.Success('Character imported successfully')
-      internalOpen.value = false
-      emit('created')
-    } catch (err) {
-      console.error('Import failed:', err)
-      snackbar.Error('Failed to import character')
-    }
-  })
-})
-
-onUnmounted(() => {
-  if (unsubscribe) unsubscribe()
-})
-
-const onDragOver = (e: DragEvent) => {
-  e.preventDefault()
-  if (e.dataTransfer) {
-    e.dataTransfer.dropEffect = 'copy'
-  }
-  isDragging.value = true
-}
-
-const onDragEnter = (e: DragEvent) => {
-  e.preventDefault()
-  isDragging.value = true
-}
-
-const onDragLeave = (e: DragEvent) => {
-  e.preventDefault()
-  // Use contains to avoid flickering on child elements
-  const target = e.currentTarget as HTMLElement
-  if (!target.contains(e.relatedTarget as Node)) {
-    isDragging.value = false
-  }
-}
-
-const onDrop = async (e: DragEvent) => {
-  e.preventDefault()
-  isDragging.value = false
-
-  const files = e.dataTransfer?.files
-  if (files && files.length > 0) {
-    await processFile(files[0])
-  } else {
-    snackbar.Info('No files detected in drop')
-  }
-}
-
-const triggerFileInput = () => {
-  fileInput.value?.click()
-}
-
-const onFileSelected = async (e: Event) => {
-  const target = e.target as HTMLInputElement
-  if (target.files && target.files.length > 0) {
-    await processFile(target.files[0])
-  }
-}
-
-const processFile = async (file: File) => {
-  if (!file.name.endsWith('.json')) {
-    snackbar.Error('Please select a .json file')
-    return
-  }
-
+const onFilesDropped = async (contents: string[]) => {
   try {
-    snackbar.Info('Processing file: ' + file.name)
-    const text = await file.text()
-    if (!text) {
-      snackbar.Error('File is empty')
-      return
+    snackbar.Info(`Importing ${contents.length} character(s)...`)
+    for (const content of contents) {
+      await ImportCharacter(content)
     }
-    // Send to backend as raw string
-    await ImportCharacter(text)
-    snackbar.Success('Character imported successfully')
+    snackbar.Success('Character(s) imported successfully')
     internalOpen.value = false
     emit('created')
   } catch (err) {
     console.error('Import failed:', err)
-    snackbar.Error('Failed to import character: ' + (err as Error).message)
+    snackbar.Error('Failed to import character')
   }
 }
 
 const createNew = () => {
-  // Placeholder for manual creation
   snackbar.Info('Manual character creation coming soon')
   internalOpen.value = false
 }
 </script>
 
 <style scoped>
-.drop-zone {
-  border: 2px dashed rgba(var(--v-theme-primary), 0.4);
-  border-radius: 12px;
-  padding: 40px 20px;
-  text-align: center;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  background-color: rgba(var(--v-theme-primary), 0.02);
-}
-
-.drop-zone:hover {
-  background-color: rgba(var(--v-theme-primary), 0.05);
-  border-color: rgba(var(--v-theme-primary), 0.8);
-}
-
-.drop-zone.drag-over,
-.drop-zone.file-drop-target-active {
-  border-color: rgb(var(--v-theme-primary));
-  background-color: rgba(var(--v-theme-primary), 0.1);
-  transform: scale(1.02);
-}
-
 .uppercase {
   text-transform: uppercase;
 }

@@ -20,6 +20,7 @@ declare module 'vue' {
     CompTwo: typeof import('./components/general/compTwo.vue')['default']
     ConfirmDialog: typeof import('./components/general/ConfirmDialog.vue')['default']
     CorruptionPsychologyCard: typeof import('./components/character/CorruptionPsychologyCard.vue')['default']
+    FileDropZone: typeof import('./components/general/FileDropZone.vue')['default']
     Line: typeof import('./components/general/Line.vue')['default']
     MenuCard: typeof import('./components/general/MenuCard.vue')['default']
     NewCharacterDialog: typeof import('./components/character/NewCharacterDialog.vue')['default']
