@@ -2,11 +2,16 @@ package service
 
 import (
 	"changeme/model"
-
+	"changeme/parser"
 	"github.com/google/uuid"
+	"os"
 )
 
 type CharacterSrv struct{}
+
+func (srv *CharacterSrv) Greet(id string) (*model.CaracterDetails, error) {
+	return srv.GetCharacter(id)
+}
 
 func (srv *CharacterSrv) GetCharacter(id string) (*model.CaracterDetails, error) {
 	parsedId, err := uuid.Parse(id)
@@ -22,9 +27,21 @@ func (srv *CharacterSrv) GetCharacter(id string) (*model.CaracterDetails, error)
 }
 
 func (srv *CharacterSrv) ImportCharacter(jsonData string) (*model.CaracterDetails, error) {
-	// For now, just log and return success.
-	println("Received character JSON:", jsonData)
-	return &model.CaracterDetails{}, nil
+	char, err := parser.ParseCharacter([]byte(jsonData))
+	if err != nil {
+		return nil, err
+	}
+	// For now, we append it to our temporary data.
+	characters = append(characters, *char)
+	return char, nil
+}
+
+func (srv *CharacterSrv) ReadFile(path string) (string, error) {
+	content, err := os.ReadFile(path)
+	if err != nil {
+		return "", err
+	}
+	return string(content), nil
 }
 
 func (srv *CharacterSrv) GetCharacterList() ([]model.CaracterPreview, error) {
