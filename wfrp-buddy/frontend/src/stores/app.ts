@@ -2,42 +2,7 @@
 import { ConfirmFunction } from '@/types/ConfirmFunction'
 import { defineStore } from 'pinia'
 
-export const useAppStore = defineStore('app', () => {
-  const currencyCode = ref<string>()
-  const localizationCode = ref<string>()
-  const cashRegisterNumber = ref<string>()
-
-  const setLocalizationCode = (code: string) => {
-    localizationCode.value = code
-  }
-  const getLocalizationCode = () => {
-    return localizationCode.value
-  }
-
-  const setCurrencyCode = (code: string) => {
-    currencyCode.value = code
-  }
-  const getCurrencyCode = () => {
-    return currencyCode.value
-  }
-
-  const setCashRegisterNumber = (number: string) => {
-    cashRegisterNumber.value = number
-  }
-  const getCashRegisterNumber = () => {
-    return cashRegisterNumber.value
-  }
-
-  return {
-    setCurrencyCode,
-    getCurrencyCode,
-    setLocalizationCode,
-    getLocalizationCode,
-    setCashRegisterNumber,
-    getCashRegisterNumber
-  }
-
-})
+export const useAppStore = defineStore('app', () => { })
 
 /**
  * Used to store functions that will be called when a user tries to go back
