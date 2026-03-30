@@ -30,16 +30,6 @@ export function GetCharacterList() {
 }
 
 /**
- * @param {string} id
- * @returns {$CancellablePromise<model$0.CaracterDetails | null>}
- */
-export function Greet(id) {
-    return $Call.ByID(1085101608, id).then(/** @type {($result: any) => any} */(($result) => {
-        return $$createType1($result);
-    }));
-}
-
-/**
  * @param {string} jsonData
  * @returns {$CancellablePromise<model$0.CaracterDetails | null>}
  */
@@ -47,14 +37,6 @@ export function ImportCharacter(jsonData) {
     return $Call.ByID(1256427305, jsonData).then(/** @type {($result: any) => any} */(($result) => {
         return $$createType1($result);
     }));
-}
-
-/**
- * @param {string} path
- * @returns {$CancellablePromise<string>}
- */
-export function ReadFile(path) {
-    return $Call.ByID(1448906061, path);
 }
 
 // Private type creation functions

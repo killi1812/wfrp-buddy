@@ -8,14 +8,8 @@
       <v-card-text>
         <p class="text-body-1 text-center mb-6">Create a new character manually or import from a file.</p>
 
-        <FileDropZone
-          id="character-import-zone"
-          class="mb-6"
-          title="Create a character from a file"
-          subtitle="Drag & Drop .json file here or click to browse"
-          accept=".json"
-          @dropped="onFilesDropped"
-        />
+        <FileDropZone id="character-import-zone" class="mb-6" title="Create a character from a file"
+          subtitle="Drag & Drop .json file here or click to browse" accept=".json" @dropped="onFilesDropped" />
 
         <v-btn block color="primary" size="large" prepend-icon="mdi-plus" @click="createNew">
           New Character
@@ -51,7 +45,6 @@ const snackbar = useSnackbar()
 
 const onFilesDropped = async (contents: string[]) => {
   try {
-    snackbar.Info(`Importing ${contents.length} character(s)...`)
     for (const content of contents) {
       await ImportCharacter(content)
     }

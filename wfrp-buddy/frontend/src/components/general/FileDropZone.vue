@@ -1,34 +1,19 @@
 <template>
-  <div 
-    :id="id"
-    class="drop-zone"
-    data-file-drop-target
-    :class="{ 'drag-over': isDragging }"
-    @dragover="onDragOver"
-    @dragenter="onDragEnter"
-    @dragleave="onDragLeave"
-    @drop="onDrop"
-    @click="triggerFileInput"
-  >
+  <div :id="id" class="drop-zone" data-file-drop-target :class="{ 'drag-over': isDragging }" @dragover="onDragOver"
+    @dragenter="onDragEnter" @dragleave="onDragLeave" @drop="onDrop" @click="triggerFileInput">
     <v-icon size="48" color="primary" class="mb-2">{{ icon || 'mdi-file-import-outline' }}</v-icon>
     <div class="text-h6">{{ title }}</div>
     <div v-if="subtitle" class="text-caption text-grey">{{ subtitle }}</div>
-    
-    <input 
-      type="file" 
-      ref="fileInput" 
-      :accept="accept" 
-      :multiple="multiple"
-      style="display: none" 
-      @change="onFileSelected"
-    />
+
+    <input type="file" ref="fileInput" :accept="accept" :multiple="multiple" style="display: none"
+      @change="onFileSelected" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { Events } from '@wailsio/runtime'
-import { ReadFile } from '../../../bindings/changeme/service/charactersrv'
+import { ReadFile } from 'bindings/changeme/service/appserv'
 
 const props = defineProps<{
   /** Unique ID for Wails drop targeting */
@@ -60,10 +45,10 @@ onMounted(() => {
   unsubscribe = Events.On('wails:file-drop', async (data: any) => {
     // Debug logging
     console.log(`[FileDropZone] Received event for ID: ${props.id}`, data)
-    
+
     // Check if event has a 'data' property (standard in some Wails event versions)
     const payload = data.data || data
-    
+
     if (payload.targetId === props.id && payload.paths) {
       console.log(`[FileDropZone] Target match! Processing ${payload.paths.length} files.`)
       const contents: string[] = []
@@ -72,7 +57,7 @@ onMounted(() => {
           console.log(`[FileDropZone] Skipping file (extension mismatch): ${path}`)
           continue
         }
-        
+
         try {
           const content = await ReadFile(path)
           contents.push(content)
@@ -80,7 +65,7 @@ onMounted(() => {
           console.error(`[FileDropZone] Failed to read file at ${path}:`, err)
         }
       }
-      
+
       if (contents.length > 0) {
         emit('dropped', contents)
       }
@@ -98,7 +83,7 @@ const onDragOver = (e: DragEvent) => {
   if (e.dataTransfer?.types.includes('Files')) {
     return
   }
-  
+
   e.preventDefault()
   if (e.dataTransfer) {
     e.dataTransfer.dropEffect = 'copy'
@@ -108,14 +93,14 @@ const onDragOver = (e: DragEvent) => {
 
 const onDragEnter = (e: DragEvent) => {
   if (e.dataTransfer?.types.includes('Files')) return
-  
+
   e.preventDefault()
   isDragging.value = true
 }
 
 const onDragLeave = (e: DragEvent) => {
   if (e.dataTransfer?.types.includes('Files')) return
-  
+
   e.preventDefault()
   const target = e.currentTarget as HTMLElement
   if (!target.contains(e.relatedTarget as Node)) {
@@ -127,7 +112,7 @@ const onDrop = async (e: DragEvent) => {
   if (e.dataTransfer?.types.includes('Files')) {
     return
   }
-  
+
   e.preventDefault()
   isDragging.value = false
 
@@ -154,7 +139,7 @@ const processFiles = async (files: File[]) => {
     if (props.accept && !file.name.toLowerCase().endsWith(props.accept.toLowerCase())) {
       continue
     }
-    
+
     try {
       const text = await file.text()
       if (text) contents.push(text)
@@ -162,7 +147,7 @@ const processFiles = async (files: File[]) => {
       console.error(`Failed to read browser file ${file.name}:`, err)
     }
   }
-  
+
   if (contents.length > 0) {
     emit('dropped', contents)
   }
