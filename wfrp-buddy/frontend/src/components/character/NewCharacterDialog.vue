@@ -12,10 +12,10 @@
         <div 
           class="drop-zone mb-6"
           :class="{ 'drag-over': isDragging }"
-          @dragover.prevent="onDragOver"
-          @dragenter.prevent="onDragEnter"
-          @dragleave.prevent="onDragLeave"
-          @drop.prevent="onDrop"
+          @dragover="onDragOver"
+          @dragenter="onDragEnter"
+          @dragleave="onDragLeave"
+          @drop="onDrop"
           @click="triggerFileInput"
         >
           <v-icon size="48" color="primary" class="mb-2">mdi-file-import-outline</v-icon>
@@ -70,15 +70,20 @@ const isDragging = ref(false)
 const fileInput = ref<HTMLInputElement | null>(null)
 
 const onDragOver = (e: DragEvent) => {
-  // We want to allow file drops, so we don't return early if it includes Files
   e.preventDefault()
+  if (e.dataTransfer) {
+    e.dataTransfer.dropEffect = 'copy'
+  }
+  isDragging.value = true
 }
 
 const onDragEnter = (e: DragEvent) => {
+  e.preventDefault()
   isDragging.value = true
 }
 
 const onDragLeave = (e: DragEvent) => {
+  e.preventDefault()
   // Use contains to avoid flickering on child elements
   const target = e.currentTarget as HTMLElement
   if (!target.contains(e.relatedTarget as Node)) {
@@ -87,10 +92,14 @@ const onDragLeave = (e: DragEvent) => {
 }
 
 const onDrop = async (e: DragEvent) => {
+  e.preventDefault()
   isDragging.value = false
+  
   const files = e.dataTransfer?.files
   if (files && files.length > 0) {
     await processFile(files[0])
+  } else {
+    snackbar.Info('No files detected in drop')
   }
 }
 
@@ -112,7 +121,12 @@ const processFile = async (file: File) => {
   }
 
   try {
+    snackbar.Info('Processing file: ' + file.name)
     const text = await file.text()
+    if (!text) {
+      snackbar.Error('File is empty')
+      return
+    }
     // Send to backend
     await ImportCharacter(text)
     snackbar.Success('Character imported successfully')
@@ -120,7 +134,7 @@ const processFile = async (file: File) => {
     emit('created')
   } catch (err) {
     console.error('Import failed:', err)
-    snackbar.Error('Failed to import character')
+    snackbar.Error('Failed to import character: ' + (err as Error).message)
   }
 }
 

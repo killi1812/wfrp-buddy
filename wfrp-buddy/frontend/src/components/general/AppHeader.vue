@@ -43,9 +43,9 @@
 
       <!-- Exit -->
       <v-divider class="my-2"></v-divider>
-      <SidebarItem @click="handleQuit" icon="mdi-power" title="Exit" color="error" :open="open" />
+      <SidebarItem :click="Window.Close" icon="mdi-power" title="Exit" color="error" :open="open" />
       <v-spacer />
-      <SidebarItem @click="open = !open" :icon="open ? 'mdi-arrow-left' : 'mdi-arrow-right'"
+      <SidebarItem :click="() => open = !open" :icon="open ? 'mdi-arrow-left' : 'mdi-arrow-right'"
         :title="open ? 'Shrink' : 'Expand'" :tooltip-text="open ? 'Shrink' : 'Expand'" :open="open" />
     </v-list>
 
@@ -83,9 +83,6 @@ const handleLogout = () => {
   router.replace("/")
 }
 
-const handleQuit = async () => {
-  await Window.Close()
-}
 </script>
 
 <style scoped>
