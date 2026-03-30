@@ -128,18 +128,34 @@ export interface TabsLayoutProps {
    * @required
    */
   startTab: Tab,
+  /**
+   * If true, uses the persistent tabs store.
+   */
+  persistent?: boolean
 }
 </script>
 
 <script setup lang="ts">
 import { Window } from '@wailsio/runtime'
+import { useTabsStore } from '@/stores/tabs'
 
 
 const props = defineProps<TabsLayoutProps>()
 
+// Store
+const tabsStore = props.persistent ? useTabsStore() : null
+
 // Variables
-const activeTab = ref(props.startTab.key)
-const tabs = shallowRef([props.startTab, ...(props.items ? props.items : [])])
+const localActiveTab = ref(props.startTab.key)
+const localTabs = shallowRef([props.startTab, ...(props.items ? props.items : [])])
+
+const activeTab = computed({
+  get: () => tabsStore ? tabsStore.activeTab : localActiveTab.value,
+  set: (val) => tabsStore ? (tabsStore.activeTab = val) : (localActiveTab.value = val)
+})
+
+const tabs = computed(() => tabsStore ? tabsStore.tabs : localTabs.value)
+
 const eagerHistory = ref<string[]>([props.startTab.key])
 
 // Use providers
@@ -186,20 +202,28 @@ const Close: closeFunc = (key?: string) => {
   if (!key)
     key = activeTab.value
 
-  tabs.value = tabs.value.filter(t => t.key != key)
-  eagerHistory.value = eagerHistory.value.filter(t => t != key)
-
-  activeTab.value = getLast() ?? ''
+  if (tabsStore) {
+    tabsStore.closeTab(key)
+  } else {
+    localTabs.value = localTabs.value.filter(t => t.key != key)
+    eagerHistory.value = eagerHistory.value.filter(t => t != key)
+    activeTab.value = getLast() ?? ''
+  }
 }
 
 const Open: openFunc = async (item: Tab, focus: boolean = true) => {
+  if (tabsStore) {
+    tabsStore.openTab(item, focus)
+    return
+  }
+
   // Block opening open tab just focus
-  if (tabs.value.some(t => t.key == item.key)) {
+  if (localTabs.value.some(t => t.key == item.key)) {
     activeTab.value = item.key
     return
   }
 
-  tabs.value.push(item)
+  localTabs.value.push(item)
   await nextTick(() => {
     if (focus) {
       activeTab.value = item.key

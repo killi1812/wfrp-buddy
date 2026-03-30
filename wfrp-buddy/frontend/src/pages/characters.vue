@@ -1,5 +1,5 @@
 <template>
-  <TabsLayout :startTab="startTab" />
+  <TabsLayout :startTab="startTab" persistent />
 </template>
 
 <script setup lang="ts">
