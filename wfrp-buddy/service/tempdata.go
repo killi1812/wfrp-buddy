@@ -116,5 +116,3 @@ var characters = []model.CaracterDetails{
 		Skills:     model.Skills{},
 	},
 }
-
-

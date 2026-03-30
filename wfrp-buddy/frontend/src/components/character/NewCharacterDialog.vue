@@ -4,43 +4,25 @@
       <v-card-title class="text-h5 text-primary text-center uppercase font-weight-bold">
         New Character
       </v-card-title>
-      
+
       <v-card-text>
         <p class="text-body-1 text-center mb-6">Create a new character manually or import from a file.</p>
-        
+
         <!-- Drag and Drop Zone -->
-        <div 
-          class="drop-zone mb-6"
-          :class="{ 'drag-over': isDragging }"
-          @dragover="onDragOver"
-          @dragenter="onDragEnter"
-          @dragleave="onDragLeave"
-          @drop="onDrop"
-          @click="triggerFileInput"
-        >
+        <div id="character-drop-zone" class="drop-zone mb-6" data-file-drop-target :class="{ 'drag-over': isDragging }"
+          @dragover="onDragOver" @dragenter="onDragEnter" @dragleave="onDragLeave" @drop="onDrop"
+          @click="triggerFileInput">
           <v-icon size="48" color="primary" class="mb-2">mdi-file-import-outline</v-icon>
           <div class="text-h6">Create a character from a file</div>
           <div class="text-caption text-grey">Drag & Drop .json file here or click to browse</div>
-          <input 
-            type="file" 
-            ref="fileInput" 
-            accept=".json" 
-            style="display: none" 
-            @change="onFileSelected"
-          />
+          <input type="file" ref="fileInput" accept=".json" style="display: none" @change="onFileSelected" />
         </div>
 
-        <v-btn
-          block
-          color="primary"
-          size="large"
-          prepend-icon="mdi-plus"
-          @click="createNew"
-        >
+        <v-btn block color="primary" size="large" prepend-icon="mdi-plus" @click="createNew">
           New Character
         </v-btn>
       </v-card-text>
-      
+
       <v-card-actions>
         <v-spacer />
         <v-btn variant="text" @click="internalOpen = false">Cancel</v-btn>
@@ -50,9 +32,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { ImportCharacter } from '../../../bindings/changeme/service/charactersrv'
 import { useSnackbar } from '../general/SnackbarProvider.vue'
+import { Events } from '@wailsio/runtime'
+import { WailsEvent } from 'node_modules/@wailsio/runtime/types/events';
 
 const props = defineProps<{
   modelValue: boolean
@@ -68,6 +52,30 @@ const internalOpen = computed({
 const snackbar = useSnackbar()
 const isDragging = ref(false)
 const fileInput = ref<HTMLInputElement | null>(null)
+
+// Handle Wails File Drop
+let unsubscribe: () => void
+
+onMounted(() => {
+  unsubscribe = Events.On('character-file-dropped', async (content: WailsEvent) => {
+    if (!internalOpen.value) return
+
+    try {
+      snackbar.Info('Importing character...')
+      await ImportCharacter(content.data)
+      snackbar.Success('Character imported successfully')
+      internalOpen.value = false
+      emit('created')
+    } catch (err) {
+      console.error('Import failed:', err)
+      snackbar.Error('Failed to import character')
+    }
+  })
+})
+
+onUnmounted(() => {
+  if (unsubscribe) unsubscribe()
+})
 
 const onDragOver = (e: DragEvent) => {
   e.preventDefault()
@@ -94,7 +102,7 @@ const onDragLeave = (e: DragEvent) => {
 const onDrop = async (e: DragEvent) => {
   e.preventDefault()
   isDragging.value = false
-  
+
   const files = e.dataTransfer?.files
   if (files && files.length > 0) {
     await processFile(files[0])
@@ -127,7 +135,7 @@ const processFile = async (file: File) => {
       snackbar.Error('File is empty')
       return
     }
-    // Send to backend
+    // Send to backend as raw string
     await ImportCharacter(text)
     snackbar.Success('Character imported successfully')
     internalOpen.value = false
@@ -161,7 +169,8 @@ const createNew = () => {
   border-color: rgba(var(--v-theme-primary), 0.8);
 }
 
-.drop-zone.drag-over {
+.drop-zone.drag-over,
+.drop-zone.file-drop-target-active {
   border-color: rgb(var(--v-theme-primary));
   background-color: rgba(var(--v-theme-primary), 0.1);
   transform: scale(1.02);

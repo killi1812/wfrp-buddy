@@ -4,11 +4,14 @@ import (
 	"embed"
 	_ "embed"
 	"log"
+	"os"
+	"path/filepath"
 	"time"
 
 	"changeme/service"
 
 	"github.com/wailsapp/wails/v3/pkg/application"
+	"github.com/wailsapp/wails/v3/pkg/events"
 )
 
 // Wails uses Go's `embed` package to embed the frontend files into the binary.
@@ -55,7 +58,7 @@ func main() {
 	// 'Mac' options tailor the window when running on macOS.
 	// 'BackgroundColour' is the background colour of the window.
 	// 'URL' is the URL that will be loaded into the webview.
-	app.Window.NewWithOptions(application.WebviewWindowOptions{
+	window := app.Window.NewWithOptions(application.WebviewWindowOptions{
 		Title: "Window 1",
 		Mac: application.MacWindow{
 			InvisibleTitleBarHeight: 50,
@@ -64,6 +67,19 @@ func main() {
 		},
 		BackgroundColour: application.NewRGB(27, 38, 54),
 		URL:              "/",
+		EnableFileDrop:   true,
+	})
+
+	window.OnWindowEvent(events.Common.WindowFilesDropped, func(event *application.WindowEvent) {
+		files := event.Context().DroppedFiles()
+		for _, file := range files {
+			if filepath.Ext(file) == ".json" {
+				content, err := os.ReadFile(file)
+				if err == nil {
+					app.Event.Emit("character-file-dropped", string(content))
+				}
+			}
+		}
 	})
 
 	// Create a goroutine that emits an event containing the current time every second.

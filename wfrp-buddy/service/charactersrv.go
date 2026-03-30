@@ -25,7 +25,7 @@ func (srv *CharacterSrv) GetCharacter(id string) (*model.CaracterDetails, error)
 }
 
 func (srv *CharacterSrv) ImportCharacter(jsonData string) (*model.CaracterDetails, error) {
-	// For now, just log and return success. In a real scenario, we'd parse and save.
+	// For now, just log and return success.
 	println("Received character JSON:", jsonData)
 	return &model.CaracterDetails{}, nil
 }
