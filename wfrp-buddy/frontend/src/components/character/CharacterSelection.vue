@@ -5,6 +5,7 @@ import { markRaw } from 'vue'
 import * as model from 'bindings/changeme/model'
 import { GetCharacterList } from 'bindings/changeme/service/charactersrv'
 import { useSnackbar } from '../general/SnackbarProvider.vue'
+import NewCharacterDialog from './NewCharacterDialog.vue'
 
 const props = defineProps<{
   open: (item: any) => void
@@ -12,17 +13,20 @@ const props = defineProps<{
 
 const uiStore = useUIStore()
 const snackbar = useSnackbar()
+const showNewDialog = ref(false)
 
 const characters = ref<model.CaracterPreview[]>([])
 
-onMounted(async () => {
+const refresh = async () => {
   try {
     const rez = await GetCharacterList()
     characters.value = rez
   } catch {
     snackbar.Error("Failed to load characters")
   }
-})
+}
+
+onMounted(refresh)
 
 const select = (char: model.CaracterPreview) => {
   props.open({
@@ -43,7 +47,8 @@ const select = (char: model.CaracterPreview) => {
 
       <div class="d-flex align-center gap-2">
         <!-- New Character Button -->
-        <v-btn color="primary" variant="elevated" prepend-icon="mdi-plus" density="comfortable" class="mr-4" disabled>
+        <v-btn color="primary" variant="elevated" prepend-icon="mdi-plus" density="comfortable" class="mr-4"
+          @click="showNewDialog = true">
           New Character
         </v-btn>
 
@@ -55,6 +60,8 @@ const select = (char: model.CaracterPreview) => {
         </v-btn-toggle>
       </div>
     </div>
+
+    <NewCharacterDialog v-model="showNewDialog" @created="refresh" />
 
     <v-window v-model="uiStore.characterListViewMode" disabled>
       <!-- GRID VIEW -->

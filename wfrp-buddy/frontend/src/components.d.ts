@@ -22,6 +22,7 @@ declare module 'vue' {
     CorruptionPsychologyCard: typeof import('./components/character/CorruptionPsychologyCard.vue')['default']
     Line: typeof import('./components/general/Line.vue')['default']
     MenuCard: typeof import('./components/general/MenuCard.vue')['default']
+    NewCharacterDialog: typeof import('./components/character/NewCharacterDialog.vue')['default']
     PersonalInfoCard: typeof import('./components/character/PersonalInfoCard.vue')['default']
     PointsCard: typeof import('./components/character/PointsCard.vue')['default']
     PrayersTable: typeof import('./components/character/PrayersTable.vue')['default']

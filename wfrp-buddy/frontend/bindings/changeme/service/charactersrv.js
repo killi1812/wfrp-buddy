@@ -39,6 +39,16 @@ export function Greet(id) {
     }));
 }
 
+/**
+ * @param {string} jsonData
+ * @returns {$CancellablePromise<model$0.CaracterDetails | null>}
+ */
+export function ImportCharacter(jsonData) {
+    return $Call.ByID(1256427305, jsonData).then(/** @type {($result: any) => any} */(($result) => {
+        return $$createType1($result);
+    }));
+}
+
 // Private type creation functions
 const $$createType0 = model$0.CaracterDetails.createFrom;
 const $$createType1 = $Create.Nullable($$createType0);

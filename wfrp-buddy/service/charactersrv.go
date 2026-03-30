@@ -24,6 +24,12 @@ func (srv *CharacterSrv) GetCharacter(id string) (*model.CaracterDetails, error)
 	return nil, nil
 }
 
+func (srv *CharacterSrv) ImportCharacter(jsonData string) (*model.CaracterDetails, error) {
+	// For now, just log and return success. In a real scenario, we'd parse and save.
+	println("Received character JSON:", jsonData)
+	return &model.CaracterDetails{}, nil
+}
+
 func (srv *CharacterSrv) GetCharacterList() ([]model.CaracterPreview, error) {
 	previews := make([]model.CaracterPreview, len(characters))
 	for i, c := range characters {
